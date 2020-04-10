@@ -12,10 +12,10 @@
 
 /*DEFINES*/
 
-#define CFG_ACQ_ON 1
+#define CFG_ACQ_ON 0
 #define CFG_TESS_ADC_1_SAMPLE 0
 #define CFG_TESS_ADC_2_SAMPLE 0
 #define CFG_TESS_ADC_3_SAMPLE 0
-#define CFG_TESS_MIP_SENSORED 1
+#define CFG_TESS_MIP_SENSORED 0
 #endif /*__tess_conf_h__*/
 

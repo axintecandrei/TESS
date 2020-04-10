@@ -8,6 +8,9 @@
 #ifndef __tess_main_h__
 #define __tess_main_h__
 
+#include "stm32f3xx.h"
+#include "stm32f3xx_nucleo_32.h"
+
 #include "tess_task_scheduler.h"
 #include "tess_bfu_adc.h"
 #include "tess_bfu_uart.h"

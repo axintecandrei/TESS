@@ -26,7 +26,7 @@ signed_int16_t PORT__TessStateMachReqDir;
 
 signed_int32_t PORT__TessStateMachReqTorque;
 
-#define Set_TessStateMachReTorque(x) (PORT__TessStateMachReqTorque = (x))
+#define Set_TessStateMachReqTorque(x) (PORT__TessStateMachReqTorque = (x))
 #define Get_TessStateMachReqTorque()   (*((const signed_int32_t *) &PORT__TessStateMachReqTorque))
 /*FUNCTIONS*/
 

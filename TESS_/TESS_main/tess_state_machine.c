@@ -18,7 +18,7 @@ extern "C" {
 void TESS_STATE_MACHINE_INIT()
 {
    Set_TessStateMachReqSpeed(0);
-   Set_TessStateMachReqdDir(0);
+   Set_TessStateMachReqDir(0);
    Set_TessStateMachReqTorque(0);
 }
 
