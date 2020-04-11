@@ -36,12 +36,12 @@
 									<listOptionValue builtIn="false" value="USE_HAL_DRIVER"/>
 								</option>
 								<option id="gnu.c.compiler.option.include.paths.580258284" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/HAL_Driver/Inc/Legacy&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/Utilities/STM32F4xx-Nucleo&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/inc&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/CMSIS/device&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/CMSIS/core&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/HAL_Driver/Inc&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/_Main_&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/LowLevelDrivers/MCULegacy/HAL/Inc/Legacy&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/Communication&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/LowLevelDrivers/CULegacy/CMSIS/core&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/LowLevelDrivers/MCULegacy/CMSIS/device_stm32f401xe&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/LowLevelDrivers/MCULegacy/HAL/Inc&quot;"/>
 								</option>
 								<option id="gnu.c.compiler.option.dialect.std.1158874388" name="Language standard" superClass="gnu.c.compiler.option.dialect.std" useByScannerDiscovery="true" value="gnu.c.compiler.dialect.default" valueType="enumerated"/>
 								<option id="gnu.c.compiler.option.preprocessor.preprocess.603954621" name="Preprocess only (-E)" superClass="gnu.c.compiler.option.preprocessor.preprocess" useByScannerDiscovery="false" value="false" valueType="boolean"/>
@@ -75,10 +75,39 @@
 							</tool>
 						</toolChain>
 					</folderInfo>
+					<folderInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.debug.1279252712.868646683" name="/" resourcePath="LowLevelDrivers">
+						<toolChain id="fr.ac6.managedbuild.toolchain.gnu.cross.exe.debug.273329808" name="Ac6 STM32 MCU GCC" superClass="fr.ac6.managedbuild.toolchain.gnu.cross.exe.debug" unusedChildren="">
+							<option id="fr.ac6.managedbuild.option.gnu.cross.mcu.1098897351.2049772624" name="Mcu" superClass="fr.ac6.managedbuild.option.gnu.cross.mcu.1098897351"/>
+							<option id="fr.ac6.managedbuild.option.gnu.cross.fpu.1247069180.1041435800" name="Floating point hardware" superClass="fr.ac6.managedbuild.option.gnu.cross.fpu.1247069180"/>
+							<option id="fr.ac6.managedbuild.option.gnu.cross.floatabi.249553025.2047907984" name="Floating-point ABI" superClass="fr.ac6.managedbuild.option.gnu.cross.floatabi.249553025"/>
+							<option id="fr.ac6.managedbuild.option.gnu.cross.board.1933339036.1867384422" name="Board" superClass="fr.ac6.managedbuild.option.gnu.cross.board.1933339036"/>
+							<targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.ELF" id="fr.ac6.managedbuild.targetPlatform.gnu.cross" isAbstract="false" osList="all" superClass="fr.ac6.managedbuild.targetPlatform.gnu.cross"/>
+							<tool id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.1024893105" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.802967845">
+								<option id="gnu.c.compiler.option.include.paths.2011096215" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/Communication&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/inc&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/LowLevelDrivers/MCULegacy/HAL/Inc/Legacy&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/LowLevelDrivers/MCULegacy/HAL/Inc&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/LowLevelDrivers/MCULegacy/CMSIS/core/&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/LowLevelDrivers/MCULegacy/CMSIS/device_stm32f401xe&quot;"/>
+								</option>
+								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c.782090068" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c"/>
+								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.s.1118334734" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.s"/>
+							</tool>
+							<tool id="fr.ac6.managedbuild.tool.gnu.cross.cpp.compiler.1208197731" name="MCU G++ Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.cpp.compiler.1343894265"/>
+							<tool id="fr.ac6.managedbuild.tool.gnu.cross.c.linker.233261158" name="MCU GCC Linker" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.linker.933434334"/>
+							<tool id="fr.ac6.managedbuild.tool.gnu.cross.cpp.linker.827349605" name="MCU G++ Linker" superClass="fr.ac6.managedbuild.tool.gnu.cross.cpp.linker.369682447"/>
+							<tool id="fr.ac6.managedbuild.tool.gnu.archiver.284449822" name="MCU GCC Archiver" superClass="fr.ac6.managedbuild.tool.gnu.archiver.382332839"/>
+							<tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.18871887" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.2042643416">
+								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.551623014" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
+								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.assembler.input.536289095" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.input"/>
+							</tool>
+						</toolChain>
+					</folderInfo>
 					<sourceEntries>
-						<entry excluding="Src/stm32f4xx_hal_timebase_rtc_wakeup_template.c|Src/stm32f4xx_hal_timebase_rtc_alarm_template.c|Src/stm32f4xx_hal_timebase_tim_template.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="HAL_Driver"/>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="inc"/>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
+						<entry flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="Communication"/>
+						<entry excluding="MCULegacy/CMSIS/core/|MCULegacy/CMSIS/device_stm32f401xe/" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="LowLevelDrivers"/>
+						<entry flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="_Main_"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="startup"/>
 					</sourceEntries>
 				</configuration>
@@ -156,9 +185,6 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="Src/stm32f4xx_hal_timebase_rtc_wakeup_template.c|Src/stm32f4xx_hal_timebase_rtc_alarm_template.c|Src/stm32f4xx_hal_timebase_tim_template.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="HAL_Driver"/>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="inc"/>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="startup"/>
 					</sourceEntries>
 				</configuration>
@@ -188,4 +214,5 @@
 			<resource resourceType="PROJECT" workspacePath="/BLDC_HALL"/>
 		</configuration>
 	</storageModule>
+	<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
 </cproject>

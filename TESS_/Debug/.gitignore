@@ -5,3 +5,6 @@
 /sources.mk
 /src/
 /startup/
+/Communication/
+/LowLevelDrivers/
+/_Main_/
