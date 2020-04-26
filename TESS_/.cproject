@@ -39,6 +39,8 @@
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/_Main_&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/LowLevelDrivers/MCULegacy/HAL/Inc/Legacy&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/Communication&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/Communication/AqPlot&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/Communication/FreeMaster&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/LowLevelDrivers/CULegacy/CMSIS/core&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/LowLevelDrivers/MCULegacy/CMSIS/device_stm32f401xe&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/LowLevelDrivers/MCULegacy/HAL/Inc&quot;"/>
@@ -75,6 +77,7 @@
 							</tool>
 						</toolChain>
 					</folderInfo>
+					<fileInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.debug.1279252712.728905978" name="config.h" rcbsApplicability="disable" resourcePath="_Main_/config.h" toolsToInvoke=""/>
 					<folderInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.debug.1279252712.868646683" name="/" resourcePath="LowLevelDrivers">
 						<toolChain id="fr.ac6.managedbuild.toolchain.gnu.cross.exe.debug.273329808" name="Ac6 STM32 MCU GCC" superClass="fr.ac6.managedbuild.toolchain.gnu.cross.exe.debug" unusedChildren="">
 							<option id="fr.ac6.managedbuild.option.gnu.cross.mcu.1098897351.2049772624" name="Mcu" superClass="fr.ac6.managedbuild.option.gnu.cross.mcu.1098897351"/>

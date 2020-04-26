@@ -3,6 +3,11 @@
 
 void _100US_LOOP (void)
 {
+	LLD_ADC_GET_RAW_VAL();
+
+#if CFG_ACQ_ON
+	TESS_DAS_MAIN();
+#endif
 
 #if(!FMSTR_DISABLE)
     {

@@ -4,11 +4,14 @@
 #define __STM32F4xx_IT_H
 
 /* Includes ------------------------------------------------------------------*/
+#include "stm32f4xx_hal.h"
+#include "stm32f4xx.h"
 #include "task_scheduler.h"
 #include "../LowLevelDrivers/UserDefined/lld_usart.h"
+#include "../LowLevelDrivers/UserDefined/lld_timers.h"
 #include "../Communication/FreeMaster/freemaster.h"
 #include "../Communication/FreeMaster/freemaster_private.h"
-
+#include  "../Communication/AqPlot/tess_ring_buffer.h"
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
 /* Exported macro ------------------------------------------------------------*/

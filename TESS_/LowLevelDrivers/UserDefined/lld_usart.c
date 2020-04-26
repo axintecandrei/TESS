@@ -3,38 +3,12 @@
   * File Name          : USART.c
   * Description        : This file provides code for the configuration
   *                      of the USART instances.
-  ******************************************************************************
-  *
-  * COPYRIGHT(c) 2017 STMicroelectronics
-  *
-  * Redistribution and use in source and binary forms, with or without modification,
-  * are permitted provided that the following conditions are met:
-  *   1. Redistributions of source code must retain the above copyright notice,
-  *      this list of conditions and the following disclaimer.
-  *   2. Redistributions in binary form must reproduce the above copyright notice,
-  *      this list of conditions and the following disclaimer in the documentation
-  *      and/or other materials provided with the distribution.
-  *   3. Neither the name of STMicroelectronics nor the names of its contributors
-  *      may be used to endorse or promote products derived from this software
-  *      without specific prior written permission.
-  *
-  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-  * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
-  * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-  * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-  * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-  * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-  *
-  ******************************************************************************
   */
 
 /* Includes ------------------------------------------------------------------*/
 #include "lld_usart.h"
 
+void DMA_INIT_UART();
 
 void USART2_UART_Init(void)
 {
@@ -44,15 +18,56 @@ void USART2_UART_Init(void)
   huart2.Init.WordLength = UART_WORDLENGTH_8B;
   huart2.Init.StopBits = UART_STOPBITS_1;
   huart2.Init.Parity = UART_PARITY_NONE;
-  huart2.Init.Mode = UART_MODE_TX_RX;
+  huart2.Init.Mode = UART_MODE_RX;
   huart2.Init.HwFlowCtl = UART_HWCONTROL_NONE;
   huart2.Init.OverSampling = UART_OVERSAMPLING_16;
 
-  __HAL_UART_ENABLE_IT(&huart2,UART_IT_TXE);
-  __HAL_UART_ENABLE_IT(&huart2,UART_IT_RXNE);
-  __HAL_UART_ENABLE_IT(&huart2,UART_IT_TC);
-  HAL_UART_Init(&huart2);
 
+#if (CFG_FMSTR_ON)
+  __HAL_UART_ENABLE_IT(&huart2,UART_IT_RXNE);
+  __HAL_UART_ENABLE_IT(&huart2,UART_IT_TXE);
+  __HAL_UART_ENABLE_IT(&huart2,UART_IT_TC);
+#endif
+  HAL_UART_Init(&huart2);
+#if CFG_ACQ_ON
+
+  USART_ENABLE_RXIT();
+  DMA_INIT_UART();
+#endif
+}
+
+void DMA_INIT_UART()
+{
+    /*Configure DMA controller*/
+     __HAL_RCC_DMA1_CLK_ENABLE();
+
+     /*If the stream is enabled, disable it*/
+  	DMA1_Stream6->CR &= ~DMA_SxCR_EN;
+  	while((DMA1_Stream6->CR & 0x01));
+
+  	/*Set peripheral address - destination
+  	 * the memory address and number of byte will be set
+  	 * before transmission start, as this will vary */
+  	DMA1_Stream6->PAR   = (uint32_t)&USART2->DR;
+  	/*Set memory address - source*/
+  	//DMA1_Stream6->M0AR  = (uint32_t)&ADC_TO_DMA_BUFFER[0];
+  	//DMA1_Stream6->NDTR  = 30;
+    /*Set channel */
+  	DMA1_Stream6->CR   |= 4<<DMA_SxCR_CHSEL_Pos;
+    /* Set priority*/
+  	DMA1_Stream6->CR   |= DMA_SxCR_PL_0 ;
+    /*Set direction of transfer - memory to peripheral*/
+  	DMA1_Stream6->CR   |= DMA_SxCR_DIR_0;
+  	/*Set Mode and data size 1byte, so 0 on PSIZE and MSIZE sections*/
+  	DMA1_Stream6->CR   |= DMA_SxCR_CIRC |
+  						  DMA_SxCR_MINC ;
+  	/*Enable Transfer complete interrupt*/
+  	DMA1_Stream6->CR   |= DMA_SxCR_TCIE;
+
+
+  /* DMA interrupt init */
+  HAL_NVIC_SetPriority(DMA1_Stream6_IRQn, 1, 0);
+  HAL_NVIC_EnableIRQ(DMA1_Stream6_IRQn);
 }
 
 void HAL_UART_MspInit(UART_HandleTypeDef* uartHandle)
@@ -74,7 +89,7 @@ void HAL_UART_MspInit(UART_HandleTypeDef* uartHandle)
     GPIO_InitStruct.Pin = SCI_TX_Pin|SCI_RX_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
-    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
     GPIO_InitStruct.Alternate = GPIO_AF7_USART2;
     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
@@ -85,25 +100,23 @@ void HAL_UART_MspInit(UART_HandleTypeDef* uartHandle)
   }
 }
 
-void HAL_UART_MspDeInit(UART_HandleTypeDef* uartHandle)
+void LLD_UART_START_TX_DMA(uint32_t data_buffer_addres, uint8_t size)
 {
+	/*Enable transmitter*/
+    USART_TX_ENABLE();
 
-  if(uartHandle->Instance==USART2)
-  {
+    /*send the buffer address and nr o f bytes to be transmitted
+     * to the DMA controller*/
+  	DMA1_Stream6->M0AR  = data_buffer_addres;
+  	DMA1_Stream6->NDTR  = size;
 
-    /* Peripheral clock disable */
-    __HAL_RCC_USART2_CLK_DISABLE();
-  
-    /**USART2 GPIO Configuration    
-    PA2     ------> USART2_TX
-    PA3     ------> USART2_RX 
-    */
-    HAL_GPIO_DeInit(GPIOA, SCI_TX_Pin|SCI_RX_Pin);
+    /* Clear the TC flag in the SR register by writing 0 to it */
+    __HAL_UART_CLEAR_FLAG(&huart2, UART_FLAG_TC);
 
-    /* Peripheral interrupt Deinit*/
-    HAL_NVIC_DisableIRQ(USART2_IRQn);
+    /* Enable the DMA transfer for transmit request by setting the DMAT bit
+       in the UART CR3 register */
+    SET_BIT(huart2.Instance->CR3, USART_CR3_DMAT);
 
-  }
-
-} 
-
+    /*Enable the DMA*/
+  	DMA_ENABLE();
+}

@@ -5,6 +5,8 @@
 #include "../Communication/FreeMaster/freemaster.h"
 #include "../Communication/FreeMaster/freemaster_private.h"
 
+#include "../LowLevelDrivers/UserDefined/lld_adc.h"
+#include "../Communication/AqPlot/tess_data_acq_output.h"
 
 void _100US_LOOP (void);
 

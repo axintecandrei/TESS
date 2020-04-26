@@ -11,8 +11,16 @@ void MAIN_INIT(void)
 {
 	RCC_INIT();
 
+	ADC_INIT();
+    TIMER2_INIT();
+    TESS_GPIO_INIT();
+
+#if CFG_ACQ_ON
 	USART2_UART_Init();
+	TESS_DAS_INIT();
+#endif
 #if !FMSTR_DISABLE
+	USART2_UART_Init();
 	FMSTR_Init();
 #endif
 }
