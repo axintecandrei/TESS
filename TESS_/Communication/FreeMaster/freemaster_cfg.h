@@ -32,13 +32,13 @@
 * Input/output communication buffer size
 ******************************************************************************/
 
-#define FMSTR_COMM_BUFFER_SIZE 254    /* set to 0 for "automatic" */
+#define FMSTR_COMM_BUFFER_SIZE 0    /* set to 0 for "automatic" */
 
 /******************************************************************************
 * Receive FIFO queue size (use with FMSTR_SHORT_INTR only)
 ******************************************************************************/
 
-#define FMSTR_COMM_RQUEUE_SIZE 254   /* set to 0 for "default" */
+#define FMSTR_COMM_RQUEUE_SIZE 2048   /* set to 0 for "default" */
 
 /*****************************************************************************
 * Support for Application Commands 
@@ -64,10 +64,10 @@
 #define FMSTR_REC_OWNBUFF      0    /* use user-allocated rec. buffer (1=yes) */
 
 /* built-in recorder buffer (use when FMSTR_REC_OWNBUFF is 0) */
-#define FMSTR_REC_BUFF_SIZE    2048 /* built-in buffer size */
+#define FMSTR_REC_BUFF_SIZE    1024*10 /* built-in buffer size */
 
 /* recorder time base, specifies how often the recorder is called in the user app. */
-#define FMSTR_REC_TIMEBASE     FMSTR_REC_BASE_MICROSEC(64) /* 0 = "unknown" *//*64- 100us*/
+#define FMSTR_REC_TIMEBASE     FMSTR_REC_BASE_MICROSEC(200) /* 0 = "unknown" *//*100- 100us*/
 
 /* Fast Recorder Control */
 #define FMSTR_USE_FASTREC      0    /* Activate Fast Recorder driver */

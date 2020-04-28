@@ -17,7 +17,7 @@ void SysTick_Handler(void)
 void ADC_IRQHandler(void)
 {
 #if CFG_ADC_REG_CONV
-	HAL_GPIO_TogglePin(GPIOC,GPIO_PIN_10);
+
 	task_scheduler();
 	/*clear interrupt flag before exit */
 	ADC_CLEAR_IT();
@@ -51,49 +51,42 @@ void USART2_IRQHandler(void)
 		/*Check for commands from PC-tester
 		 * Call commands handler
 	    */
+		//HAL_GPIO_TogglePin(GPIOC,GPIO_PIN_10);
 		temp_dr = USART2->DR;
 		TESS_DAS_GET_COMMANDS(temp_dr);
 
-		/*disable receiver so it won't bother*/
-		USART_RX_DISABLE();
-		USART_ENABLE_TXIT();
-
-		/*Enable transmitter*/
-		USART_TX_ENABLE();
-
-		/*Clear interrupt flag*/
-		USART_CLEAR_RXIT();
 	}
 	else if ((temp_sr & USART_SR_TC)>>USART_SR_TC_Pos)
 	{
 		/*the package has been sent
 		 * - enable RX to get new commands
 		 * - disable DMA and TX until further commands*/
-		/*USART_TX_DISABLE();
-		USART_DISABLE_TXIT();
-		USART_ENABLE_RXIT();
-		USART_RX_ENABLE();*/
+
+		//
+		//CLEAR_BIT(huart2.Instance->CR3, USART_CR3_DMAT);
 		USART_CLEAR_TCIT();
+	}else if ((temp_sr & USART_SR_PE)>>USART_SR_PE_Pos)
+	{
+		/*dummy read from DR*/
+		temp_dr = USART2->DR;
+		USART2->SR = 0;
 	}
 
 
 #else
 	FMSTR_ProcessSCI();
-#endif
 
-   /*clear interrupt flag before exit */
-   HAL_UART_IRQHandler(&huart2);
+#endif
+	/*clear interrupt flag before exit */
+
+	HAL_UART_IRQHandler(&huart2);
 }
 
 /* This function handles DMA1 stream6 global interrupt. */
 void DMA1_Stream6_IRQHandler(void)
 {
-	dma_isr++;
-/*
-	USART_DISABLE_TXIT();
-	USART_ENABLE_RXIT();
-	USART_RX_ENABLE();
-
-	DMA_DISABLE();*/
-	DMA_CLEAR_TCIT();
+	HAL_GPIO_TogglePin(GPIOC,GPIO_PIN_10);
+	//HAL_UART_DMAPause(&huart2);
+	TESS_DAS_UPDATE_BUFFER();
+	HAL_DMA_IRQHandler(&hdma_usart2_tx);
 }

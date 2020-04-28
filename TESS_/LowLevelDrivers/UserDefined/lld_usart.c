@@ -14,11 +14,11 @@ void USART2_UART_Init(void)
 {
 
   huart2.Instance = USART2;
-  huart2.Init.BaudRate = 115200;
+  huart2.Init.BaudRate = 1000000;
   huart2.Init.WordLength = UART_WORDLENGTH_8B;
   huart2.Init.StopBits = UART_STOPBITS_1;
   huart2.Init.Parity = UART_PARITY_NONE;
-  huart2.Init.Mode = UART_MODE_RX;
+  huart2.Init.Mode = UART_MODE_TX_RX;
   huart2.Init.HwFlowCtl = UART_HWCONTROL_NONE;
   huart2.Init.OverSampling = UART_OVERSAMPLING_16;
 
@@ -32,6 +32,7 @@ void USART2_UART_Init(void)
 #if CFG_ACQ_ON
 
   USART_ENABLE_RXIT();
+  //USART_ENABLE_TXIT();
   DMA_INIT_UART();
 #endif
 }
@@ -40,7 +41,7 @@ void DMA_INIT_UART()
 {
     /*Configure DMA controller*/
      __HAL_RCC_DMA1_CLK_ENABLE();
-
+#if 0
      /*If the stream is enabled, disable it*/
   	DMA1_Stream6->CR &= ~DMA_SxCR_EN;
   	while((DMA1_Stream6->CR & 0x01));
@@ -61,13 +62,31 @@ void DMA_INIT_UART()
   	/*Set Mode and data size 1byte, so 0 on PSIZE and MSIZE sections*/
   	DMA1_Stream6->CR   |= DMA_SxCR_CIRC |
   						  DMA_SxCR_MINC ;
+#endif
+
+
+    /* Peripheral DMA init*/
+    hdma_usart2_tx.Instance = DMA1_Stream6;
+    hdma_usart2_tx.Init.Channel = DMA_CHANNEL_4;
+    hdma_usart2_tx.Init.Direction = DMA_MEMORY_TO_PERIPH;
+    hdma_usart2_tx.Init.PeriphInc = DMA_PINC_DISABLE;
+    hdma_usart2_tx.Init.MemInc = DMA_MINC_ENABLE;
+    hdma_usart2_tx.Init.PeriphDataAlignment = DMA_MDATAALIGN_BYTE;
+    hdma_usart2_tx.Init.MemDataAlignment = DMA_MDATAALIGN_BYTE;
+    hdma_usart2_tx.Init.Mode = DMA_CIRCULAR; //DMA_NORMAL; //
+    hdma_usart2_tx.Init.Priority = DMA_PRIORITY_MEDIUM;
+    hdma_usart2_tx.Init.FIFOMode = DMA_FIFOMODE_DISABLE;
+    HAL_DMA_Init(&hdma_usart2_tx);
+
+
+  	__HAL_LINKDMA(&huart2,hdmatx,hdma_usart2_tx);
+
   	/*Enable Transfer complete interrupt*/
-  	DMA1_Stream6->CR   |= DMA_SxCR_TCIE;
+    DMA1_Stream6->CR   |= DMA_SxCR_TCIE;
 
-
-  /* DMA interrupt init */
-  HAL_NVIC_SetPriority(DMA1_Stream6_IRQn, 1, 0);
-  HAL_NVIC_EnableIRQ(DMA1_Stream6_IRQn);
+    /* DMA interrupt init */
+    HAL_NVIC_SetPriority(DMA1_Stream6_IRQn, 1, 0);
+    HAL_NVIC_EnableIRQ(DMA1_Stream6_IRQn);
 }
 
 void HAL_UART_MspInit(UART_HandleTypeDef* uartHandle)
@@ -102,8 +121,6 @@ void HAL_UART_MspInit(UART_HandleTypeDef* uartHandle)
 
 void LLD_UART_START_TX_DMA(uint32_t data_buffer_addres, uint8_t size)
 {
-	/*Enable transmitter*/
-    USART_TX_ENABLE();
 
     /*send the buffer address and nr o f bytes to be transmitted
      * to the DMA controller*/
@@ -112,11 +129,11 @@ void LLD_UART_START_TX_DMA(uint32_t data_buffer_addres, uint8_t size)
 
     /* Clear the TC flag in the SR register by writing 0 to it */
     __HAL_UART_CLEAR_FLAG(&huart2, UART_FLAG_TC);
-
     /* Enable the DMA transfer for transmit request by setting the DMAT bit
        in the UART CR3 register */
     SET_BIT(huart2.Instance->CR3, USART_CR3_DMAT);
 
     /*Enable the DMA*/
   	DMA_ENABLE();
+
 }

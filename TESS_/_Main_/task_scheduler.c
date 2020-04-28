@@ -63,7 +63,7 @@ void task_scheduler(void)
   uint8_t i;
   //SaveContext(); //save temporary registers, if necessary
   
-  //HAL_GPIO_TogglePin(TP1_GPIO_Port, TP1_Pin);//HAL_GPIO_WritePin(TP1_GPIO_Port, TP1_Pin, GPIO_PIN_SET);
+
   for (i=0; i < tasksNum; ++i) 
   { // Heart of scheduler code
     
@@ -94,7 +94,6 @@ void task_scheduler(void)
             }
     tasks[i].elapsedTime += tasksPeriod;
   }
-   //HAL_GPIO_TogglePin(TP1_GPIO_Port, TP1_Pin);//HAL_GPIO_WritePin(TP1_GPIO_Port, TP1_Pin, GPIO_PIN_RESET);
   //RestoreContext();//restore temporary registers, if necessary
 }
 

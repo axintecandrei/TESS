@@ -36,6 +36,8 @@ typedef enum tess_das_states_e
 {
 	DAS_StandBy ,
 	DAS_SendPackage,
+	DAS_StartMeas,
+	DAS_ResumePackSend,
 	DAS_KeepPacking ,
 	DAS_StopOfMeasurement ,
 }tess_das_states_t;
