@@ -14,7 +14,7 @@ void USART2_UART_Init(void)
 {
 
   huart2.Instance = USART2;
-  huart2.Init.BaudRate = 1000000;
+  huart2.Init.BaudRate = 750000;
   huart2.Init.WordLength = UART_WORDLENGTH_8B;
   huart2.Init.StopBits = UART_STOPBITS_1;
   huart2.Init.Parity = UART_PARITY_NONE;
@@ -41,29 +41,6 @@ void DMA_INIT_UART()
 {
     /*Configure DMA controller*/
      __HAL_RCC_DMA1_CLK_ENABLE();
-#if 0
-     /*If the stream is enabled, disable it*/
-  	DMA1_Stream6->CR &= ~DMA_SxCR_EN;
-  	while((DMA1_Stream6->CR & 0x01));
-
-  	/*Set peripheral address - destination
-  	 * the memory address and number of byte will be set
-  	 * before transmission start, as this will vary */
-  	DMA1_Stream6->PAR   = (uint32_t)&USART2->DR;
-  	/*Set memory address - source*/
-  	//DMA1_Stream6->M0AR  = (uint32_t)&ADC_TO_DMA_BUFFER[0];
-  	//DMA1_Stream6->NDTR  = 30;
-    /*Set channel */
-  	DMA1_Stream6->CR   |= 4<<DMA_SxCR_CHSEL_Pos;
-    /* Set priority*/
-  	DMA1_Stream6->CR   |= DMA_SxCR_PL_0 ;
-    /*Set direction of transfer - memory to peripheral*/
-  	DMA1_Stream6->CR   |= DMA_SxCR_DIR_0;
-  	/*Set Mode and data size 1byte, so 0 on PSIZE and MSIZE sections*/
-  	DMA1_Stream6->CR   |= DMA_SxCR_CIRC |
-  						  DMA_SxCR_MINC ;
-#endif
-
 
     /* Peripheral DMA init*/
     hdma_usart2_tx.Instance = DMA1_Stream6;
@@ -119,21 +96,7 @@ void HAL_UART_MspInit(UART_HandleTypeDef* uartHandle)
   }
 }
 
-void LLD_UART_START_TX_DMA(uint32_t data_buffer_addres, uint8_t size)
+void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)
 {
-
-    /*send the buffer address and nr o f bytes to be transmitted
-     * to the DMA controller*/
-  	DMA1_Stream6->M0AR  = data_buffer_addres;
-  	DMA1_Stream6->NDTR  = size;
-
-    /* Clear the TC flag in the SR register by writing 0 to it */
-    __HAL_UART_CLEAR_FLAG(&huart2, UART_FLAG_TC);
-    /* Enable the DMA transfer for transmit request by setting the DMAT bit
-       in the UART CR3 register */
-    SET_BIT(huart2.Instance->CR3, USART_CR3_DMAT);
-
-    /*Enable the DMA*/
-  	DMA_ENABLE();
-
+	TESS_DAS_UPDATE_UPON_TC();
 }

@@ -42,7 +42,7 @@ void USART2_IRQHandler(void)
 {
 
 #if	FMSTR_DISABLE
-	uint8_t temp_dr;
+	uint8_t temp_dr;f
 	uint8_t temp_sr;
 	temp_sr = USART2->SR;
 	/*Check interrupt source*/
@@ -61,9 +61,6 @@ void USART2_IRQHandler(void)
 		/*the package has been sent
 		 * - enable RX to get new commands
 		 * - disable DMA and TX until further commands*/
-
-		//
-		//CLEAR_BIT(huart2.Instance->CR3, USART_CR3_DMAT);
 		USART_CLEAR_TCIT();
 	}else if ((temp_sr & USART_SR_PE)>>USART_SR_PE_Pos)
 	{
@@ -75,7 +72,6 @@ void USART2_IRQHandler(void)
 
 #else
 	FMSTR_ProcessSCI();
-
 #endif
 	/*clear interrupt flag before exit */
 
@@ -86,7 +82,6 @@ void USART2_IRQHandler(void)
 void DMA1_Stream6_IRQHandler(void)
 {
 	HAL_GPIO_TogglePin(GPIOC,GPIO_PIN_10);
-	//HAL_UART_DMAPause(&huart2);
-	TESS_DAS_UPDATE_BUFFER();
+
 	HAL_DMA_IRQHandler(&hdma_usart2_tx);
 }

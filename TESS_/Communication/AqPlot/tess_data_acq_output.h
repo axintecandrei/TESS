@@ -23,7 +23,7 @@
 #if CFG_ACQ_ON
 
 /*DEFINES*/
-#define ACQ_BUFFER_SIZE 26
+#define ACQ_BUFFER_SIZE 20
 
 #define ACQ_HEADER      0x55
 #define ACQ_FOOTER      0x77
@@ -37,7 +37,6 @@ typedef enum tess_das_states_e
 	DAS_StandBy ,
 	DAS_SendPackage,
 	DAS_StartMeas,
-	DAS_ResumePackSend,
 	DAS_KeepPacking ,
 	DAS_StopOfMeasurement ,
 }tess_das_states_t;
@@ -50,11 +49,11 @@ tess_das_states_t PORT__TessDasStates;
 
 r_buff_data_t TESS_DATA_ACQ_BUFFER;
 r_buff_data_t TESS_DMA_BUFFER;
-
+uint32_t TESS_LOOP_CNT;
 /*FUNCTIONS*/
 void TESS_DAS_INIT();
 void TESS_DAS_MAIN();
-void TESS_DAS_UPDATE_BUFFER();
+void TESS_DAS_UPDATE_UPON_TC();
 void TESS_DAS_GET_COMMANDS(uint8_t command);
 
 #endif /*CFG_ACQ_ON*/

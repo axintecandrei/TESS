@@ -9,7 +9,7 @@
 
 #if CFG_ACQ_ON
 
-static uint8_t TESS_BUFF_IDX_INC (const uint8_t currentVal,const uint16_t buff_size);
+static uint16_t TESS_BUFF_IDX_INC (const uint16_t currentVal,const uint16_t buff_size);
 static void DATA_COPY ( const r_buff_data_t *source, r_buff_data_t *dest);
 
 void TESS_RING_BUFFER_INIT(ring_buffer_t * buff)
@@ -56,7 +56,7 @@ void TESS_RING_BUFFER_INIT(ring_buffer_t * buff)
 r_buff_data_t TESS_RING_BUFFER_GET(ring_buffer_t * buff)
 {
    r_buff_data_t  loc_buff_data;
-   buff->buffer_acces = Buff_lock_read;
+
 
    if (buff->count > 0u)
    {
@@ -65,17 +65,17 @@ r_buff_data_t TESS_RING_BUFFER_GET(ring_buffer_t * buff)
       DATA_COPY(&(buff->buff_data[buff->tail]), &loc_buff_data);
 
       buff->tail  = TESS_BUFF_IDX_INC (buff->tail, RBUF_SIZE);
-      buff->count = buff->count - (uint8_t)1;
+      buff->count--;
 
    }
    else
    {
       /* fill buffer with dummy data*/
-      loc_buff_data.byte0 = 45;
-      loc_buff_data.byte1 = dma_isr&0x000000FF;
-      loc_buff_data.byte2 = (dma_isr&0x0000FF00)>>8;
-      loc_buff_data.byte3 = (dma_isr&0x00FF0000)>>16;
-      loc_buff_data.byte4 = (dma_isr&0xFF000000)>>24;
+      loc_buff_data.byte0 = 1;
+      loc_buff_data.byte1 = 1;
+      loc_buff_data.byte2 = 1;
+      loc_buff_data.byte3 = 1;
+      loc_buff_data.byte4 = 1;
       loc_buff_data.byte5 = 1;
       loc_buff_data.byte6 = 1;
       loc_buff_data.byte7 = 1;
@@ -84,7 +84,7 @@ r_buff_data_t TESS_RING_BUFFER_GET(ring_buffer_t * buff)
       loc_buff_data.byte10 = 1;
       loc_buff_data.byte11 = 1;
       loc_buff_data.byte12 = 1;
-      loc_buff_data.byte13 = 90;
+      loc_buff_data.byte13 = 1;
       loc_buff_data.byte14 = 1;
       loc_buff_data.byte15 = 1;
       loc_buff_data.byte16 = 1;
@@ -96,13 +96,13 @@ r_buff_data_t TESS_RING_BUFFER_GET(ring_buffer_t * buff)
       loc_buff_data.byte22 = 1;
       loc_buff_data.byte23 = 1;
       loc_buff_data.byte24 = 1;
-      loc_buff_data.byte25 = 180;
+      loc_buff_data.byte25 = 1;
    }
    buff->buffer_acces = Buff_lock_none;
+
    /*return the entire structure at once*/
    return (loc_buff_data);
 }
-
 
 void TESS_RING_BUFFER_PUT(ring_buffer_t * buff, r_buff_data_t data)
 {
@@ -120,7 +120,7 @@ void TESS_RING_BUFFER_PUT(ring_buffer_t * buff, r_buff_data_t data)
          DATA_COPY(&data, &(buff->buff_data[buff->head])); /* copy received data to the buffer */
 
          buff->head = TESS_BUFF_IDX_INC (buff->head, RBUF_SIZE);
-         buff->count = buff->count + (uint8_t)1;
+         buff->count = buff->count + (uint16_t)1;
       }
       else
       {
@@ -146,12 +146,12 @@ uint8_t TESS_RINGBUFF_IS_EMPTY( const ring_buffer_t * buff)
    return (((uint8_t)(0) == buff->count));
 }
 
-static uint8_t TESS_BUFF_IDX_INC (const uint8_t currentVal,const uint16_t buff_size)
+static uint16_t TESS_BUFF_IDX_INC (const uint16_t currentVal,const uint16_t buff_size)
 {
-   uint8_t  newVal;
+	uint16_t  newVal;
 
 
-   newVal = currentVal + (uint8_t)1;
+   newVal = currentVal + 1;
    if (newVal >= buff_size)
    {
       newVal  = 0;

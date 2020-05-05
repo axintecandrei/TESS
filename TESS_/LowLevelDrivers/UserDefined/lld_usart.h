@@ -3,6 +3,7 @@
 #include "stm32f4xx.h"
 #include "stm32f4xx_hal.h"
 #include "../_Main_/utilities.h"
+#include "../Communication/AqPlot/tess_data_acq_output.h"
 
 #define SCI_TX_Pin        GPIO_PIN_2
 #define SCI_TX_GPIO_Port  GPIOA
@@ -30,5 +31,5 @@ DMA_HandleTypeDef hdma_usart2_tx;
 
 extern void Error_Handler(void);
 void USART2_UART_Init(void);
-void LLD_UART_START_TX_DMA(uint32_t data_buffer_addres, uint8_t size);
+
 #endif /*__usart_H*/
