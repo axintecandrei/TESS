@@ -42,7 +42,7 @@ void USART2_IRQHandler(void)
 {
 
 #if	FMSTR_DISABLE
-	uint8_t temp_dr;f
+	uint8_t temp_dr;
 	uint8_t temp_sr;
 	temp_sr = USART2->SR;
 	/*Check interrupt source*/
