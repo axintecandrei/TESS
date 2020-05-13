@@ -39,17 +39,6 @@ void TESS_RING_BUFFER_INIT(ring_buffer_t * buff)
       buff->buff_data[idx].byte13 = 0;
       buff->buff_data[idx].byte14 = 0;
       buff->buff_data[idx].byte15 = 0;
-      buff->buff_data[idx].byte15 = 0;
-      buff->buff_data[idx].byte16 = 0;
-      buff->buff_data[idx].byte17 = 0;
-      buff->buff_data[idx].byte18 = 0;
-      buff->buff_data[idx].byte19 = 0;
-      buff->buff_data[idx].byte20 = 0;
-      buff->buff_data[idx].byte21 = 0;
-      buff->buff_data[idx].byte22 = 0;
-      buff->buff_data[idx].byte23 = 0;
-      buff->buff_data[idx].byte24 = 0;
-      buff->buff_data[idx].byte25 = 0;
    }
 }
 
@@ -60,7 +49,6 @@ r_buff_data_t TESS_RING_BUFFER_GET(ring_buffer_t * buff)
 
    if (buff->count > 0u)
    {
-	   buff->buffer_acces = Buff_lock_read;
 	  /*copy data from the buffer to local structure*/
       DATA_COPY(&(buff->buff_data[buff->tail]), &loc_buff_data);
 
@@ -87,18 +75,7 @@ r_buff_data_t TESS_RING_BUFFER_GET(ring_buffer_t * buff)
       loc_buff_data.byte13 = 1;
       loc_buff_data.byte14 = 1;
       loc_buff_data.byte15 = 1;
-      loc_buff_data.byte16 = 1;
-      loc_buff_data.byte17 = 1;
-      loc_buff_data.byte18 = 1;
-      loc_buff_data.byte19 = 1;
-      loc_buff_data.byte20 = 1;
-      loc_buff_data.byte21 = 1;
-      loc_buff_data.byte22 = 1;
-      loc_buff_data.byte23 = 1;
-      loc_buff_data.byte24 = 1;
-      loc_buff_data.byte25 = 1;
    }
-   buff->buffer_acces = Buff_lock_none;
 
    /*return the entire structure at once*/
    return (loc_buff_data);
@@ -107,26 +84,15 @@ r_buff_data_t TESS_RING_BUFFER_GET(ring_buffer_t * buff)
 void TESS_RING_BUFFER_PUT(ring_buffer_t * buff, r_buff_data_t data)
 {
 
-   if (buff->buffer_acces == Buff_lock_read)
-   {
-      /* skip adding data to avoid concurrent write/read */
-      buff->buffer_flags |= (uint8_t)(Benchaling_buffer_concurent_write_read);
-   }
-   else
-   {
-      buff->buffer_acces = Buff_lock_write; 
-      if (buff->count < RBUF_SIZE)
+   if (buff->count < RBUF_SIZE)
       {
          DATA_COPY(&data, &(buff->buff_data[buff->head])); /* copy received data to the buffer */
 
          buff->head = TESS_BUFF_IDX_INC (buff->head, RBUF_SIZE);
-         buff->count = buff->count + (uint16_t)1;
+         buff->count++;
       }
-      else
+   else
       {
-         /*set error for buffer */
-         buff->buffer_flags |= (uint8_t)(Benchalign_buffer_overwrite);
-
          /* discard data at tail */
          buff->tail = TESS_BUFF_IDX_INC (buff->tail, RBUF_SIZE);
 
@@ -136,26 +102,24 @@ void TESS_RING_BUFFER_PUT(ring_buffer_t * buff, r_buff_data_t data)
 
          /*count will remain constant*/
       }
-
-      buff->buffer_acces = Buff_lock_none;
-   }
 }
 
 uint8_t TESS_RINGBUFF_IS_EMPTY( const ring_buffer_t * buff)
 {
-   return (((uint8_t)(0) == buff->count));
+   return (buff->count == 0);
+}
+
+uint8_t TESS_RINGBUFF_IS_FULL( const ring_buffer_t * buff)
+{
+   return (RBUF_SIZE == buff->count);
 }
 
 static uint16_t TESS_BUFF_IDX_INC (const uint16_t currentVal,const uint16_t buff_size)
 {
-	uint16_t  newVal;
-
+   uint16_t  newVal;
 
    newVal = currentVal + 1;
-   if (newVal >= buff_size)
-   {
-      newVal  = 0;
-   }
+   newVal %= buff_size;
 
    return newVal;
 }
@@ -179,17 +143,6 @@ static void DATA_COPY ( const r_buff_data_t *source, r_buff_data_t *dest)
    dest->byte13 = source->byte13;
    dest->byte14 = source->byte14;
    dest->byte15 = source->byte15;
-   dest->byte16 = source->byte16;
-   dest->byte17 = source->byte17;
-   dest->byte18 = source->byte18;
-   dest->byte19 = source->byte19;
-   dest->byte20 = source->byte20;
-   dest->byte21 = source->byte21;
-   dest->byte22 = source->byte22;
-   dest->byte23 = source->byte23;
-   dest->byte24 = source->byte24;
-   dest->byte25 = source->byte25;
-
 }
 
 #endif /*CFG_ACQ_ON*/

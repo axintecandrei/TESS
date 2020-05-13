@@ -32,7 +32,6 @@ void USART2_UART_Init(void)
 #if CFG_ACQ_ON
 
   USART_ENABLE_RXIT();
-  //USART_ENABLE_TXIT();
   DMA_INIT_UART();
 #endif
 }

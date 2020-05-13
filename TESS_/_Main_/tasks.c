@@ -3,7 +3,6 @@
 
 void _100US_LOOP (void)
 {
-	TESS_LOOP_CNT++;
 	LLD_ADC_GET_RAW_VAL();
 
 #if CFG_ACQ_ON

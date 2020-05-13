@@ -23,7 +23,7 @@
 #if CFG_ACQ_ON
 
 /*DEFINES*/
-#define ACQ_BUFFER_SIZE 20
+#define ACQ_BUFFER_SIZE 16
 
 #define ACQ_HEADER      0x55
 #define ACQ_FOOTER      0x77
@@ -50,6 +50,7 @@ tess_das_states_t PORT__TessDasStates;
 r_buff_data_t TESS_DATA_ACQ_BUFFER;
 r_buff_data_t TESS_DMA_BUFFER;
 uint32_t TESS_LOOP_CNT;
+extern uint32_t dma_isr_cnt, ring_buff_cnt;
 /*FUNCTIONS*/
 void TESS_DAS_INIT();
 void TESS_DAS_MAIN();
