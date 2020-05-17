@@ -15,7 +15,10 @@
 #include "../LowLevelDrivers/UserDefined/lld_adc.h"
 #include "../Communication/FreeMaster/freemaster.h"
 #include "../Communication/FreeMaster/freemaster_STM32F4xx.h"
+#include "../USB_DEVICE/App/usb_device.h"
 #include "../Communication/AqPlot/tess_data_acq_output.h"
+
+
 
 
 void MAIN_INIT(void);

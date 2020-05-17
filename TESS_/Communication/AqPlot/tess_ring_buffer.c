@@ -39,6 +39,10 @@ void TESS_RING_BUFFER_INIT(ring_buffer_t * buff)
       buff->buff_data[idx].byte13 = 0;
       buff->buff_data[idx].byte14 = 0;
       buff->buff_data[idx].byte15 = 0;
+      buff->buff_data[idx].byte16 = 0;
+      buff->buff_data[idx].byte17 = 0;
+      buff->buff_data[idx].byte18 = 0;
+      buff->buff_data[idx].byte19 = 0;
    }
 }
 
@@ -75,6 +79,11 @@ r_buff_data_t TESS_RING_BUFFER_GET(ring_buffer_t * buff)
       loc_buff_data.byte13 = 1;
       loc_buff_data.byte14 = 1;
       loc_buff_data.byte15 = 1;
+      loc_buff_data.byte16 = 0;
+      loc_buff_data.byte17 = 0;
+      loc_buff_data.byte18 = 0;
+      loc_buff_data.byte19 = 0;
+
    }
 
    /*return the entire structure at once*/
@@ -143,6 +152,11 @@ static void DATA_COPY ( const r_buff_data_t *source, r_buff_data_t *dest)
    dest->byte13 = source->byte13;
    dest->byte14 = source->byte14;
    dest->byte15 = source->byte15;
+   dest->byte16 = source->byte16;
+   dest->byte17 = source->byte17;
+   dest->byte18 = source->byte18;
+   dest->byte19 = source->byte19;
+
 }
 
 #endif /*CFG_ACQ_ON*/

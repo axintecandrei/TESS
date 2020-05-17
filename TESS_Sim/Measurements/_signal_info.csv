@@ -1,0 +1,7 @@
+SignalName;Size;ByteOffset;Unit;Resolution
+RingBuffCnt;2;3;-;1
+RingBuff_Head;2;5;-;1
+RingBuff_Tail;2;7;-;1
+DasState;1;10;-;1
+_200usCnt;4;11;us;0.0002
+AdcChannelTest;2;15;V;0.001

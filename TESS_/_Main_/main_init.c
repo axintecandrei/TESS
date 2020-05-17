@@ -16,9 +16,14 @@ void MAIN_INIT(void)
     TESS_GPIO_INIT();
 
 #if CFG_ACQ_ON
+    TESS_DAS_INIT();
+#if CFG_DAS_USB_UART == CFG_DAS_USB_AVAILABLE
+    MX_USB_DEVICE_Init();
+#else
 	USART2_UART_Init();
-	TESS_DAS_INIT();
 #endif
+#endif
+
 #if !FMSTR_DISABLE
 	USART2_UART_Init();
 	FMSTR_Init();

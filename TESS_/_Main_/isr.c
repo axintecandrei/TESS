@@ -7,6 +7,9 @@
   * @param  None
   * @retval None
   */
+
+extern PCD_HandleTypeDef hpcd_USB_OTG_FS;
+
 void SysTick_Handler(void)
 {
 	HAL_IncTick();
@@ -37,7 +40,7 @@ void TIM2_IRQHandler()
 	TIM2_CLEAR_IT();
 #endif
 }
-
+#if CFG_FMSTR_ON || CFG_ACQ_ON
 void USART2_IRQHandler(void)
 {
 
@@ -81,7 +84,15 @@ void USART2_IRQHandler(void)
 /* This function handles DMA1 stream6 global interrupt. */
 void DMA1_Stream6_IRQHandler(void)
 {
-	HAL_GPIO_TogglePin(GPIOC,GPIO_PIN_10);
-
 	HAL_DMA_IRQHandler(&hdma_usart2_tx);
 }
+#endif
+
+#if (CFG_ACQ_ON && (CFG_DAS_USB_UART == CFG_DAS_USB_AVAILABLE))
+void OTG_FS_IRQHandler(void)
+{
+
+  HAL_PCD_IRQHandler(&hpcd_USB_OTG_FS);
+
+}
+#endif

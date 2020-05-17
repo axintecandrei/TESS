@@ -8,6 +8,8 @@
 /* Includes ------------------------------------------------------------------*/
 #include "lld_usart.h"
 
+#if CFG_FMSTR_ON || CFG_ACQ_ON
+
 void DMA_INIT_UART();
 
 void USART2_UART_Init(void)
@@ -30,7 +32,6 @@ void USART2_UART_Init(void)
 #endif
   HAL_UART_Init(&huart2);
 #if CFG_ACQ_ON
-
   USART_ENABLE_RXIT();
   DMA_INIT_UART();
 #endif
@@ -99,3 +100,5 @@ void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)
 {
 	TESS_DAS_UPDATE_UPON_TC();
 }
+
+#endif

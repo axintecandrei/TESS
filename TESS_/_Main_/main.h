@@ -14,5 +14,7 @@
 #include "../Communication/FreeMaster/freemaster.h"
 #include "../Communication/FreeMaster/freemaster_private.h"
 
+
+void Error_Handler(void);
 uint32_t MAIN_CLOCK;
 #endif /* MAIN_H_ */

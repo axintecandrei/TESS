@@ -15,7 +15,7 @@
 
 #if CFG_ACQ_ON
 
-#define RBUF_SIZE                               1024
+#define RBUF_SIZE                               2048
 #define Benchalign_buffer_overwrite             0x0001
 #define Benchaling_buffer_concurent_write_read  0x0002
 #define Buff_lock_none                          ((uint8_t)0x00)
@@ -40,6 +40,10 @@ typedef struct r_buff_data_s
    uint8_t byte13;
    uint8_t byte14;
    uint8_t byte15;
+   uint8_t byte16;
+   uint8_t byte17;
+   uint8_t byte18;
+   uint8_t byte19;
 }r_buff_data_t;
 
 

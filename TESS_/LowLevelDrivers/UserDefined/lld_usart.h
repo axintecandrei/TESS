@@ -4,7 +4,7 @@
 #include "stm32f4xx_hal.h"
 #include "../_Main_/utilities.h"
 #include "../Communication/AqPlot/tess_data_acq_output.h"
-
+#if CFG_FMSTR_ON || CFG_ACQ_ON
 #define SCI_TX_Pin        GPIO_PIN_2
 #define SCI_TX_GPIO_Port  GPIOA
 #define SCI_RX_Pin        GPIO_PIN_3
@@ -31,5 +31,5 @@ DMA_HandleTypeDef hdma_usart2_tx;
 
 extern void Error_Handler(void);
 void USART2_UART_Init(void);
-
+#endif
 #endif /*__usart_H*/

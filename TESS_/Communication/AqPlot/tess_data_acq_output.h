@@ -12,6 +12,8 @@
 #include "../_Main_/config.h"
 #include "tess_ring_buffer.h"
 #include "../LowLevelDrivers/UserDefined/lld_usart.h"
+#include "../USB_DEVICE/App/usbd_cdc_if.h"
+#include "../LowLevelDrivers/UserDefined/lld_adc.h"
 /*Include the needed files so the DAS
  * can have access to the variable
  * to be send during measurement*/
@@ -23,7 +25,7 @@
 #if CFG_ACQ_ON
 
 /*DEFINES*/
-#define ACQ_BUFFER_SIZE 16
+#define ACQ_BUFFER_SIZE 20
 
 #define ACQ_HEADER      0x55
 #define ACQ_FOOTER      0x77
@@ -54,7 +56,7 @@ extern uint32_t dma_isr_cnt, ring_buff_cnt;
 /*FUNCTIONS*/
 void TESS_DAS_INIT();
 void TESS_DAS_MAIN();
-void TESS_DAS_UPDATE_UPON_TC();
+uint8_t TESS_DAS_UPDATE_UPON_TC();
 void TESS_DAS_GET_COMMANDS(uint8_t command);
 
 #endif /*CFG_ACQ_ON*/
