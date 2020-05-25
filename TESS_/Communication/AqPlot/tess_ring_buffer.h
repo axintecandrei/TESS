@@ -15,7 +15,7 @@
 
 #if CFG_ACQ_ON
 
-#define RBUF_SIZE                               2048
+#define RBUF_SIZE                               1536
 #define Benchalign_buffer_overwrite             0x0001
 #define Benchaling_buffer_concurent_write_read  0x0002
 #define Buff_lock_none                          ((uint8_t)0x00)
@@ -44,6 +44,17 @@ typedef struct r_buff_data_s
    uint8_t byte17;
    uint8_t byte18;
    uint8_t byte19;
+   uint8_t byte20;
+   uint8_t byte21;
+   uint8_t byte22;
+   uint8_t byte23;
+   uint8_t byte24;
+   uint8_t byte25;
+   uint8_t byte26;
+   uint8_t byte27;
+   uint8_t byte28;
+   uint8_t byte29;
+   
 }r_buff_data_t;
 
 
@@ -70,6 +81,6 @@ extern r_buff_data_t TESS_RING_BUFFER_GET(ring_buffer_t * buff);
 extern void TESS_RING_BUFFER_PUT(ring_buffer_t * buff, r_buff_data_t data);
 extern uint8_t TESS_RINGBUFF_IS_EMPTY( const ring_buffer_t * buff);
 extern uint8_t TESS_RINGBUFF_IS_FULL( const ring_buffer_t * buff);
-
+uint16_t TESS_BUFF_IDX_INC (const uint16_t currentVal,const uint16_t buff_size);
 #endif /*CFG_ACQ_ON*/
 #endif /* __tess_ring_buffer_h__ */
