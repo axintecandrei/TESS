@@ -33,14 +33,13 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define TESS_MOTOR_RESISTANCE (1.9F)       /*Ohm*/
-#define TESS_MOTOR_INDUCTANCE (0.001558F)  /*H*/
-//#define TESS_MOTOR_KE         (4.282E-3)   /*V/rad/s*/
-#define TESS_MOTOR_KE         (2.784E-4)/* (4.484E-04)*/  /*V/rad/s*/
+#define TESS_MOTOR_RESISTANCE (1.9F) /*1.35*/       /*Ohm*/
+#define TESS_MOTOR_INDUCTANCE (0.001558F)   /*H*/
+#define TESS_MOTOR_KE         (3.984E-4)    /*V/rad/s*/
 #define TESS_MOTOR_POLE       (2)
 #define TESS_TS               (0.0005F)     /*s*/
-#define TESS_GEAR_RATIO       (25.0F)      /*gear box ratio*/
-#define TESS_mV_TO_V          (0.001F)     /**/
+#define TESS_GEAR_RATIO       (16.9F)       /*gear box ratio*/
+#define TESS_mV_TO_V          (0.001F)      /**/
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -266,7 +265,7 @@ void ADC_IRQHandler(void)
     /*Estimate Speed based on measured  motor voltage and current using motor model */
     MOTOR_EST_SPEED = TessSpeedEstimation(M1_CURRENT,MOTOR_VOLT);
     WHEEL_EST_SPEED = MOTOR_EST_SPEED/TESS_GEAR_RATIO;
-    REQUESTED_MOTOR_VOLTAGE = TessSpeedControler(REQUESTED_SPEED*4,WHEEL_EST_SPEED);
+    REQUESTED_MOTOR_VOLTAGE = TessSpeedControler(REQUESTED_SPEED*TESS_GEAR_RATIO,MOTOR_EST_SPEED);
 
     PWM_DTC = 0.5F + (REQUESTED_MOTOR_VOLTAGE/DC_LINK_VOLT);
     PWM_DTC = Saturate(PWM_DTC, 0.02F,0.98F);

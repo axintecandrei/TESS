@@ -2,7 +2,7 @@
 RCC.USART1Freq_Value=72000000
 SH.S_TIM1_CH4.0=TIM1_CH4,PWM Generation4 CH4
 RCC.TIM17Freq_Value=72000000
-ADC1.SamplingTime-4\#ChannelInjectedConversion=ADC_SAMPLETIME_112CYCLES
+ADC1.SamplingTime-4\#ChannelInjectedConversion=ADC_SAMPLETIME_144CYCLES
 PE11.GPIOParameters=GPIO_Label
 TIM1.IPParameters=Channel-PWM Generation1 CH1,Channel-PWM Generation2 CH2,Channel-PWM Generation4 CH4,Channel-PWM Generation3 CH3,TIM_MasterSlaveMode,TIM_MasterOutputTrigger,Prescaler,CounterMode,Period,RepetitionCounter
 RCC.PLLCLKFreq_Value=100000000
@@ -60,7 +60,7 @@ Mcu.Package=LQFP144
 TIM2.Prescaler=1
 RCC.TIM15Freq_Value=72000000
 ADC1.Channel-4\#ChannelInjectedConversion=ADC_CHANNEL_2
-ADC1.SamplingTime-5\#ChannelInjectedConversion=ADC_SAMPLETIME_112CYCLES
+ADC1.SamplingTime-5\#ChannelInjectedConversion=ADC_SAMPLETIME_480CYCLES
 RCC.I2S2Freq_Value=192000000
 RCC.SAI1AFreq_Value=8000000
 RCC.ADC34outputFreq_Value=72000000
