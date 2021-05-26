@@ -36,8 +36,9 @@
 #define TESS_MOTOR_RESISTANCE (1.9F)       /*Ohm*/
 #define TESS_MOTOR_INDUCTANCE (0.001558F)  /*H*/
 //#define TESS_MOTOR_KE         (4.282E-3)   /*V/rad/s*/
-#define TESS_MOTOR_KE         (2.584E-4) /*(4.484E-04)*/  /*V/rad/s*/
-#define TESS_TS               (0.002F)     /*s*/
+#define TESS_MOTOR_KE         (2.784E-4)/* (4.484E-04)*/  /*V/rad/s*/
+#define TESS_MOTOR_POLE       (2)
+#define TESS_TS               (0.0005F)     /*s*/
 #define TESS_GEAR_RATIO       (25.0F)      /*gear box ratio*/
 #define TESS_mV_TO_V          (0.001F)     /**/
 /* USER CODE END PD */
@@ -45,6 +46,7 @@
 /* Private macro -------------------------------------------------------------*/
 /* USER CODE BEGIN PM */
 #define AbsValue(x) (((x)>=0) ? (x) : (-(x)))
+#define Saturate(x, l, u ) (((x) <= (l)) ? (l) : (((x) >= (u)) ? (u) : (x)) )
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
@@ -56,18 +58,22 @@ uint16_t AdcValueM4Current;
 uint16_t AdcValueDcLink1;
 
 uint32_t MAIN_CLOCK;
-uint16_t PWM_DTC;
+float    PWM_DTC;
+int16_t  REQUESTED_SPEED;
+float    REQUESTED_MOTOR_VOLTAGE;
 uint16_t PWM_DTC_READ;
 uint16_t PWM_PER_READ;
 float    MOTOR_PWM_DTC;
 uint16_t MOTOR_CURRENT_ADC_VALUE;
 float    DC_LINK_VOLT;
-float    MOTOR_VOLT, M1_CURRENT, M2_CURRENT, WHEEL_EST_SPEED;
+float    MOTOR_VOLT, M1_CURRENT, M2_CURRENT, WHEEL_EST_SPEED, MOTOR_EST_SPEED;
+float    PGain, IGain, SpeedError;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN PFP */
-float TESS_MOTOR_MODEL(float current_meas, float voltage_meas);
+float TessSpeedEstimation(float ia_meas, float va_meas);
+float TessSpeedControler(float RequestedSpeed, float MeasuredSpeed);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -240,26 +246,35 @@ void ADC_IRQHandler(void)
 {
   /* USER CODE BEGIN ADC_IRQn 0 */
     HAL_GPIO_WritePin(GPIOB, LD1_Pin, GPIO_PIN_SET);
+
+    /*Get the ADC values of current and dc link*/
     AdcValueM1Current = HAL_ADCEx_InjectedGetValue(&hadc1, ADC_INJECTED_RANK_1);
     AdcValueDcLink1   = HAL_ADCEx_InjectedGetValue(&hadc1, ADC_INJECTED_RANK_2);
     AdcValueM3Current = HAL_ADCEx_InjectedGetValue(&hadc1, ADC_INJECTED_RANK_3);
     AdcValueM4Current = HAL_ADCEx_InjectedGetValue(&hadc1, ADC_INJECTED_RANK_4);
     //AdcValueDcLink1 = ADC_GetSingleConv();
 
-
-    MOTOR_PWM_DTC = (float)PWM_DTC_READ/(float)PWM_PER_READ;
-    /*DC_LINK_VOLT = ((((float)DC_LINK_ADC_VALUE*3.3F)/4096.0F) * 3 );
-    MOTOR_VOLT = DC_LINK_VOLT * MOTOR_PWM_DTC;*/
-    M1_CURRENT =  (((float)AdcValueM1Current*3300.0F)/4096.0F) ; /*adc to mV*/
-    M1_CURRENT /= 0.5F; /*mV to mA*/
-
+    /*Calculate the motor voltage as a proportion of DC Link*/
+    MOTOR_PWM_DTC = (float)PWM_DTC_READ/((float)PWM_PER_READ+1);
     DC_LINK_VOLT = (((float)AdcValueDcLink1*3320.0F)/4095.0F)*3 ; /*adc to mV*/
     MOTOR_VOLT = DC_LINK_VOLT*MOTOR_PWM_DTC - (DC_LINK_VOLT*0.5);
-    WHEEL_EST_SPEED = TESS_MOTOR_MODEL(M1_CURRENT,MOTOR_VOLT);
+
+    /*Calculate motor current*/
+    M1_CURRENT =  (((float)AdcValueM1Current*3300.0F)/4096.0F) ; /*adc to mV*/
+    M1_CURRENT /= 0.46F; /*mV to mA*/
+
+    /*Estimate Speed based on measured  motor voltage and current using motor model */
+    MOTOR_EST_SPEED = TessSpeedEstimation(M1_CURRENT,MOTOR_VOLT);
+    WHEEL_EST_SPEED = MOTOR_EST_SPEED/TESS_GEAR_RATIO;
+    REQUESTED_MOTOR_VOLTAGE = TessSpeedControler(REQUESTED_SPEED*4,WHEEL_EST_SPEED);
+
+    PWM_DTC = 0.5F + (REQUESTED_MOTOR_VOLTAGE/DC_LINK_VOLT);
+    PWM_DTC = Saturate(PWM_DTC, 0.02F,0.98F);
+
     TIM1->CCR3 = htim1.Init.Period*0.5;/*((float)PWM_DTC*0.01F)*htim1.Init.Period;*/
     TIM1->CCR4 = htim1.Init.Period*0.5;/*htim1.Init.Period - (((float)PWM_DTC*0.01F)*htim1.Init.Period);*/
-    TIM1->CCR1 = ((float)PWM_DTC*0.01F)*htim1.Init.Period;
-    TIM1->CCR2 =  htim1.Init.Period - (((float)PWM_DTC*0.01F)*htim1.Init.Period);
+    TIM1->CCR1 = PWM_DTC*htim1.Init.Period;
+    TIM1->CCR2 = htim1.Init.Period - (PWM_DTC*htim1.Init.Period);
 
     MAIN_CLOCK++;
 #if(!FMSTR_DISABLE)
@@ -320,7 +335,7 @@ void DMA2_Stream0_IRQHandler(void)
 }
 
 /* USER CODE BEGIN 1 */
-float TESS_MOTOR_MODEL(float ia_meas, float va_meas)
+float TessSpeedEstimation(float ia_meas, float va_meas)
 {
     static float ia_k_1;
     float d_ia, est_speed;
@@ -330,9 +345,27 @@ float TESS_MOTOR_MODEL(float ia_meas, float va_meas)
 
     est_speed  = (va_meas - ia_meas*TESS_MOTOR_RESISTANCE - (TESS_MOTOR_INDUCTANCE*d_ia)*TESS_TS)*TESS_mV_TO_V;
     est_speed /= TESS_MOTOR_KE;
-    est_speed /= TESS_GEAR_RATIO;
+    //est_speed /= TESS_MOTOR_POLE;
+    //est_speed /= TESS_GEAR_RATIO;
 
     return est_speed;
+}
+
+float TessSpeedControler(float RequestedSpeed, float MeasuredSpeed)
+{
+    //float SpeedError;
+    float ProportionalPart;
+    static float IntegralPart = 0;
+    float RequestedMotorVoltage = 0;
+
+    SpeedError = RequestedSpeed - MeasuredSpeed;
+    ProportionalPart = PGain*SpeedError;
+    IntegralPart     = IntegralPart + IntegralPart*SpeedError*TESS_TS;
+
+    RequestedMotorVoltage = ProportionalPart + IntegralPart*IGain;
+
+
+    return RequestedMotorVoltage;
 }
 /* USER CODE END 1 */
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

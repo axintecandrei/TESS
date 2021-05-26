@@ -53,6 +53,7 @@ PCD_HandleTypeDef hpcd_USB_OTG_FS;
 
 /* USER CODE BEGIN PV */
 extern uint16_t PWM_DTC;
+float    PGain, IGain;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -114,7 +115,8 @@ int main(void)
 #if !FMSTR_DISABLE
 	FMSTR_Init();
 #endif
-	PWM_DTC = 50;
+	PGain = 0.25;
+	IGain = 0.05;
   /* USER CODE END 2 */
 
   /* Infinite loop */
