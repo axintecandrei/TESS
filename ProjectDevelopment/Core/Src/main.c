@@ -115,8 +115,8 @@ int main(void)
 #if !FMSTR_DISABLE
 	FMSTR_Init();
 #endif
-	PGain = 0.25;
-	IGain = 0.05;
+	PGain = 0.01;
+	IGain = 3.0;
 	PWM_DTC = 0.5;
   /* USER CODE END 2 */
 

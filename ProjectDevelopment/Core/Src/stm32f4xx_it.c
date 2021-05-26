@@ -35,7 +35,7 @@
 /* USER CODE BEGIN PD */
 #define TESS_MOTOR_RESISTANCE (1.9F) /*1.35*/       /*Ohm*/
 #define TESS_MOTOR_INDUCTANCE (0.001558F)   /*H*/
-#define TESS_MOTOR_KE         (3.984E-4)    /*V/rad/s*/
+#define TESS_MOTOR_KE         (3.584E-4)    /*V/rad/s*/
 #define TESS_MOTOR_POLE       (2)
 #define TESS_TS               (0.0005F)     /*s*/
 #define TESS_GEAR_RATIO       (16.9F)       /*gear box ratio*/
@@ -359,7 +359,7 @@ float TessSpeedControler(float RequestedSpeed, float MeasuredSpeed)
 
     SpeedError = RequestedSpeed - MeasuredSpeed;
     ProportionalPart = PGain*SpeedError;
-    IntegralPart     = IntegralPart + IntegralPart*SpeedError*TESS_TS;
+    IntegralPart     = IntegralPart + SpeedError*TESS_TS;
 
     RequestedMotorVoltage = ProportionalPart + IntegralPart*IGain;
 
