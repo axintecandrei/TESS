@@ -32,7 +32,8 @@ extern "C" {
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "freemaster.h"
+#include "freemaster_private.h"
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
@@ -50,6 +51,8 @@ extern "C" {
 
 /* USER CODE END EM */
 
+void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);
+
 /* Exported functions prototypes ---------------------------------------------*/
 void Error_Handler(void);
 
@@ -58,6 +61,8 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define PIN_TEST_Pin GPIO_PIN_8
+#define PIN_TEST_GPIO_Port GPIOA
 #define USART3_TX_Pin GPIO_PIN_10
 #define USART3_TX_GPIO_Port GPIOC
 #define USART3_RX_Pin GPIO_PIN_11
