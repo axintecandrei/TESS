@@ -61,8 +61,38 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define PIN_TEST_Pin GPIO_PIN_8
-#define PIN_TEST_GPIO_Port GPIOA
+#define PWMOutput1M2_Pin_Pin GPIO_PIN_0
+#define PWMOutput1M2_Pin_GPIO_Port GPIOC
+#define PWMOutput2M2_Pin_Pin GPIO_PIN_1
+#define PWMOutput2M2_Pin_GPIO_Port GPIOC
+#define PWMOutput1M1_Pin_Pin GPIO_PIN_2
+#define PWMOutput1M1_Pin_GPIO_Port GPIOC
+#define PWMOutput2M1_Pin_Pin GPIO_PIN_3
+#define PWMOutput2M1_Pin_GPIO_Port GPIOC
+#define ADCM1Current_Pin_Pin GPIO_PIN_0
+#define ADCM1Current_Pin_GPIO_Port GPIOA
+#define ADCM2Current_Pin_Pin GPIO_PIN_1
+#define ADCM2Current_Pin_GPIO_Port GPIOA
+#define ADCM3Current_Pin_Pin GPIO_PIN_2
+#define ADCM3Current_Pin_GPIO_Port GPIOA
+#define ADCDcLink_Pin_Pin GPIO_PIN_3
+#define ADCDcLink_Pin_GPIO_Port GPIOA
+#define PWMInputM1_Pin_Pin GPIO_PIN_5
+#define PWMInputM1_Pin_GPIO_Port GPIOA
+#define PWMInputM2_Pin_Pin GPIO_PIN_6
+#define PWMInputM2_Pin_GPIO_Port GPIOA
+#define PWMInputM4_Pin_Pin GPIO_PIN_2
+#define PWMInputM4_Pin_GPIO_Port GPIOB
+#define PWMOutput1M3_Pin_Pin GPIO_PIN_6
+#define PWMOutput1M3_Pin_GPIO_Port GPIOC
+#define PWMOutput2M3_Pin_Pin GPIO_PIN_7
+#define PWMOutput2M3_Pin_GPIO_Port GPIOC
+#define PWMOutput1M4_Pin_Pin GPIO_PIN_8
+#define PWMOutput1M4_Pin_GPIO_Port GPIOC
+#define PWMOutput2M4_Pin_Pin GPIO_PIN_9
+#define PWMOutput2M4_Pin_GPIO_Port GPIOC
+#define PWMInputM3_Pin_Pin GPIO_PIN_11
+#define PWMInputM3_Pin_GPIO_Port GPIOA
 #define USART3_TX_Pin GPIO_PIN_10
 #define USART3_TX_GPIO_Port GPIOC
 #define USART3_RX_Pin GPIO_PIN_11
