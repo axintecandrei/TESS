@@ -32,8 +32,7 @@ extern "C" {
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "freemaster.h"
-#include "freemaster_private.h"
+#include "tess_main.h"
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
@@ -83,6 +82,8 @@ void Error_Handler(void);
 #define PWMInputM2_Pin_GPIO_Port GPIOA
 #define PWMInputM4_Pin_Pin GPIO_PIN_2
 #define PWMInputM4_Pin_GPIO_Port GPIOB
+#define ADCM4Current_Pin_Pin GPIO_PIN_14
+#define ADCM4Current_Pin_GPIO_Port GPIOB
 #define PWMOutput1M3_Pin_Pin GPIO_PIN_6
 #define PWMOutput1M3_Pin_GPIO_Port GPIOC
 #define PWMOutput2M3_Pin_Pin GPIO_PIN_7
@@ -91,12 +92,12 @@ void Error_Handler(void);
 #define PWMOutput1M4_Pin_GPIO_Port GPIOC
 #define PWMOutput2M4_Pin_Pin GPIO_PIN_9
 #define PWMOutput2M4_Pin_GPIO_Port GPIOC
-#define PWMInputM3_Pin_Pin GPIO_PIN_11
-#define PWMInputM3_Pin_GPIO_Port GPIOA
 #define USART3_TX_Pin GPIO_PIN_10
 #define USART3_TX_GPIO_Port GPIOC
 #define USART3_RX_Pin GPIO_PIN_11
 #define USART3_RX_GPIO_Port GPIOC
+#define PWMInputM3_Pin_Pin GPIO_PIN_6
+#define PWMInputM3_Pin_GPIO_Port GPIOB
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */
