@@ -28,8 +28,8 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "freemaster.h"
-#include "freemaster_private.h"
+#include "../../TESS/Freemaster/include/freemaster.h"
+#include "../../TESS/Freemaster/include/freemaster_private.h"
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/

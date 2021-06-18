@@ -20,9 +20,12 @@ OBJCOPY_BIN :=
 
 # Every subdirectory with source files must be described here
 SUBDIRS := \
-Application/Freemaster/source \
-Application \
 Core/Src \
 Core/Startup \
 Drivers/STM32G4xx_HAL_Driver/Src \
+TESS/Actuators/MotorControl \
+TESS/Actuators/MotorDriver \
+TESS/Actuators/MotorInputProcesing \
+TESS/Freemaster/source \
+TESS \
 

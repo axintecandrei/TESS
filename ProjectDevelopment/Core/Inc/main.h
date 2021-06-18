@@ -33,6 +33,7 @@ extern "C" {
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "tess_main.h"
+#include "tess_hal_if.h"
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/

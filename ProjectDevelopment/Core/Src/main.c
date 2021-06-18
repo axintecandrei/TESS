@@ -285,7 +285,7 @@ static void MX_ADC1_Init(void)
       ADC_Disable(&hadc1);
   }
 
-  HAL_ADC_Start_DMA(&hadc1, ADC_VALUE, ADC_BUFFER_SIZE);
+  HAL_ADC_Start_DMA(&hadc1, RawAdcValue, RAW_ADC_BUFFER_SIZE);
   /* USER CODE END ADC1_Init 2 */
 
 }

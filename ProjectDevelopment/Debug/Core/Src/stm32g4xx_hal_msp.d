@@ -31,13 +31,22 @@ Core/Src/stm32g4xx_hal_msp.o: ../Core/Src/stm32g4xx_hal_msp.c \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim_ex.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart_ex.h \
- ../Application/tess_main.h \
- ../Application/Freemaster/include/freemaster.h \
- ../Application/Freemaster/include/freemaster_defcfg.h \
- ../Application/Freemaster/include/freemaster_cfg.h \
- ../Application/Freemaster/include/freemaster_tsa.h \
- ../Application/Freemaster/include/freemaster_private.h \
- ../Application/Freemaster/include/freemaster_STM32F4xx.h
+ ../TESS/tess_main.h ../TESS/Freemaster/include/freemaster.h \
+ ../TESS/Freemaster/include/../../../TESS/Freemaster/include/freemaster_defcfg.h \
+ c:\users\nxf70809\documents\laboratory\tess\projectdevelopment\tess\freemaster\include\freemaster_cfg.h \
+ ../TESS/Freemaster/include/../../../TESS/Freemaster/include/freemaster_tsa.h \
+ c:\users\nxf70809\documents\laboratory\tess\projectdevelopment\tess\freemaster\include\freemaster_defcfg.h \
+ ../TESS/Freemaster/include/freemaster_private.h \
+ ../TESS/Freemaster/include/../../../TESS/Freemaster/include/freemaster_STM32F4xx.h \
+ ../TESS/Actuators/MotorControl/tess_act_statemachine.h \
+ ../TESS/Actuators/MotorControl/tess_motorcontrol.h \
+ ../TESS/Actuators/tess_act_types.h \
+ ../TESS/Actuators/tess_sys_constants.h \
+ ../TESS/Actuators/MotorControl/tess_act_statemachine.h \
+ ../TESS/Actuators/MotorDriver/tess_motordriver.h \
+ ../TESS/Actuators/tess_hal_if.h ../TESS/Actuators/tess_utilities.h \
+ ../TESS/Actuators/MotorInputProcesing/tess_motorinputprocesing.h \
+ ../TESS/Actuators/tess_sys_constants.h
 
 ../Core/Inc/main.h:
 
@@ -105,16 +114,38 @@ Core/Src/stm32g4xx_hal_msp.o: ../Core/Src/stm32g4xx_hal_msp.c \
 
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart_ex.h:
 
-../Application/tess_main.h:
+../TESS/tess_main.h:
 
-../Application/Freemaster/include/freemaster.h:
+../TESS/Freemaster/include/freemaster.h:
 
-../Application/Freemaster/include/freemaster_defcfg.h:
+../TESS/Freemaster/include/../../../TESS/Freemaster/include/freemaster_defcfg.h:
 
-../Application/Freemaster/include/freemaster_cfg.h:
+c:\users\nxf70809\documents\laboratory\tess\projectdevelopment\tess\freemaster\include\freemaster_cfg.h:
 
-../Application/Freemaster/include/freemaster_tsa.h:
+../TESS/Freemaster/include/../../../TESS/Freemaster/include/freemaster_tsa.h:
 
-../Application/Freemaster/include/freemaster_private.h:
+c:\users\nxf70809\documents\laboratory\tess\projectdevelopment\tess\freemaster\include\freemaster_defcfg.h:
 
-../Application/Freemaster/include/freemaster_STM32F4xx.h:
+../TESS/Freemaster/include/freemaster_private.h:
+
+../TESS/Freemaster/include/../../../TESS/Freemaster/include/freemaster_STM32F4xx.h:
+
+../TESS/Actuators/MotorControl/tess_act_statemachine.h:
+
+../TESS/Actuators/MotorControl/tess_motorcontrol.h:
+
+../TESS/Actuators/tess_act_types.h:
+
+../TESS/Actuators/tess_sys_constants.h:
+
+../TESS/Actuators/MotorControl/tess_act_statemachine.h:
+
+../TESS/Actuators/MotorDriver/tess_motordriver.h:
+
+../TESS/Actuators/tess_hal_if.h:
+
+../TESS/Actuators/tess_utilities.h:
+
+../TESS/Actuators/MotorInputProcesing/tess_motorinputprocesing.h:
+
+../TESS/Actuators/tess_sys_constants.h:
