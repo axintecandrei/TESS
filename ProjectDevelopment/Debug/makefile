@@ -13,6 +13,7 @@ RM := rm -rf
 -include TESS/Actuators/MotorInputProcesing/subdir.mk
 -include TESS/Actuators/MotorDriver/subdir.mk
 -include TESS/Actuators/MotorControl/subdir.mk
+-include TESS/Actuators/ActStMachine/subdir.mk
 -include TESS/subdir.mk
 -include Drivers/STM32G4xx_HAL_Driver/Src/subdir.mk
 -include Core/Startup/subdir.mk

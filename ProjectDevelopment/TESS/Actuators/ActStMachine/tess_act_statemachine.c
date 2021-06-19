@@ -13,6 +13,7 @@ void Tess_MotCtrl_VoltageMode();
 void Tess_MotCtrl_CurrentControlMode();
 void Tess_MotCtrl_SpeedVoltageMode();
 void Tess_MotCtrl_SpeedControlMode();
+extern void Tess_MotCtrl_ResetInputs(void);
 
 void Tess_Act_StateMachineInit(void)
 {
@@ -57,6 +58,7 @@ void Tess_Act_StateMachine(void)
 
 void Tess_MotCtrl_StandbyMode()
 {
+    Tess_MotCtrl_ResetInputs();
 
     switch(MotCtrlStateMachine.RequestedMode)
     {
@@ -85,18 +87,23 @@ void Tess_MotCtrl_PwmMode()
     switch(MotCtrlStateMachine.RequestedMode)
     {
     case StandBy:
+        Tess_MotCtrl_ResetInputs();
         MotCtrlStateMachine.CurrentMode = StandBy;
         break;
     case VoltageMode:
+        Tess_MotCtrl_ResetInputs();
         MotCtrlStateMachine.CurrentMode = VoltageMode;
         break;
     case CurrentControl:
+        Tess_MotCtrl_ResetInputs();
         MotCtrlStateMachine.CurrentMode = CurrentControl;
         break;
     case SpeedVoltageControl:
+        Tess_MotCtrl_ResetInputs();
         MotCtrlStateMachine.CurrentMode = SpeedVoltageControl;
         break;
     case SpeedControl:
+        Tess_MotCtrl_ResetInputs();
         MotCtrlStateMachine.CurrentMode = SpeedControl;
         break;
     default:
@@ -109,18 +116,23 @@ void Tess_MotCtrl_VoltageMode()
     switch(MotCtrlStateMachine.RequestedMode)
     {
     case StandBy:
+        Tess_MotCtrl_ResetInputs();
         MotCtrlStateMachine.CurrentMode = StandBy;
         break;
     case PwmMode:
+        Tess_MotCtrl_ResetInputs();
         MotCtrlStateMachine.CurrentMode = PwmMode;
         break;
     case CurrentControl:
+        Tess_MotCtrl_ResetInputs();
         MotCtrlStateMachine.CurrentMode = CurrentControl;
         break;
     case SpeedVoltageControl:
+        Tess_MotCtrl_ResetInputs();
         MotCtrlStateMachine.CurrentMode = SpeedVoltageControl;
         break;
     case SpeedControl:
+        Tess_MotCtrl_ResetInputs();
         MotCtrlStateMachine.CurrentMode = SpeedControl;
         break;
     default:
@@ -133,18 +145,23 @@ void Tess_MotCtrl_CurrentControlMode()
     switch(MotCtrlStateMachine.RequestedMode)
     {
     case StandBy:
+        Tess_MotCtrl_ResetInputs();
         MotCtrlStateMachine.CurrentMode = StandBy;
         break;
     case PwmMode:
+        Tess_MotCtrl_ResetInputs();
         MotCtrlStateMachine.CurrentMode = PwmMode;
         break;
     case VoltageMode:
+        Tess_MotCtrl_ResetInputs();
         MotCtrlStateMachine.CurrentMode = VoltageMode;
         break;
     case SpeedVoltageControl:
+        Tess_MotCtrl_ResetInputs();
         MotCtrlStateMachine.CurrentMode = SpeedVoltageControl;
         break;
     case SpeedControl:
+        Tess_MotCtrl_ResetInputs();
         MotCtrlStateMachine.CurrentMode = SpeedControl;
         break;
     default:
@@ -158,18 +175,23 @@ void Tess_MotCtrl_SpeedVoltageMode()
     switch(MotCtrlStateMachine.RequestedMode)
     {
     case StandBy:
+        Tess_MotCtrl_ResetInputs();
         MotCtrlStateMachine.CurrentMode = StandBy;
         break;
     case PwmMode:
+        Tess_MotCtrl_ResetInputs();
         MotCtrlStateMachine.CurrentMode = PwmMode;
         break;
     case VoltageMode:
+        Tess_MotCtrl_ResetInputs();
         MotCtrlStateMachine.CurrentMode = VoltageMode;
         break;
     case CurrentControl:
+        Tess_MotCtrl_ResetInputs();
         MotCtrlStateMachine.CurrentMode = CurrentControl;
         break;
     case SpeedControl:
+        Tess_MotCtrl_ResetInputs();
         MotCtrlStateMachine.CurrentMode = SpeedControl;
         break;
     default:
@@ -183,18 +205,23 @@ void Tess_MotCtrl_SpeedControlMode()
     switch(MotCtrlStateMachine.RequestedMode)
     {
     case StandBy:
+        Tess_MotCtrl_ResetInputs();
         MotCtrlStateMachine.CurrentMode = StandBy;
         break;
     case PwmMode:
+        Tess_MotCtrl_ResetInputs();
         MotCtrlStateMachine.CurrentMode = PwmMode;
         break;
     case VoltageMode:
+        Tess_MotCtrl_ResetInputs();
         MotCtrlStateMachine.CurrentMode = VoltageMode;
         break;
     case CurrentControl:
+        Tess_MotCtrl_ResetInputs();
         MotCtrlStateMachine.CurrentMode = CurrentControl;
         break;
     case SpeedVoltageControl:
+        Tess_MotCtrl_ResetInputs();
         MotCtrlStateMachine.CurrentMode = SpeedVoltageControl;
         break;
     default:

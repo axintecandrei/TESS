@@ -36,7 +36,7 @@ TESS/Actuators/MotorDriver/tess_motordriver.o: \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart_ex.h \
  ../TESS/Actuators/tess_utilities.h \
- ../TESS/Actuators/MotorControl/tess_act_statemachine.h
+ C:/Users/NXF70809/Documents/Laboratory/TESS/ProjectDevelopment/TESS/Actuators/ActStMachine/tess_act_statemachine.h
 
 ../TESS/Actuators/MotorDriver/tess_motordriver.h:
 
@@ -112,4 +112,4 @@ TESS/Actuators/MotorDriver/tess_motordriver.o: \
 
 ../TESS/Actuators/tess_utilities.h:
 
-../TESS/Actuators/MotorControl/tess_act_statemachine.h:
+C:/Users/NXF70809/Documents/Laboratory/TESS/ProjectDevelopment/TESS/Actuators/ActStMachine/tess_act_statemachine.h:

@@ -122,3 +122,16 @@ static void Tess_VoltToDtc(tess_act_motor_t* Motor, float DcLinkVoltage)
         /*do nothing*/
     }
 }
+
+void Tess_MotCtrl_ResetInputs(void)
+{
+    uint8_t MotorIndex = 0;
+
+    for (MotorIndex = 0; MotorIndex < TESS_MOTOR_NUMBERS; MotorIndex++)
+    {
+    Motor[MotorIndex].Requests.PwmDtc          = 0.5;
+    Motor[MotorIndex].Requests.Voltage         = 0;
+    Motor[MotorIndex].Requests.Current         = 0;
+    Motor[MotorIndex].Requests.Speed           = 0;
+    }
+}
