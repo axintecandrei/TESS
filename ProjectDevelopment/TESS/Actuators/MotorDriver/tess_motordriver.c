@@ -7,7 +7,6 @@
 
 #include "tess_motordriver.h"
 
-static float Tess_VoltToDtc(float volt,float DcLinkVoltage);
 static uint16_t Tess_DtcToPwmTick(float Dtc,float MaxPwmTick);
 
 void Tess_MotDrv_Init()
@@ -17,7 +16,7 @@ void Tess_MotDrv_Init()
 
 void Tess_MotDrv_SetMotorsPwm(float M1Pwm, float M2Pwm, float M3Pwm, float M4Pwm)
 {
-    if((MotCtrlStateMachine.ControlWord & Moc_Pwm) == 1)
+    if((MotCtrlStateMachine.ControlWord & Moc_Pwm)  > 0)
     {
         htim1.Instance->CCR3 = Tess_DtcToPwmTick(M1Pwm,htim1.Init.Period);
         htim1.Instance->CCR4 = htim1.Init.Period - htim1.Instance->CCR3;

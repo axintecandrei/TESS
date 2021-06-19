@@ -35,6 +35,7 @@ void Tess_MotCtrl_Init(void)
 
 void Tess_MotCtrl_Main(void)
 {
+
     Tess_Act_StateMachine();
 
     Tess_MotCtrl_CurrentControl(Motor);
@@ -53,7 +54,7 @@ static void Tess_MotCtrl_SpeedControl(tess_act_motor_t* Motor)
     float Error = 0;
     float ProportionalPart = 0;
     uint8_t MotorIndex = 0;
-    if((MotCtrlStateMachine.ControlWord & Moc_Speed) == 1)
+    if((MotCtrlStateMachine.ControlWord & Moc_Speed) > 0)
     {
         for (MotorIndex = 0; MotorIndex < TESS_MOTOR_NUMBERS; MotorIndex++)
         {
@@ -61,7 +62,7 @@ static void Tess_MotCtrl_SpeedControl(tess_act_motor_t* Motor)
             ProportionalPart                         = Motor[MotorIndex].SpeedCtrl.Pgain*Error;
             Motor[MotorIndex].SpeedCtrl.IntegralPart += Error*TESS_TS;
 
-            if(MotCtrlStateMachine.ControlWord & Moc_Current == 1)
+            if((MotCtrlStateMachine.ControlWord & Moc_Current)  > 0)
             {
                 Motor[MotorIndex].Requests.Current = ProportionalPart + Motor[MotorIndex].SpeedCtrl.IntegralPart*Motor[MotorIndex].SpeedCtrl.Igain;
             }
@@ -88,7 +89,7 @@ static void Tess_MotCtrl_CurrentControl(tess_act_motor_t* Motor)
     uint8_t MotorIndex = 0;
 
     /*check if there is a need for the current controller*/
-    if((MotCtrlStateMachine.ControlWord & Moc_Current) == 1)
+    if((MotCtrlStateMachine.ControlWord & Moc_Current)  > 0)
     {
         for (MotorIndex = 0; MotorIndex < TESS_MOTOR_NUMBERS; MotorIndex++)
         {
@@ -110,7 +111,7 @@ static void Tess_MotCtrl_CurrentControl(tess_act_motor_t* Motor)
 
 static void Tess_VoltToDtc(tess_act_motor_t* Motor, float DcLinkVoltage)
 {
-    if((MotCtrlStateMachine.ControlWord & Moc_Voltage) == 1)
+    if((MotCtrlStateMachine.ControlWord & Moc_Voltage)  > 0)
     {
         Motor[M1].Requests.PwmDtc = Saturate(0.5F + ( Motor[M1].Requests.Voltage/DcLinkVoltage),0.02F,0.98F);
         Motor[M2].Requests.PwmDtc = Saturate(0.5F + ( Motor[M2].Requests.Voltage/DcLinkVoltage),0.02F,0.98F);

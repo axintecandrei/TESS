@@ -19,7 +19,7 @@
 
 
 #define ControlWord_StandBy              (Moc_StandBy)                                     /*1*/
-#define ControlWord_Pwm                  (Moc_Pwm)                                         /*2*/
+#define ControlWord_Pwm                  (Moc_Pwm )                                         /*2*/
 #define ControlWord_Voltage              (Moc_Pwm | Moc_Voltage)                           /*6*/
 #define ControlWord_CurrentControl       (Moc_Pwm | Moc_Voltage | Moc_Current)             /*14*/
 #define ControlWord_SpeedVoltageControl  (Moc_Pwm | Moc_Voltage | Moc_Speed)               /*22*/
@@ -46,6 +46,6 @@ typedef struct
 
 moc_statemachine_t MotCtrlStateMachine;
 
-
+void Tess_Act_StateMachineInit(void);
 void Tess_Act_StateMachine(void);
 #endif /* TESS_ACT_STATEMACHINE_H_ */
