@@ -43,6 +43,9 @@ typedef struct
 typedef struct
 {
     float Iak1;
+    float Vak1;
+    float Speedk1;
+    float bEMF;
 }mip_speed_est_t;
 
 /*Requests*/

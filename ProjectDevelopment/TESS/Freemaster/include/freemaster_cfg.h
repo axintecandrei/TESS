@@ -66,7 +66,7 @@
 #define FMSTR_REC_BUFF_SIZE    1024*10 /* built-in buffer size */
 
 /* recorder time base, specifies how often the recorder is called in the user app. */
-#define FMSTR_REC_TIMEBASE     FMSTR_REC_BASE_MICROSEC(200) /* 0 = "unknown" *//*100- 100us*/
+#define FMSTR_REC_TIMEBASE     FMSTR_REC_BASE_MICROSEC(500) /* 0 = "unknown" *//*100- 100us*/
 
 /* Fast Recorder Control */
 #define FMSTR_USE_FASTREC      0    /* Activate Fast Recorder driver */

@@ -58,7 +58,7 @@ void Tess_Act_StateMachine(void)
 
 void Tess_MotCtrl_StandbyMode()
 {
-    Tess_MotCtrl_ResetInputs();
+    //Tess_MotCtrl_ResetInputs();
 
     switch(MotCtrlStateMachine.RequestedMode)
     {

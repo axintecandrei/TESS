@@ -1,9 +1,11 @@
 TESS/Actuators/MotorControl/tess_motorcontrol.o: \
  ../TESS/Actuators/MotorControl/tess_motorcontrol.c \
+ C:/Users/NXF70809/Documents/Laboratory/TESS/ProjectDevelopment/TESS/Actuators/ActStMachine/tess_act_statemachine.h \
+ ../TESS/Actuators/tess_sys_constants.h \
+ ../TESS/Actuators/tess_utilities.h \
  ../TESS/Actuators/MotorControl/tess_motorcontrol.h \
  ../TESS/Actuators/tess_act_types.h \
  ../TESS/Actuators/tess_sys_constants.h \
- C:/Users/NXF70809/Documents/Laboratory/TESS/ProjectDevelopment/TESS/Actuators/ActStMachine/tess_act_statemachine.h \
  ../TESS/Actuators/MotorDriver/tess_motordriver.h \
  ../TESS/Actuators/tess_hal_if.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h \
@@ -37,16 +39,19 @@ TESS/Actuators/MotorControl/tess_motorcontrol.o: \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim_ex.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart.h \
- ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart_ex.h \
- ../TESS/Actuators/tess_utilities.h
+ ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart_ex.h
+
+C:/Users/NXF70809/Documents/Laboratory/TESS/ProjectDevelopment/TESS/Actuators/ActStMachine/tess_act_statemachine.h:
+
+../TESS/Actuators/tess_sys_constants.h:
+
+../TESS/Actuators/tess_utilities.h:
 
 ../TESS/Actuators/MotorControl/tess_motorcontrol.h:
 
 ../TESS/Actuators/tess_act_types.h:
 
 ../TESS/Actuators/tess_sys_constants.h:
-
-C:/Users/NXF70809/Documents/Laboratory/TESS/ProjectDevelopment/TESS/Actuators/ActStMachine/tess_act_statemachine.h:
 
 ../TESS/Actuators/MotorDriver/tess_motordriver.h:
 
@@ -115,5 +120,3 @@ C:/Users/NXF70809/Documents/Laboratory/TESS/ProjectDevelopment/TESS/Actuators/Ac
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart.h:
 
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart_ex.h:
-
-../TESS/Actuators/tess_utilities.h:

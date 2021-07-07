@@ -130,7 +130,7 @@ void TIM2_IRQHandler(void)
     float TempCCR1, TempCCR2;
     TempCCR1   = HAL_TIM_ReadCapturedValue(&htim2,TIM_CHANNEL_1)+1;
     TempCCR2   = HAL_TIM_ReadCapturedValue(&htim2,TIM_CHANNEL_2);
-    RawPwmInput.M1 = (TempCCR2/TempCCR1)*100.0F;
+    RawPwmInput.M1 = TempCCR2/TempCCR1;
   //PwmInputM1++;
   /* USER CODE END TIM2_IRQn 0 */
   HAL_TIM_IRQHandler(&htim2);
@@ -148,7 +148,7 @@ void TIM3_IRQHandler(void)
     float TempCCR1, TempCCR2;
     TempCCR1   = HAL_TIM_ReadCapturedValue(&htim3,TIM_CHANNEL_1)+1;
     TempCCR2   = HAL_TIM_ReadCapturedValue(&htim3,TIM_CHANNEL_2);
-    RawPwmInput.M2 = (TempCCR2/TempCCR1)*100.0F;
+    RawPwmInput.M2 = TempCCR2/TempCCR1;
   /* USER CODE END TIM3_IRQn 0 */
   HAL_TIM_IRQHandler(&htim3);
   /* USER CODE BEGIN TIM3_IRQn 1 */
@@ -165,7 +165,7 @@ void TIM4_IRQHandler(void)
     float TempCCR1, TempCCR2;
     TempCCR1   = HAL_TIM_ReadCapturedValue(&htim4,TIM_CHANNEL_1)+1;
     TempCCR2   = HAL_TIM_ReadCapturedValue(&htim4,TIM_CHANNEL_2);
-    RawPwmInput.M3 = (TempCCR2/TempCCR1)*100.0F;
+    RawPwmInput.M3 = TempCCR2/TempCCR1;
   /* USER CODE END TIM4_IRQn 0 */
   HAL_TIM_IRQHandler(&htim4);
   /* USER CODE BEGIN TIM4_IRQn 1 */
@@ -198,7 +198,7 @@ void TIM5_IRQHandler(void)
     float TempCCR1, TempCCR2;
     TempCCR1   = HAL_TIM_ReadCapturedValue(&htim5,TIM_CHANNEL_1)+1;
     TempCCR2   = HAL_TIM_ReadCapturedValue(&htim5,TIM_CHANNEL_2);
-    RawPwmInput.M4 = (TempCCR2/TempCCR1)*100.0F;
+    RawPwmInput.M4 = TempCCR2/TempCCR1;
   /* USER CODE END TIM5_IRQn 0 */
   HAL_TIM_IRQHandler(&htim5);
   /* USER CODE BEGIN TIM5_IRQn 1 */
