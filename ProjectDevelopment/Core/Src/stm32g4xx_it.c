@@ -131,7 +131,6 @@ void TIM2_IRQHandler(void)
     TempCCR1   = HAL_TIM_ReadCapturedValue(&htim2,TIM_CHANNEL_1)+1;
     TempCCR2   = HAL_TIM_ReadCapturedValue(&htim2,TIM_CHANNEL_2);
     RawPwmInput.M1 = TempCCR2/TempCCR1;
-  //PwmInputM1++;
   /* USER CODE END TIM2_IRQn 0 */
   HAL_TIM_IRQHandler(&htim2);
   /* USER CODE BEGIN TIM2_IRQn 1 */

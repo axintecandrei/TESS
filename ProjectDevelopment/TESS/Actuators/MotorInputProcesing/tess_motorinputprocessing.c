@@ -102,8 +102,8 @@ static void Tess_Mip_SpeedEstimation(tess_act_motor_t* Motors)
         Motors[MotorIndex].SpeedEst.Speedk1 = Motors[MotorIndex].MotorInputs.MotorSpeed/TESS_RAD_TO_RPM;
 #endif
         Motors[MotorIndex].MotorInputs.MotorSpeed  = backEMF/Motors[MotorIndex].Param.Ke ;
-        Motors[MotorIndex].MotorInputs.MotorSpeed *= TESS_RAD_TO_RPM ;
-        Motors[MotorIndex].MotorInputs.WheelSpeed  = Motors[MotorIndex].MotorInputs.MotorSpeed/TESS_GEAR_RATIO ;
+        Motors[MotorIndex].MotorInputs.MotorSpeed *= TESS_RAD_TO_RPM;
+        Motors[MotorIndex].MotorInputs.WheelSpeed  = Motors[MotorIndex].MotorInputs.MotorSpeed/TESS_GEAR_RATIO;
         Motors[MotorIndex].SpeedEst.bEMF  = backEMF;
     }
 }

@@ -93,6 +93,8 @@ void Error_Handler(void);
 #define PWMOutput1M4_Pin_GPIO_Port GPIOC
 #define PWMOutput2M4_Pin_Pin GPIO_PIN_9
 #define PWMOutput2M4_Pin_GPIO_Port GPIOC
+#define TestPin_Pin GPIO_PIN_15
+#define TestPin_GPIO_Port GPIOA
 #define USART3_TX_Pin GPIO_PIN_10
 #define USART3_TX_GPIO_Port GPIOC
 #define USART3_RX_Pin GPIO_PIN_11

@@ -59,16 +59,22 @@ typedef struct
 
 typedef struct
 {
+    float Error;
     float Pgain;
     float Igain;
     float IntegralPart;
+    float ProportionalPart;
+    float Sat;
 }moc_mot_speed_ctrl_t;
 
 typedef struct
 {
+    float Error;
     float Pgain;
     float Igain;
     float IntegralPart;
+    float ProportionalPart;
+    float Sat;
 }moc_mot_current_ctrl_t;
 
 typedef struct
