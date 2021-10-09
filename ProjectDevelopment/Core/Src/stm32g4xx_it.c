@@ -178,9 +178,7 @@ void TIM4_IRQHandler(void)
 void USART3_IRQHandler(void)
 {
   /* USER CODE BEGIN USART3_IRQn 0 */
-#if !FMSTR_DISABLE
-  FMSTR_ProcessSCI();
-#endif
+
   /* USER CODE END USART3_IRQn 0 */
   HAL_UART_IRQHandler(&huart3);
   /* USER CODE BEGIN USART3_IRQn 1 */

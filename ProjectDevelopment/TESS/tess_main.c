@@ -12,15 +12,7 @@ void TessMain(void)
     Tess_Mip_Main();
     Tess_MotCtrl_Main();
 
-
-#if(!FMSTR_DISABLE)
-    {
-      FMSTR_Poll();
-      FMSTR_Recorder();
-     }
-#endif
 }
-
 
 void TessMainInit(void)
 {
@@ -28,9 +20,4 @@ void TessMainInit(void)
     Tess_Mip_Init();
     Tess_MotCtrl_Init();
     Tess_MotDrv_Init();
-
-
-#if !FMSTR_DISABLE
-    FMSTR_Init();
-#endif
 }
