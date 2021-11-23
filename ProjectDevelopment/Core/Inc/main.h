@@ -77,10 +77,12 @@ void Error_Handler(void);
 #define ADCM3Current_Pin_GPIO_Port GPIOA
 #define ADCDcLink_Pin_Pin GPIO_PIN_3
 #define ADCDcLink_Pin_GPIO_Port GPIOA
-#define PWMInputM1_Pin_Pin GPIO_PIN_5
-#define PWMInputM1_Pin_GPIO_Port GPIOA
+#define M1EncoderCh1_Pin GPIO_PIN_5
+#define M1EncoderCh1_GPIO_Port GPIOA
 #define PWMInputM2_Pin_Pin GPIO_PIN_6
 #define PWMInputM2_Pin_GPIO_Port GPIOA
+#define M1EncoderCh2_Pin GPIO_PIN_7
+#define M1EncoderCh2_GPIO_Port GPIOA
 #define PWMInputM4_Pin_Pin GPIO_PIN_2
 #define PWMInputM4_Pin_GPIO_Port GPIOB
 #define ADCM4Current_Pin_Pin GPIO_PIN_14
@@ -93,8 +95,6 @@ void Error_Handler(void);
 #define PWMOutput1M4_Pin_GPIO_Port GPIOC
 #define PWMOutput2M4_Pin_Pin GPIO_PIN_9
 #define PWMOutput2M4_Pin_GPIO_Port GPIOC
-#define TestPin_Pin GPIO_PIN_15
-#define TestPin_GPIO_Port GPIOA
 #define USART3_TX_Pin GPIO_PIN_10
 #define USART3_TX_GPIO_Port GPIOC
 #define USART3_RX_Pin GPIO_PIN_11
