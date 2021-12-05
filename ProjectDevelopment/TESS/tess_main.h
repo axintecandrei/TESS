@@ -9,10 +9,10 @@
 #define TESS_MAIN_H_
 
 #include <tess_act_statemachine.h>
+#include <tess_motorinputprocessing.h>
 #include "stm32g4xx_hal.h"
 
 #include "tess_motorcontrol.h"
-#include "tess_motorinputprocesing.h"
 #include "tess_motordriver.h"
 
 
