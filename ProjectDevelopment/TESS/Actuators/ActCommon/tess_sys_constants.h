@@ -34,7 +34,10 @@
 #define TESS_MAX_REQ_CURRENT         (2000)        /*mA*/
 
 /*Feedback ratios*/
-#define TESS_CURRENT_SENSOR_GAIN     (0.652F)       /*mV/A*/
+/*#define TESS_CURRENT_SENSOR_GAIN     (0.652F) */      /*mV/A*/
+#define TESS_CURRENT_SENSOR_GAIN     (227.0F)       /*mV/A*/
+#define TESS_CURRENT_SENSOR_GAIN_N   (161.5F)       /*mV/A*/
+#define TESS_CURRENT_SENSOR_OFFSET   (2599.0F)       /*mV/A*/
 #define TESS_VOLTAGE_DIV_RATIO       (3.0F)
 
 
