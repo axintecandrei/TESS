@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../../../STM32Cube/Repository/STM32Cube_FW_G4_V1.4.0/Projects/NUCLEO-G474RE/Examples/TIM/TIM_Encoder"
+		}
+	],
+	"settings": {}
+}

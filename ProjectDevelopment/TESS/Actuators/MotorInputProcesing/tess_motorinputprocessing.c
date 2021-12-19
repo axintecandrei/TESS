@@ -5,7 +5,7 @@
  *      Author: Axinte Andrei
  */
 
-#include "tess_motorinputprocesing.h"
+#include "tess_motorinputprocessing.h"
 
 static void Tess_Mip_GetMotorVoltages(tess_act_motor_t* Motors);
 static void Tess_Mip_GetMotorCurrents(tess_act_motor_t* Motors);
@@ -67,7 +67,7 @@ static void Tess_Mip_GetMotorVoltages(tess_act_motor_t* Motors)
 
 static void Tess_Mip_GetMotorCurrents(tess_act_motor_t* Motors)
 {
-    Motors[M1].MotorInputs.Current = RawAdcValue[ADC_M1]/TESS_CURRENT_SENSOR_GAIN;
+	Motors[M1].MotorInputs.Current = (RawAdcValue[ADC_M1]-TESS_CURRENT_SENSOR_OFFSET)/TESS_CURRENT_SENSOR_GAIN;
     Motors[M2].MotorInputs.Current = RawAdcValue[ADC_M2]/TESS_CURRENT_SENSOR_GAIN;
     Motors[M3].MotorInputs.Current = RawAdcValue[ADC_M3]/TESS_CURRENT_SENSOR_GAIN;
     Motors[M4].MotorInputs.Current = RawAdcValue[ADC_M4]/TESS_CURRENT_SENSOR_GAIN;

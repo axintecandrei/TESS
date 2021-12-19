@@ -5,8 +5,8 @@
  *      Author: Axinte Andrei
  */
 
-#include "stdint.h"
 #include "tess_act_statemachine.h"
+#include "stdint.h"
 #include "tess_sys_constants.h"
 #include "tess_utilities.h"
 #include "tess_motorcontrol.h"

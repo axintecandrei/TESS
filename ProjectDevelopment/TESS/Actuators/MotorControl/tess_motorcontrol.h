@@ -8,8 +8,8 @@
 #ifndef TESS_MOTORCONTROL_H_
 #define TESS_MOTORCONTROL_H_
 
+#include <tess_act_statemachine.h>
 #include "tess_act_types.h"
-#include "tess_act_statemachine.h"
 #include "tess_motordriver.h"
 
 
