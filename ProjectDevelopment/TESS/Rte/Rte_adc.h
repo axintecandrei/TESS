@@ -19,6 +19,10 @@ typedef enum
 	AdcChannelM4Cur  //M4 Current
 }AdcBufferMap_t;
 
+#define ADC_DMA_BUFFER_SIZE   (5U)
+
+extern uint16 AdcDmaBuffer[ADC_DMA_BUFFER_SIZE];
+
 extern uint16 Tess_Adc_GetValue(uint8 Channel);
 
 #endif /* RTE_RTE_ADC_H_ */
