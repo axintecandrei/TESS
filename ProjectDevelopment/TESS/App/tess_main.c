@@ -10,6 +10,7 @@
 void TessMain(void)
 {
     Tess_Mip_Main();
+    Tess_Act_StateMachine();
     Tess_MotCtrl_Main();
 
 }

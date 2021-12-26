@@ -8,9 +8,10 @@
 #ifndef TESS_MOTORINTPUTPROC_H_
 #define TESS_MOTORINTPUTPROC_H_
 
-#include "tess_act_types.h"
-#include "tess_hal_if.h"
-#include "tess_sys_constants.h"
+#include "Rte_adc.h"
+#include "tess_moc_types.h"
+#include "tess_moc_param.h"
+
 
 void Tess_Mip_Init();
 void Tess_Mip_Main();

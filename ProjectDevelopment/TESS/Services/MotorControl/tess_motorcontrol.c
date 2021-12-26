@@ -5,9 +5,9 @@
  *      Author: Axinte Andrei
  */
 
-#include "tess_act_statemachine.h"
+#include "tess_actuator_manager.h"
+#include "tess_moc_param.h"
 #include "stdint.h"
-#include "tess_sys_constants.h"
 #include "tess_utilities.h"
 #include "tess_motorcontrol.h"
 
@@ -30,7 +30,6 @@ void Tess_MotCtrl_Init(void)
         Motor[MotorIndex].CurrentCtrl.Igain        = 377.55;
         Motor[MotorIndex].CurrentCtrl.IntegralPart = 0;
 
-        Motor[MotorIndex].Requests.PwmDtc          = 0.5;
         Motor[MotorIndex].Requests.Voltage         = 0;
         Motor[MotorIndex].Requests.Current         = 0;
         Motor[MotorIndex].Requests.Speed           = 0;
@@ -40,16 +39,9 @@ void Tess_MotCtrl_Init(void)
 void Tess_MotCtrl_Main(void)
 {
 
-    Tess_Act_StateMachine();
-
     Tess_MotCtrl_CurrentControl(Motor);
     Tess_MotCtrl_SpeedControl(Motor);
 
-    Tess_VoltToDtc(Motor, MipDcLinkVoltage);
-    Tess_MotDrv_SetMotorsPwm(Motor[M1].Requests.PwmDtc,
-                             Motor[M2].Requests.PwmDtc,
-                             Motor[M3].Requests.PwmDtc,
-                             Motor[M4].Requests.PwmDtc);
 
 }
 
@@ -191,10 +183,10 @@ static void Tess_VoltToDtc(tess_act_motor_t* Motor, float DcLinkVoltage)
 {
     if((MotCtrlStateMachine.ControlWord & Moc_Voltage)  > 0)
     {
-        Motor[M1].Requests.PwmDtc = Saturate(0.5F + ( Motor[M1].Requests.Voltage/DcLinkVoltage),0.02F,0.98F);
+        /*Motor[M1].Requests.PwmDtc = Saturate(0.5F + ( Motor[M1].Requests.Voltage/DcLinkVoltage),0.02F,0.98F);
         Motor[M2].Requests.PwmDtc = Saturate(0.5F + ( Motor[M2].Requests.Voltage/DcLinkVoltage),0.02F,0.98F);
         Motor[M3].Requests.PwmDtc = Saturate(0.5F + ( Motor[M3].Requests.Voltage/DcLinkVoltage),0.02F,0.98F);
-        Motor[M4].Requests.PwmDtc = Saturate(0.5F + ( Motor[M4].Requests.Voltage/DcLinkVoltage),0.02F,0.98F);
+        Motor[M4].Requests.PwmDtc = Saturate(0.5F + ( Motor[M4].Requests.Voltage/DcLinkVoltage),0.02F,0.98F);*/
     }else
     {
         /*do nothing*/
@@ -207,9 +199,8 @@ void Tess_MotCtrl_ResetInputs(void)
 
     for (MotorIndex = 0; MotorIndex < TESS_MOTOR_NUMBERS; MotorIndex++)
     {
-    Motor[MotorIndex].Requests.PwmDtc          = 0.5;
-    Motor[MotorIndex].Requests.Voltage         = 0;
-    Motor[MotorIndex].Requests.Current         = 0;
-    Motor[MotorIndex].Requests.Speed           = 0;
+    	Motor[MotorIndex].Requests.Voltage         = 0;
+    	Motor[MotorIndex].Requests.Current         = 0;
+    	Motor[MotorIndex].Requests.Speed           = 0;
     }
 }

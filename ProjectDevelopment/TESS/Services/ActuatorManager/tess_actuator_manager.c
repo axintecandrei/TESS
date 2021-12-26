@@ -4,7 +4,7 @@
  *  Created on: Jun 18, 2021
  *      Author: Axinte Andrei
  */
-#include <tess_act_statemachine.h>
+#include "tess_actuator_manager.h"
 
 
 void Tess_MotCtrl_StandbyMode();
@@ -81,6 +81,7 @@ void Tess_MotCtrl_StandbyMode()
         break;
     }
 }
+
 void Tess_MotCtrl_PwmMode()
 {
 
@@ -110,6 +111,7 @@ void Tess_MotCtrl_PwmMode()
         break;
     }
 }
+
 void Tess_MotCtrl_VoltageMode()
 {
 
@@ -139,6 +141,7 @@ void Tess_MotCtrl_VoltageMode()
         break;
     }
 }
+
 void Tess_MotCtrl_CurrentControlMode()
 {
 

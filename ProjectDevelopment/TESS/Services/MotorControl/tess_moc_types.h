@@ -8,9 +8,8 @@
 #ifndef TESS_ACT_TYPES_H_
 #define TESS_ACT_TYPES_H_
 
-#include "stdint.h"
-#include "tess_sys_constants.h"
-
+#include "StandardTypes.h"
+#include "tess_moc_param.h"
 
 
 /*Motors ID*/
@@ -39,22 +38,12 @@ typedef struct
     float WheelSpeed;
 }mip_mot_inputs_t;
 
-/*Speed Estimation*/
-typedef struct
-{
-    float Iak1;
-    float Vak1;
-    float Speedk1;
-    float bEMF;
-}mip_speed_est_t;
-
 /*Requests*/
 typedef struct
 {
     float Speed;
     float Current;
     float Voltage;
-    float PwmDtc;
 }moc_mot_requests_t;
 
 typedef struct
@@ -81,8 +70,6 @@ typedef struct
 {
     /*feedback: volt, current, speed*/
     mip_mot_inputs_t       MotorInputs;
-    /*Speed estimation */
-    mip_speed_est_t        SpeedEst;
     /*requests Speed, current, voltage*/
     moc_mot_requests_t     Requests;
     /*motor parameters*/
