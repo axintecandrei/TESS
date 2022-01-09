@@ -7,11 +7,10 @@
 
 #include "tess_motorinputprocessing.h"
 
-static void Tess_Mip_GetMotorVoltages(tess_act_motor_t* Motors);
 static void Tess_Mip_GetMotorCurrents(tess_act_motor_t* Motors);
 static void Tess_Mip_GetDcLinkVoltage(void);
 
-void Tess_Mip_Init()
+void Tess_Mip_Init(void)
 {
     uint8 MotorIndex = 0;
 
@@ -41,30 +40,21 @@ void Tess_Mip_Init()
     Motor[M4].Param.Ke            = TESS_M4_KE;
 }
 
-void Tess_Mip_Main()
+void Tess_Mip_Main(void)
 {
     Tess_Mip_GetDcLinkVoltage();
-    Tess_Mip_GetMotorVoltages(Motor);
     Tess_Mip_GetMotorCurrents(Motor);
 }
 
 static void Tess_Mip_GetDcLinkVoltage(void)
 {
-    MipDcLinkVoltage = Tess_Adc_GetValue(AdcChannelDcLink)*TESS_VOLTAGE_DIV_RATIO;
-}
-
-static void Tess_Mip_GetMotorVoltages(tess_act_motor_t* Motors)
-{
-    /*Motors[M1].MotorInputs.Voltage = (MipDcLinkVoltage*RawPwmInput.M1) - (MipDcLinkVoltage*0.5F);
-    Motors[M2].MotorInputs.Voltage = (MipDcLinkVoltage*RawPwmInput.M2) - (MipDcLinkVoltage*0.5F);
-    Motors[M3].MotorInputs.Voltage = (MipDcLinkVoltage*RawPwmInput.M3) - (MipDcLinkVoltage*0.5F);
-    Motors[M4].MotorInputs.Voltage = (MipDcLinkVoltage*RawPwmInput.M4) - (MipDcLinkVoltage*0.5F);*/
+	Set_TessMipDcLinkVoltage(Tess_Adc_GetValue(AdcChannelDcLink)*TESS_VOLTAGE_DIV_RATIO);
 }
 
 static void Tess_Mip_GetMotorCurrents(tess_act_motor_t* Motors)
 {
 	Motors[M1].MotorInputs.Current = (Tess_Adc_GetValue(AdcChannelM1Cur)-TESS_CURRENT_SENSOR_OFFSET)/TESS_CURRENT_SENSOR_GAIN;
-    Motors[M2].MotorInputs.Current = Tess_Adc_GetValue(AdcChannelM2Cur)/TESS_CURRENT_SENSOR_GAIN;
-    Motors[M3].MotorInputs.Current = Tess_Adc_GetValue(AdcChannelM3Cur)/TESS_CURRENT_SENSOR_GAIN;
-    Motors[M4].MotorInputs.Current = Tess_Adc_GetValue(AdcChannelM4Cur)/TESS_CURRENT_SENSOR_GAIN;
+    Motors[M2].MotorInputs.Current = (Tess_Adc_GetValue(AdcChannelM2Cur)-TESS_CURRENT_SENSOR_OFFSET)/TESS_CURRENT_SENSOR_GAIN;
+    Motors[M3].MotorInputs.Current = (Tess_Adc_GetValue(AdcChannelM3Cur)-TESS_CURRENT_SENSOR_OFFSET)/TESS_CURRENT_SENSOR_GAIN;
+    Motors[M4].MotorInputs.Current = (Tess_Adc_GetValue(AdcChannelM4Cur)-TESS_CURRENT_SENSOR_OFFSET)/TESS_CURRENT_SENSOR_GAIN;
 }

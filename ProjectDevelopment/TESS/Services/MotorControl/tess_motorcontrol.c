@@ -5,20 +5,16 @@
  *      Author: Axinte Andrei
  */
 
-#include "tess_actuator_manager.h"
-#include "tess_moc_param.h"
-#include "stdint.h"
-#include "tess_utilities.h"
 #include "tess_motorcontrol.h"
+
 
 static void Tess_MotCtrl_SpeedControl(tess_act_motor_t* Motor);
 static void Tess_MotCtrl_CurrentControl(tess_act_motor_t* Motor);
-static void Tess_VoltToDtc(tess_act_motor_t* Motor, float DcLinkVoltage);
 
 
 void Tess_MotCtrl_Init(void)
 {
-    uint8_t MotorIndex = 0;
+    uint8 MotorIndex = 0;
 
     for (MotorIndex = 0; MotorIndex < TESS_MOTOR_NUMBERS; MotorIndex++)
     {
@@ -38,11 +34,8 @@ void Tess_MotCtrl_Init(void)
 
 void Tess_MotCtrl_Main(void)
 {
-
-    Tess_MotCtrl_CurrentControl(Motor);
     Tess_MotCtrl_SpeedControl(Motor);
-
-
+    Tess_MotCtrl_CurrentControl(Motor);
 }
 
 static void Tess_MotCtrl_SpeedControl(tess_act_motor_t* Motor)
@@ -51,10 +44,10 @@ static void Tess_MotCtrl_SpeedControl(tess_act_motor_t* Motor)
     float ProportionalPart = 0;
     float IntegralPart     = 0;
     float UnSatOutput      = 0;
-    uint8_t MotorIndex     = 0;
-    uint8_t SatOn          = 1;
+    uint8 MotorIndex     = 0;
+    uint8 SatOn          = 1;
 
-    if((MotCtrlStateMachine.ControlWord & Moc_Speed) > 0)
+    if((Get_TessActMngControlWord() & Moc_Speed) > 0)
     {
         for (MotorIndex = 0; MotorIndex < TESS_MOTOR_NUMBERS; MotorIndex++)
         {
@@ -64,7 +57,7 @@ static void Tess_MotCtrl_SpeedControl(tess_act_motor_t* Motor)
             Motor[MotorIndex].SpeedCtrl.ProportionalPart = ProportionalPart;
             IntegralPart         = Motor[MotorIndex].SpeedCtrl.IntegralPart + SatOn*Error*TESS_TS;
 
-            if((MotCtrlStateMachine.ControlWord & Moc_Current)  > 0)
+            if((Get_TessActMngControlWord() & Moc_Current)  > 0)
             {
                 UnSatOutput = ProportionalPart + IntegralPart*Motor[MotorIndex].SpeedCtrl.Igain;
                 Motor[MotorIndex].Requests.Current = Saturate(UnSatOutput,0,TESS_MAX_REQ_CURRENT);
@@ -97,6 +90,7 @@ static void Tess_MotCtrl_SpeedControl(tess_act_motor_t* Motor)
             {
                 Motor[MotorIndex].Requests.Voltage = ProportionalPart + Motor[MotorIndex].SpeedCtrl.IntegralPart*Motor[MotorIndex].SpeedCtrl.Igain;
                 Motor[MotorIndex].Requests.Voltage = Saturate(Motor[MotorIndex].Requests.Voltage,-TESS_MAX_REQ_VOLT,TESS_MAX_REQ_VOLT);
+                Set_TessMocVoltageRequest(MotorIndex,Motor[MotorIndex].Requests.Voltage);
             }
          }
     }
@@ -116,14 +110,14 @@ static void Tess_MotCtrl_CurrentControl(tess_act_motor_t* Motor)
     float ProportionalPart = 0;
     float IntegralPart     = 0;
     float UnSatOutput      = 0;
-    uint8_t MotorIndex     = 0;
-    uint8_t OutputSaturate = 0;
-    uint8_t SameSign       = 0;
-    uint8_t DisableSat     = 1;
+    uint8 MotorIndex     = 0;
+    uint8 OutputSaturate = 0;
+    uint8 SameSign       = 0;
+    uint8 DisableSat     = 1;
 
 
     /*check if there is a need for the current controller*/
-    if((MotCtrlStateMachine.ControlWord & Moc_Current)  > 0)
+    if((Get_TessActMngControlWord() & Moc_Current)  > 0)
     {
         for (MotorIndex = 0; MotorIndex < TESS_MOTOR_NUMBERS; MotorIndex++)
         {
@@ -135,6 +129,7 @@ static void Tess_MotCtrl_CurrentControl(tess_act_motor_t* Motor)
 
             UnSatOutput = ProportionalPart + IntegralPart*Motor[MotorIndex].CurrentCtrl.Igain;
             Motor[MotorIndex].Requests.Voltage = Saturate(UnSatOutput,-TESS_MAX_REQ_VOLT,TESS_MAX_REQ_VOLT);
+            Set_TessMocVoltageRequest(MotorIndex,Motor[MotorIndex].Requests.Voltage);
             /*Anti-WIndup*/
 
             if (Motor[MotorIndex].Requests.Voltage != UnSatOutput)
@@ -179,23 +174,9 @@ static void Tess_MotCtrl_CurrentControl(tess_act_motor_t* Motor)
 }
 
 
-static void Tess_VoltToDtc(tess_act_motor_t* Motor, float DcLinkVoltage)
-{
-    if((MotCtrlStateMachine.ControlWord & Moc_Voltage)  > 0)
-    {
-        /*Motor[M1].Requests.PwmDtc = Saturate(0.5F + ( Motor[M1].Requests.Voltage/DcLinkVoltage),0.02F,0.98F);
-        Motor[M2].Requests.PwmDtc = Saturate(0.5F + ( Motor[M2].Requests.Voltage/DcLinkVoltage),0.02F,0.98F);
-        Motor[M3].Requests.PwmDtc = Saturate(0.5F + ( Motor[M3].Requests.Voltage/DcLinkVoltage),0.02F,0.98F);
-        Motor[M4].Requests.PwmDtc = Saturate(0.5F + ( Motor[M4].Requests.Voltage/DcLinkVoltage),0.02F,0.98F);*/
-    }else
-    {
-        /*do nothing*/
-    }
-}
-
 void Tess_MotCtrl_ResetInputs(void)
 {
-    uint8_t MotorIndex = 0;
+    uint8 MotorIndex = 0;
 
     for (MotorIndex = 0; MotorIndex < TESS_MOTOR_NUMBERS; MotorIndex++)
     {

@@ -9,6 +9,7 @@
 #define TESS_MOTORINTPUTPROC_H_
 
 #include "Rte_adc.h"
+#include "Rte_motorinputprocessing.h"
 #include "tess_moc_types.h"
 #include "tess_moc_param.h"
 

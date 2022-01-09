@@ -81,7 +81,6 @@ typedef struct
 
 }tess_act_motor_t;
 
-float MipDcLinkVoltage;
 tess_act_motor_t Motor[TESS_MOTOR_NUMBERS];
 
 #endif /* TESS_ACT_TYPES_H_ */

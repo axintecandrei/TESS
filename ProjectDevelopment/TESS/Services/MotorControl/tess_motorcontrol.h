@@ -8,9 +8,11 @@
 #ifndef TESS_MOTORCONTROL_H_
 #define TESS_MOTORCONTROL_H_
 
+#include "Rte_motorcontrol.h"
+#include "Rte_actuatormanager.h"
+#include "tess_moc_param.h"
+#include "tess_utilities.h"
 #include "tess_moc_types.h"
-#include "tess_actuator_manager.h"
-#include "tess_motordriver.h"
 
 
 void Tess_MotCtrl_Init(void);

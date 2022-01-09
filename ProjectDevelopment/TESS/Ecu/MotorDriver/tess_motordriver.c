@@ -17,10 +17,10 @@ static uint8_t MotorToPwmChannel[4] =
 };
 
 
-void Tess_MotorDrv_SetMotorPwm(uint8_t MotorChannel, uint16_t DutyCycle)
+void Tess_MotorDrv_SetMotorPwm(uint8 MotorChannel, uint16 DutyCycle)
 {
 	/*From dtc to pwm ticks*/
-	uint16_t LocPwmTicks = 0;
+	uint16 LocPwmTicks = 0;
 
 	LocPwmTicks = (float)(DutyCycle*TESS_PWM_PERIOD)/1000.0F;
 

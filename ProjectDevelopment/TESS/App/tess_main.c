@@ -6,15 +6,6 @@
  */
 #include "tess_main.h"
 
-
-void TessMain(void)
-{
-    Tess_Mip_Main();
-    Tess_Act_StateMachine();
-    Tess_MotCtrl_Main();
-
-}
-
 void TessMainInit(void)
 {
     Tess_Act_StateMachineInit();
@@ -22,3 +13,14 @@ void TessMainInit(void)
     Tess_MotCtrl_Init();
     /*Tess_MotDrv_Init();*/
 }
+
+void TessMain(void)
+{
+	Tess_ActMng_Inputs();
+	Tess_Act_StateMachine();
+    Tess_Mip_Main();
+    Tess_MotCtrl_Main();
+    Tess_Mop_Main();
+}
+
+

@@ -22,6 +22,20 @@ void Tess_Act_StateMachineInit(void)
     MotCtrlStateMachine.ControlWord = ControlWord_StandBy;
 }
 
+void Tess_ActMng_Inputs(void)
+{
+	uint8 MotorIndex;
+
+	MotCtrlStateMachine.RequestedMode = Tess_Input_RequestMode;
+
+	for(MotorIndex = 0; MotorIndex < TESS_MOTOR_NUMBERS; MotorIndex++)
+	{
+		Set_TessMocSpeedRequest(MotorIndex,Tess_Input_RequestedSpeed);
+		Set_TessMocVoltageRequest(MotorIndex,Tess_Input_RequestedVoltage);
+		Set_TessMocCurrentRequest(MotorIndex,Tess_Input_RequestedCurrent);
+		Set_TessMopRequestDtc(MotorIndex,Tess_Input_RequestedDTC);
+	}
+}
 
 void Tess_Act_StateMachine(void)
 {
@@ -54,6 +68,7 @@ void Tess_Act_StateMachine(void)
     default:
         break;
     }
+    Set_TessActMngControlWord(MotCtrlStateMachine.ControlWord);
 }
 
 void Tess_MotCtrl_StandbyMode()
