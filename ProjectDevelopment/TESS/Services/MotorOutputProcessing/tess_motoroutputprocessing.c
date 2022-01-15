@@ -8,6 +8,7 @@
 #include "tess_motoroutputprocessing.h"
 
 static void Tess_Mop_SetDutyCycle(uint8 Motor, uint16 MotorVoltage);
+static uint16 Tess_Mop_Voltage2DutyCycle(uint16 Voltage);
 
 void Tess_Mop_Main(void)
 {
@@ -17,7 +18,8 @@ void Tess_Mop_Main(void)
 	{
 		for(MotorIndex = 0; MotorIndex < TESS_MOTOR_NUMBERS;MotorIndex++)
 		{
-			Tess_Mop_SetDutyCycle(MotorIndex,(uint16)Get_TessMocVoltageRequest(MotorIndex));
+
+			Tess_Mop_SetDutyCycle(MotorIndex,Tess_Mop_Voltage2DutyCycle((uint16)Get_TessMocVoltageRequest(MotorIndex)));
 		}
 	}
 	else if((Get_TessActMngControlWord() & Moc_Pwm) != 0)
@@ -36,11 +38,14 @@ void Tess_Mop_Main(void)
 	}
 }
 
-static void Tess_Mop_SetDutyCycle(uint8 Motor, uint16 MotorVoltage)
+static uint16 Tess_Mop_Voltage2DutyCycle(uint16 MotorVoltage)
 {
-	uint16 ReqDutyCycle;
+	return (((float)MotorVoltage/(float)Get_TessMipDcLinkVoltage())*1000U);
+}
 
-	ReqDutyCycle = ((float)MotorVoltage/(float)Get_TessMipDcLinkVoltage())*1000U;
+static void Tess_Mop_SetDutyCycle(uint8 Motor, uint16 ReqDutyCycle)
+{
+
 	ReqDutyCycle = Saturate(ReqDutyCycle,TESS_MIN_DTC,TESS_MAX_DTC);
 	Tess_MotorDrv_SetMotorPwm(Motor,ReqDutyCycle);
 }

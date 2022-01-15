@@ -20,6 +20,7 @@ void Tess_Act_StateMachineInit(void)
     MotCtrlStateMachine.CurrentMode   = StandBy;
     MotCtrlStateMachine.RequestedMode = StandBy;
     MotCtrlStateMachine.ControlWord = ControlWord_StandBy;
+    Tess_Input_RequestedDTC = 500;
 }
 
 void Tess_ActMng_Inputs(void)

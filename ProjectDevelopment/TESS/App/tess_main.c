@@ -11,7 +11,6 @@ void TessMainInit(void)
     Tess_Act_StateMachineInit();
     Tess_Mip_Init();
     Tess_MotCtrl_Init();
-    /*Tess_MotDrv_Init();*/
 }
 
 void TessMain(void)
