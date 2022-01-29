@@ -8,6 +8,7 @@
 #ifndef TESS_MAIN_H_
 #define TESS_MAIN_H_
 
+#include <Rte_ComBT.h>
 #include "tess_mcal.h"
 #include "Rte_adc.h"
 #include "Rte_actuatormanager.h"

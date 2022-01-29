@@ -76,6 +76,10 @@ void Error_Handler(void);
 #define ADCM3Current_Pin_GPIO_Port GPIOA
 #define ADCDcLink_Pin_Pin GPIO_PIN_3
 #define ADCDcLink_Pin_GPIO_Port GPIOA
+#define BT_TX_Pin GPIO_PIN_4
+#define BT_TX_GPIO_Port GPIOC
+#define BT_RX_Pin GPIO_PIN_5
+#define BT_RX_GPIO_Port GPIOC
 #define ADCM4Current_Pin_Pin GPIO_PIN_14
 #define ADCM4Current_Pin_GPIO_Port GPIOB
 #define PWMOutput1M3_Pin_Pin GPIO_PIN_6
@@ -90,8 +94,6 @@ void Error_Handler(void);
 #define USART3_TX_GPIO_Port GPIOC
 #define USART3_RX_Pin GPIO_PIN_11
 #define USART3_RX_GPIO_Port GPIOC
-#define PWMInputM3_Pin_Pin GPIO_PIN_6
-#define PWMInputM3_Pin_GPIO_Port GPIOB
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */
