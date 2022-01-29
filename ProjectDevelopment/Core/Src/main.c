@@ -49,6 +49,7 @@ TIM_HandleTypeDef htim8;
 
 UART_HandleTypeDef huart1;
 UART_HandleTypeDef huart3;
+DMA_HandleTypeDef hdma_usart1_rx;
 
 /* USER CODE BEGIN PV */
 uint32_t MAIN_CLOCK;
@@ -69,7 +70,7 @@ static void MX_USART1_UART_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-uint8 RX_buff;
+uint8 RX_buff[4];
 /* USER CODE END 0 */
 
 /**
@@ -108,7 +109,7 @@ int main(void)
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
   TessMainInit();
-  HAL_UART_Receive_IT(&huart1,&RX_buff,1);
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -512,7 +513,7 @@ static void MX_USART1_UART_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN USART1_Init 2 */
-
+  HAL_UART_Receive_DMA(&huart1,&RX_buff[0],4);
   /* USER CODE END USART1_Init 2 */
 
 }
@@ -579,6 +580,9 @@ static void MX_DMA_Init(void)
   /* DMA1_Channel1_IRQn interrupt configuration */
   HAL_NVIC_SetPriority(DMA1_Channel1_IRQn, 0, 1);
   HAL_NVIC_EnableIRQ(DMA1_Channel1_IRQn);
+  /* DMA1_Channel2_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA1_Channel2_IRQn, 0, 3);
+  HAL_NVIC_EnableIRQ(DMA1_Channel2_IRQn);
 
 }
 
@@ -605,7 +609,7 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc)
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
-	;
+	/*HAL_UART_Receive_DMA(&huart1,&RX_buff[0],4);*/
 }
 /* USER CODE END 4 */
 
