@@ -58,10 +58,6 @@
 /* External variables --------------------------------------------------------*/
 extern DMA_HandleTypeDef hdma_adc1;
 extern ADC_HandleTypeDef hadc1;
-extern TIM_HandleTypeDef htim2;
-extern TIM_HandleTypeDef htim3;
-extern TIM_HandleTypeDef htim4;
-extern TIM_HandleTypeDef htim5;
 extern UART_HandleTypeDef huart3;
 extern TIM_HandleTypeDef htim6;
 
@@ -122,58 +118,6 @@ void ADC1_2_IRQHandler(void)
 }
 
 /**
-  * @brief This function handles TIM2 global interrupt.
-  */
-void TIM2_IRQHandler(void)
-{
-  /* USER CODE BEGIN TIM2_IRQn 0 */
-    float TempCCR1;
-    TempCCR1   = HAL_TIM_ReadCapturedValue(&htim2,TIM_CHANNEL_1);
-    RawPwmInput.M1 = TempCCR1 - RawPwmInput.M2;
-
-    RawPwmInput.M2 = TempCCR1;
-  /* USER CODE END TIM2_IRQn 0 */
-  HAL_TIM_IRQHandler(&htim2);
-  /* USER CODE BEGIN TIM2_IRQn 1 */
-
-  /* USER CODE END TIM2_IRQn 1 */
-}
-
-/**
-  * @brief This function handles TIM3 global interrupt.
-  */
-void TIM3_IRQHandler(void)
-{
-  /* USER CODE BEGIN TIM3_IRQn 0 */
-    float TempCCR1, TempCCR2;
-    TempCCR1   = HAL_TIM_ReadCapturedValue(&htim3,TIM_CHANNEL_1)+1;
-    TempCCR2   = HAL_TIM_ReadCapturedValue(&htim3,TIM_CHANNEL_2);
-    /*RawPwmInput.M2 = TempCCR2/TempCCR1;*/
-  /* USER CODE END TIM3_IRQn 0 */
-  HAL_TIM_IRQHandler(&htim3);
-  /* USER CODE BEGIN TIM3_IRQn 1 */
-
-  /* USER CODE END TIM3_IRQn 1 */
-}
-
-/**
-  * @brief This function handles TIM4 global interrupt.
-  */
-void TIM4_IRQHandler(void)
-{
-  /* USER CODE BEGIN TIM4_IRQn 0 */
-    float TempCCR1, TempCCR2;
-    TempCCR1   = HAL_TIM_ReadCapturedValue(&htim4,TIM_CHANNEL_1)+1;
-    TempCCR2   = HAL_TIM_ReadCapturedValue(&htim4,TIM_CHANNEL_2);
-    RawPwmInput.M3 = TempCCR2/TempCCR1;
-  /* USER CODE END TIM4_IRQn 0 */
-  HAL_TIM_IRQHandler(&htim4);
-  /* USER CODE BEGIN TIM4_IRQn 1 */
-
-  /* USER CODE END TIM4_IRQn 1 */
-}
-
-/**
   * @brief This function handles USART3 global interrupt / USART3 wake-up interrupt through EXTI line 28.
   */
 void USART3_IRQHandler(void)
@@ -185,23 +129,6 @@ void USART3_IRQHandler(void)
   /* USER CODE BEGIN USART3_IRQn 1 */
 
   /* USER CODE END USART3_IRQn 1 */
-}
-
-/**
-  * @brief This function handles TIM5 global interrupt.
-  */
-void TIM5_IRQHandler(void)
-{
-  /* USER CODE BEGIN TIM5_IRQn 0 */
-    float TempCCR1, TempCCR2;
-    TempCCR1   = HAL_TIM_ReadCapturedValue(&htim5,TIM_CHANNEL_1)+1;
-    TempCCR2   = HAL_TIM_ReadCapturedValue(&htim5,TIM_CHANNEL_2);
-    RawPwmInput.M4 = TempCCR2/TempCCR1;
-  /* USER CODE END TIM5_IRQn 0 */
-  HAL_TIM_IRQHandler(&htim5);
-  /* USER CODE BEGIN TIM5_IRQn 1 */
-
-  /* USER CODE END TIM5_IRQn 1 */
 }
 
 /**

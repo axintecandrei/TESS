@@ -33,7 +33,6 @@ extern "C" {
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "tess_main.h"
-#include "tess_hal_if.h"
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
@@ -77,12 +76,6 @@ void Error_Handler(void);
 #define ADCM3Current_Pin_GPIO_Port GPIOA
 #define ADCDcLink_Pin_Pin GPIO_PIN_3
 #define ADCDcLink_Pin_GPIO_Port GPIOA
-#define M1Encoder_Pin GPIO_PIN_5
-#define M1Encoder_GPIO_Port GPIOA
-#define PWMInputM2_Pin_Pin GPIO_PIN_6
-#define PWMInputM2_Pin_GPIO_Port GPIOA
-#define PWMInputM4_Pin_Pin GPIO_PIN_2
-#define PWMInputM4_Pin_GPIO_Port GPIOB
 #define ADCM4Current_Pin_Pin GPIO_PIN_14
 #define ADCM4Current_Pin_GPIO_Port GPIOB
 #define PWMOutput1M3_Pin_Pin GPIO_PIN_6
