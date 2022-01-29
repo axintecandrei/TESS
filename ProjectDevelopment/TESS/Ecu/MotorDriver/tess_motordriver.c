@@ -25,5 +25,5 @@ void Tess_MotorDrv_SetMotorPwm(uint8 MotorChannel, uint16 DutyCycle)
 	LocPwmTicks = (float)(DutyCycle*TESS_PWM_PERIOD)/1000.0F;
 
 	Tess_Pwm_SetChannelxDTC(MotorToPwmChannel[MotorChannel],LocPwmTicks);
-	Tess_Pwm_SetChannelxDTC(MotorToPwmChannel[MotorChannel],TESS_PWM_PERIOD - LocPwmTicks);
+	Tess_Pwm_SetChannelNxDTC(MotorToPwmChannel[MotorChannel],TESS_PWM_PERIOD - LocPwmTicks);
 }
