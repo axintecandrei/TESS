@@ -10,8 +10,18 @@
 
 #include "StandardTypes.h"
 
-extern uint8 TessBL_RX_Buff[4];
+#define TESS_BT_BUFF_LEN    (2U)
 
-extern void Tess_ComBL_RXClbk(void);
+typedef struct
+{
+	uint8 Ignition;
+	uint8 Command;
+}tess_bt_frame_t;
+
+extern uint8 TessBT_RX_Buff[TESS_BT_BUFF_LEN];
+extern tess_bt_frame_t TessBTFrame;
+
+
+extern void Tess_ComBT_RXClbk(void);
 
 #endif /* RTE_RTE_COMBT_H_ */

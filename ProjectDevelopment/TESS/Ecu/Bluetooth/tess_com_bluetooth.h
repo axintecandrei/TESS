@@ -9,11 +9,10 @@
 #define ECU_BLUETOOTH_TESS_COM_BLUETOOTH_H_
 
 #include "StandardTypes.h"
+#include "Rte_ComBT.h"
+#include "Rte_actuatormanager.h"
 
-typedef struct
-{
+uint8 TessBT_RX_Buff[TESS_BT_BUFF_LEN];
+tess_bt_frame_t TessBTFrame;
 
-}tess_bl_frame_t;
-
-uint8 TessBL_RX_Buff[4];
 #endif /* ECU_BLUETOOTH_TESS_COM_BLUETOOTH_H_ */

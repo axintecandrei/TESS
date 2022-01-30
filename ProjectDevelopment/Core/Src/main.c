@@ -52,7 +52,7 @@ UART_HandleTypeDef huart3;
 DMA_HandleTypeDef hdma_usart1_rx;
 
 /* USER CODE BEGIN PV */
-uint32_t MAIN_CLOCK;
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -70,7 +70,7 @@ static void MX_USART1_UART_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-uint8 RX_buff[4];
+
 /* USER CODE END 0 */
 
 /**
@@ -119,7 +119,7 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-   MAIN_CLOCK++;
+
   }
   /* USER CODE END 3 */
 }
@@ -513,7 +513,7 @@ static void MX_USART1_UART_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN USART1_Init 2 */
-  HAL_UART_Receive_DMA(&huart1,&RX_buff[0],4);
+  HAL_UART_Receive_DMA(&huart1,&TessBT_RX_Buff[0],TESS_BT_BUFF_LEN);
   /* USER CODE END USART1_Init 2 */
 
 }
@@ -610,6 +610,7 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc)
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
 	/*HAL_UART_Receive_DMA(&huart1,&RX_buff[0],4);*/
+	Tess_ComBT_RXClbk();
 }
 /* USER CODE END 4 */
 

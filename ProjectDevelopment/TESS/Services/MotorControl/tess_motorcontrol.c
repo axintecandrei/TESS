@@ -172,16 +172,3 @@ static void Tess_MotCtrl_CurrentControl(tess_act_motor_t* Motor)
         }
     }
 }
-
-
-void Tess_MotCtrl_ResetInputs(void)
-{
-    uint8 MotorIndex = 0;
-
-    for (MotorIndex = 0; MotorIndex < TESS_MOTOR_NUMBERS; MotorIndex++)
-    {
-    	Motor[MotorIndex].Requests.Voltage         = 0;
-    	Motor[MotorIndex].Requests.Current         = 0;
-    	Motor[MotorIndex].Requests.Speed           = 0;
-    }
-}
