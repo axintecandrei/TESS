@@ -6,8 +6,8 @@
  */
 #include "tess_actuator_manager.h"
 
-#define TESS_DEMO_POS_DTC    (650)/**/
-#define TESS_DEMO_NEG_DTC    (350)
+#define TESS_DEMO_POS_DTC    (770)/**/
+#define TESS_DEMO_NEG_DTC    (230)
 
 void Tess_MotCtrl_StandbyMode();
 void Tess_MotCtrl_PwmMode();
@@ -301,7 +301,7 @@ static void Tess_ActMng_Demo(void)
 					Set_TessMopRequestDtc(0,TESS_DEMO_NEG_DTC);
 					Set_TessMopRequestDtc(1,TESS_DEMO_POS_DTC);
 					Set_TessMopRequestDtc(2,TESS_DEMO_POS_DTC);
-					Set_TessMopRequestDtc(3,TESS_DEMO_NEG_DTC);
+					Set_TessMopRequestDtc(3,TESS_DEMO_NEG_DTC+30);
 				}
 					break;
 				case 'd':
@@ -309,7 +309,7 @@ static void Tess_ActMng_Demo(void)
 					Set_TessMopRequestDtc(0,TESS_DEMO_POS_DTC);
 					Set_TessMopRequestDtc(1,TESS_DEMO_NEG_DTC);
 					Set_TessMopRequestDtc(2,TESS_DEMO_NEG_DTC);
-					Set_TessMopRequestDtc(3,TESS_DEMO_POS_DTC);
+					Set_TessMopRequestDtc(3,TESS_DEMO_POS_DTC+30);
 				}
 					break;
 				}
