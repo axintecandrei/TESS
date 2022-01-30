@@ -24,7 +24,7 @@ static void Tess_ComBT_DecodeFrame()
 {
 	Set_TessActMngRemoteEN(STD_ON);
 	/*Get all data from DMA buffer*/
-	if(TessBT_RX_Buff[0] == 'A')
+	if(TessBT_RX_Buff[0] == 'a')
 	{
 		TessBTFrame.Ignition = STD_ON;
 		TessBTFrame.Command  = TessBT_RX_Buff[1];

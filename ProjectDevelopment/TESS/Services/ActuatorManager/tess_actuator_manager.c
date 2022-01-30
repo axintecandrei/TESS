@@ -15,7 +15,8 @@ void Tess_MotCtrl_VoltageMode();
 void Tess_MotCtrl_CurrentControlMode();
 void Tess_MotCtrl_SpeedVoltageMode();
 void Tess_MotCtrl_SpeedControlMode();
-static void Tess_MotCtrl_ResetInputs(void);
+static void Tess_ActMng_ResetInputs(void);
+static void Tess_ActMng_Demo(void);
 
 void Tess_Act_StateMachineInit(void)
 {
@@ -31,54 +32,7 @@ void Tess_ActMng_Inputs(void)
 	uint8 MotorIndex;
 	if(Get_TessActMngRemoteEN() == STD_ON)
 	{
-		if(TessBTFrame.Ignition == STD_ON)
-		{
-			MotCtrlStateMachine.RequestedMode = PwmMode;
-			switch(TessBTFrame.Command)
-			{
-			case 'F':
-			{
-				Set_TessMopRequestDtc(0,TESS_DEMO_POS_DTC);
-				Set_TessMopRequestDtc(1,TESS_DEMO_POS_DTC);
-				Set_TessMopRequestDtc(2,TESS_DEMO_POS_DTC);
-				Set_TessMopRequestDtc(3,TESS_DEMO_POS_DTC);
-			}
-				break;
-			case 'B':
-			{
-				Set_TessMopRequestDtc(0,TESS_DEMO_NEG_DTC);
-				Set_TessMopRequestDtc(1,TESS_DEMO_NEG_DTC);
-				Set_TessMopRequestDtc(2,TESS_DEMO_NEG_DTC);
-				Set_TessMopRequestDtc(3,TESS_DEMO_NEG_DTC);
-			}
-				break;
-			case 'C':
-			{
-				Set_TessMopRequestDtc(0,TESS_DEMO_NEG_DTC);
-				Set_TessMopRequestDtc(1,TESS_DEMO_POS_DTC);
-				Set_TessMopRequestDtc(2,TESS_DEMO_POS_DTC);
-				Set_TessMopRequestDtc(3,TESS_DEMO_NEG_DTC);
-			}
-				break;
-			case 'D':
-			{
-				Set_TessMopRequestDtc(0,TESS_DEMO_POS_DTC);
-				Set_TessMopRequestDtc(1,TESS_DEMO_NEG_DTC);
-				Set_TessMopRequestDtc(2,TESS_DEMO_NEG_DTC);
-				Set_TessMopRequestDtc(3,TESS_DEMO_POS_DTC);
-			}
-				break;
-			}
-		}
-		else
-		{
-			MotCtrlStateMachine.ControlWord = ControlWord_StandBy;
-			Set_TessMopRequestDtc(0,500);
-			Set_TessMopRequestDtc(1,500);
-			Set_TessMopRequestDtc(2,500);
-			Set_TessMopRequestDtc(3,500);
-		}
-
+		Tess_ActMng_Demo();
 	}else
 	{
 		/*Debug Mode*/
@@ -131,7 +85,7 @@ void Tess_Act_StateMachine(void)
 
 void Tess_MotCtrl_StandbyMode()
 {
-    //Tess_MotCtrl_ResetInputs();
+    //Tess_ActMng_ResetInputs();
 
     switch(MotCtrlStateMachine.RequestedMode)
     {
@@ -161,23 +115,23 @@ void Tess_MotCtrl_PwmMode()
     switch(MotCtrlStateMachine.RequestedMode)
     {
     case StandBy:
-        Tess_MotCtrl_ResetInputs();
+        Tess_ActMng_ResetInputs();
         MotCtrlStateMachine.CurrentMode = StandBy;
         break;
     case VoltageMode:
-        Tess_MotCtrl_ResetInputs();
+        Tess_ActMng_ResetInputs();
         MotCtrlStateMachine.CurrentMode = VoltageMode;
         break;
     case CurrentControl:
-        Tess_MotCtrl_ResetInputs();
+        Tess_ActMng_ResetInputs();
         MotCtrlStateMachine.CurrentMode = CurrentControl;
         break;
     case SpeedVoltageControl:
-        Tess_MotCtrl_ResetInputs();
+        Tess_ActMng_ResetInputs();
         MotCtrlStateMachine.CurrentMode = SpeedVoltageControl;
         break;
     case SpeedControl:
-        Tess_MotCtrl_ResetInputs();
+        Tess_ActMng_ResetInputs();
         MotCtrlStateMachine.CurrentMode = SpeedControl;
         break;
     default:
@@ -191,23 +145,23 @@ void Tess_MotCtrl_VoltageMode()
     switch(MotCtrlStateMachine.RequestedMode)
     {
     case StandBy:
-        Tess_MotCtrl_ResetInputs();
+        Tess_ActMng_ResetInputs();
         MotCtrlStateMachine.CurrentMode = StandBy;
         break;
     case PwmMode:
-        Tess_MotCtrl_ResetInputs();
+        Tess_ActMng_ResetInputs();
         MotCtrlStateMachine.CurrentMode = PwmMode;
         break;
     case CurrentControl:
-        Tess_MotCtrl_ResetInputs();
+        Tess_ActMng_ResetInputs();
         MotCtrlStateMachine.CurrentMode = CurrentControl;
         break;
     case SpeedVoltageControl:
-        Tess_MotCtrl_ResetInputs();
+        Tess_ActMng_ResetInputs();
         MotCtrlStateMachine.CurrentMode = SpeedVoltageControl;
         break;
     case SpeedControl:
-        Tess_MotCtrl_ResetInputs();
+        Tess_ActMng_ResetInputs();
         MotCtrlStateMachine.CurrentMode = SpeedControl;
         break;
     default:
@@ -221,23 +175,23 @@ void Tess_MotCtrl_CurrentControlMode()
     switch(MotCtrlStateMachine.RequestedMode)
     {
     case StandBy:
-        Tess_MotCtrl_ResetInputs();
+        Tess_ActMng_ResetInputs();
         MotCtrlStateMachine.CurrentMode = StandBy;
         break;
     case PwmMode:
-        Tess_MotCtrl_ResetInputs();
+        Tess_ActMng_ResetInputs();
         MotCtrlStateMachine.CurrentMode = PwmMode;
         break;
     case VoltageMode:
-        Tess_MotCtrl_ResetInputs();
+        Tess_ActMng_ResetInputs();
         MotCtrlStateMachine.CurrentMode = VoltageMode;
         break;
     case SpeedVoltageControl:
-        Tess_MotCtrl_ResetInputs();
+        Tess_ActMng_ResetInputs();
         MotCtrlStateMachine.CurrentMode = SpeedVoltageControl;
         break;
     case SpeedControl:
-        Tess_MotCtrl_ResetInputs();
+        Tess_ActMng_ResetInputs();
         MotCtrlStateMachine.CurrentMode = SpeedControl;
         break;
     default:
@@ -251,23 +205,23 @@ void Tess_MotCtrl_SpeedVoltageMode()
     switch(MotCtrlStateMachine.RequestedMode)
     {
     case StandBy:
-        Tess_MotCtrl_ResetInputs();
+        Tess_ActMng_ResetInputs();
         MotCtrlStateMachine.CurrentMode = StandBy;
         break;
     case PwmMode:
-        Tess_MotCtrl_ResetInputs();
+        Tess_ActMng_ResetInputs();
         MotCtrlStateMachine.CurrentMode = PwmMode;
         break;
     case VoltageMode:
-        Tess_MotCtrl_ResetInputs();
+        Tess_ActMng_ResetInputs();
         MotCtrlStateMachine.CurrentMode = VoltageMode;
         break;
     case CurrentControl:
-        Tess_MotCtrl_ResetInputs();
+        Tess_ActMng_ResetInputs();
         MotCtrlStateMachine.CurrentMode = CurrentControl;
         break;
     case SpeedControl:
-        Tess_MotCtrl_ResetInputs();
+        Tess_ActMng_ResetInputs();
         MotCtrlStateMachine.CurrentMode = SpeedControl;
         break;
     default:
@@ -281,23 +235,23 @@ void Tess_MotCtrl_SpeedControlMode()
     switch(MotCtrlStateMachine.RequestedMode)
     {
     case StandBy:
-        Tess_MotCtrl_ResetInputs();
+        Tess_ActMng_ResetInputs();
         MotCtrlStateMachine.CurrentMode = StandBy;
         break;
     case PwmMode:
-        Tess_MotCtrl_ResetInputs();
+        Tess_ActMng_ResetInputs();
         MotCtrlStateMachine.CurrentMode = PwmMode;
         break;
     case VoltageMode:
-        Tess_MotCtrl_ResetInputs();
+        Tess_ActMng_ResetInputs();
         MotCtrlStateMachine.CurrentMode = VoltageMode;
         break;
     case CurrentControl:
-        Tess_MotCtrl_ResetInputs();
+        Tess_ActMng_ResetInputs();
         MotCtrlStateMachine.CurrentMode = CurrentControl;
         break;
     case SpeedVoltageControl:
-        Tess_MotCtrl_ResetInputs();
+        Tess_ActMng_ResetInputs();
         MotCtrlStateMachine.CurrentMode = SpeedVoltageControl;
         break;
     default:
@@ -306,7 +260,7 @@ void Tess_MotCtrl_SpeedControlMode()
 }
 
 
-static void Tess_MotCtrl_ResetInputs(void)
+static void Tess_ActMng_ResetInputs(void)
 {
     uint8 MotorIndex = 0;
 
@@ -317,4 +271,55 @@ static void Tess_MotCtrl_ResetInputs(void)
 		Set_TessMocCurrentRequest(MotorIndex,0);
 		Set_TessMopRequestDtc(MotorIndex,500);
     }
+}
+
+static void Tess_ActMng_Demo(void)
+{
+	if(TessBTFrame.Ignition == STD_ON)
+	{
+				MotCtrlStateMachine.RequestedMode = PwmMode;
+				switch(TessBTFrame.Command)
+				{
+				case 'f':
+				{
+					Set_TessMopRequestDtc(0,TESS_DEMO_POS_DTC);
+					Set_TessMopRequestDtc(1,TESS_DEMO_POS_DTC);
+					Set_TessMopRequestDtc(2,TESS_DEMO_POS_DTC);
+					Set_TessMopRequestDtc(3,TESS_DEMO_POS_DTC);
+				}
+					break;
+				case 'b':
+				{
+					Set_TessMopRequestDtc(0,TESS_DEMO_NEG_DTC);
+					Set_TessMopRequestDtc(1,TESS_DEMO_NEG_DTC);
+					Set_TessMopRequestDtc(2,TESS_DEMO_NEG_DTC);
+					Set_TessMopRequestDtc(3,TESS_DEMO_NEG_DTC);
+				}
+					break;
+				case 'c':
+				{
+					Set_TessMopRequestDtc(0,TESS_DEMO_NEG_DTC);
+					Set_TessMopRequestDtc(1,TESS_DEMO_POS_DTC);
+					Set_TessMopRequestDtc(2,TESS_DEMO_POS_DTC);
+					Set_TessMopRequestDtc(3,TESS_DEMO_NEG_DTC);
+				}
+					break;
+				case 'd':
+				{
+					Set_TessMopRequestDtc(0,TESS_DEMO_POS_DTC);
+					Set_TessMopRequestDtc(1,TESS_DEMO_NEG_DTC);
+					Set_TessMopRequestDtc(2,TESS_DEMO_NEG_DTC);
+					Set_TessMopRequestDtc(3,TESS_DEMO_POS_DTC);
+				}
+					break;
+				}
+			}
+			else
+			{
+				MotCtrlStateMachine.ControlWord = ControlWord_StandBy;
+				Set_TessMopRequestDtc(0,500);
+				Set_TessMopRequestDtc(1,500);
+				Set_TessMopRequestDtc(2,500);
+				Set_TessMopRequestDtc(3,500);
+			}
 }
