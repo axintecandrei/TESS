@@ -10,8 +10,8 @@
 
 #include "StandardTypes.h"
 
-#define TESS_MAX_DTC     	(985)
-#define TESS_MIN_DTC	 	(15)
+#define TESS_MAX_DTC     	(1000)
+#define TESS_MIN_DTC	 	(0)
 #define TESS_STANDBY_DTC 	(500)
 
 extern void Tess_MotorDrv_SetMotorPwm(uint8 MotorChannel, uint16 DutyCycle);
