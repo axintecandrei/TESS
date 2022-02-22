@@ -7,6 +7,7 @@
 
 #include "tess_motorinputprocessing.h"
 
+static void Tess_Mip_GetMotorSpeed(tess_act_motor_t* Motors);
 static void Tess_Mip_GetMotorCurrents(tess_act_motor_t* Motors);
 static void Tess_Mip_GetDcLinkVoltage(void);
 
@@ -44,6 +45,7 @@ void Tess_Mip_Main(void)
 {
     Tess_Mip_GetDcLinkVoltage();
     Tess_Mip_GetMotorCurrents(Motor);
+    Tess_Mip_GetMotorSpeed(Motor);
 }
 
 static void Tess_Mip_GetDcLinkVoltage(void)
@@ -57,4 +59,10 @@ static void Tess_Mip_GetMotorCurrents(tess_act_motor_t* Motors)
     Motors[M2].MotorInputs.Current = (Tess_Adc_GetValue(AdcChannelM2Cur)-TESS_CURRENT_SENSOR_OFFSET)/TESS_CURRENT_SENSOR_GAIN;
     Motors[M3].MotorInputs.Current = (Tess_Adc_GetValue(AdcChannelM3Cur)-TESS_CURRENT_SENSOR_OFFSET)/TESS_CURRENT_SENSOR_GAIN;
     Motors[M4].MotorInputs.Current = (Tess_Adc_GetValue(AdcChannelM4Cur)-TESS_CURRENT_SENSOR_OFFSET)/TESS_CURRENT_SENSOR_GAIN;
+}
+
+static void Tess_Mip_GetMotorSpeed(tess_act_motor_t* Motors)
+{
+	Motors[M2].MotorInputs.MotorSpeed = (Get_TessEncoderFrequencyM2()*60.0F)/TESS_ENCODER_PPR;
+	Motors[M2].MotorInputs.WheelSpeed = Motors[M2].MotorInputs.MotorSpeed/TESS_GEAR_RATIO;
 }

@@ -10,6 +10,7 @@
 
 #include "Rte_adc.h"
 #include "Rte_motorinputprocessing.h"
+#include "Rte_encoders.h"
 #include "tess_moc_types.h"
 #include "tess_moc_param.h"
 

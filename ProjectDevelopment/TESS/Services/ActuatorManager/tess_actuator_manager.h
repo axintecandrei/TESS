@@ -12,6 +12,7 @@
 #include "Rte_actuatormanager.h"
 #include "Rte_motorcontrol.h"
 #include "Rte_motoroutputprocessing.h"
+#include "Rte_ComBT.h"
 
 #define ControlWord_StandBy              (Moc_StandBy)                                     /*1*/
 #define ControlWord_Pwm                  (Moc_Pwm  )                                       /*2*/
@@ -42,10 +43,11 @@ typedef struct
 moc_statemachine_t 	MotCtrlStateMachine;
 
 ControlMode_t      	Tess_Input_RequestMode;
-uint16			   	Tess_Input_RequestedSpeed;
-uint16			   	Tess_Input_RequestedVoltage;
-uint16			   	Tess_Input_RequestedCurrent;
+int16			   	Tess_Input_RequestedSpeed;
+int16			   	Tess_Input_RequestedVoltage;
+int16			   	Tess_Input_RequestedCurrent;
 uint16			   	Tess_Input_RequestedDTC;
+
 
 void Tess_Act_StateMachineInit(void);
 void Tess_Act_StateMachine(void);

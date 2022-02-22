@@ -15,10 +15,10 @@ moc_mot_requests_t PORT__TessMocRequests[4];
 #define Set_TessMocSpeedRequest(y,x)    (PORT__TessMocRequests[y].Speed = (x))
 #define Get_TessMocSpeedRequest(y)      (PORT__TessMocRequests[y].Speed)
 
-#define Set_TessMocVoltageRequest(y,x)  (PORT__TessMocRequests[y].Speed = (x))
+#define Set_TessMocVoltageRequest(y,x)  (PORT__TessMocRequests[y].Voltage = (x))
 #define Get_TessMocVoltageRequest(y)    (PORT__TessMocRequests[y].Voltage)
 
-#define Set_TessMocCurrentRequest(y,x)  (PORT__TessMocRequests[y].Speed = (x))
+#define Set_TessMocCurrentRequest(y,x)  (PORT__TessMocRequests[y].Current = (x))
 #define Get_TessMocCurrentRequest(y)    (PORT__TessMocRequests[y].Current)
 
 extern void Tess_MotCtrl_Init(void);

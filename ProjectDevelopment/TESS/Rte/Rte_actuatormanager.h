@@ -10,16 +10,23 @@
 
 #include "StandardTypes.h"
 
+/*Control word bitfields*/
 #define Moc_StandBy   ( 1)
 #define Moc_Pwm       ( 2)
 #define Moc_Voltage   ( 4)
 #define Moc_Current   ( 8)
 #define Moc_Speed     (16)
 
+
 uint8 PORT__TessActMngControlWord;
 
 #define Set_TessActMngControlWord(x)   (PORT__TessActMngControlWord = (x))
 #define Get_TessActMngControlWord()    (*((const uint8 *) &PORT__TessActMngControlWord))
+
+uint8 PORT__TessActMngRemoteEN;
+
+#define Set_TessActMngRemoteEN(x)   (PORT__TessActMngRemoteEN = (x))
+#define Get_TessActMngRemoteEN()    (*((const uint8 *) &PORT__TessActMngRemoteEN))
 
 extern void Tess_Act_StateMachineInit(void);
 extern void Tess_ActMng_Inputs(void);
