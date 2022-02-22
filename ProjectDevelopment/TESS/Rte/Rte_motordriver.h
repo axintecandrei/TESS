@@ -14,6 +14,14 @@
 #define TESS_MIN_DTC	 	(0)
 #define TESS_STANDBY_DTC 	(500)
 
+typedef enum
+{
+	M1Channel,
+	M2Channel,
+	M3Channel,
+	M4Channel,
+}TessMotDrvMotorMap_t;
+
 extern void Tess_MotorDrv_SetMotorPwm(uint8 MotorChannel, uint16 DutyCycle);
 
 #endif /* RTE_RTE_MOTORDRIVER_H_ */

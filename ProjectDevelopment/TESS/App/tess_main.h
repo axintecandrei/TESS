@@ -15,6 +15,7 @@
 #include "Rte_motorinputprocessing.h"
 #include "Rte_motoroutputprocessing.h"
 #include "Rte_ComBT.h"
+#include "Rte_encoders.h"
 
 
 void TessMain(void);

@@ -13,7 +13,8 @@
 #define TESS_RAD_TO_RPM              (9.54929658F)
 
 /*Motor Param*/
-#define TESS_GEAR_RATIO              (25) /*16.9*/
+#define TESS_GEAR_RATIO              (75.0F)
+#define TESS_ENCODER_PPR             (11.0F)
 #define TESS_MOTOR_NUMBERS           (4U)
 #define TESS_M1_RESISTANCE           (3.1F)        /*Ohm*/
 #define TESS_M2_RESISTANCE           (3.1F)        /*Ohm*/
@@ -30,8 +31,8 @@
 #define TESS_M3_KE                   (4.252E-3)    /*V/rad/s*/
 #define TESS_M4_KE                   (4.516E-3)    /*V/rad/s*/
 
-#define TESS_MAX_REQ_VOLT            (3000)        /*mV*/
-#define TESS_MAX_REQ_CURRENT         (2000)        /*mA*/
+#define TESS_MAX_REQ_VOLT            (4500)        /*mV*/
+#define TESS_MAX_REQ_CURRENT         (3500)        /*mA*/
 
 /*Feedback ratios*/
 #define TESS_CURRENT_SENSOR_GAIN     (227.0F)       /*mV/A*/

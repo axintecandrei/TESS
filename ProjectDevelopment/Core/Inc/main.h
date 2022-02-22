@@ -76,6 +76,8 @@ void Error_Handler(void);
 #define ADCM3Current_Pin_GPIO_Port GPIOA
 #define ADCDcLink_Pin_Pin GPIO_PIN_3
 #define ADCDcLink_Pin_GPIO_Port GPIOA
+#define EncoderM1_A_Pin GPIO_PIN_5
+#define EncoderM1_A_GPIO_Port GPIOA
 #define BT_TX_Pin GPIO_PIN_4
 #define BT_TX_GPIO_Port GPIOC
 #define BT_RX_Pin GPIO_PIN_5
@@ -94,6 +96,8 @@ void Error_Handler(void);
 #define USART3_TX_GPIO_Port GPIOC
 #define USART3_RX_Pin GPIO_PIN_11
 #define USART3_RX_GPIO_Port GPIOC
+#define EncoderM1_B_Pin GPIO_PIN_3
+#define EncoderM1_B_GPIO_Port GPIOB
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */

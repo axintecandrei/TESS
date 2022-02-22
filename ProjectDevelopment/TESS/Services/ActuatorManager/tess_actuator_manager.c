@@ -6,8 +6,8 @@
  */
 #include "tess_actuator_manager.h"
 
-#define TESS_DEMO_POS_DTC    (1000)/**/
-#define TESS_DEMO_NEG_DTC    (0)
+#define TESS_DEMO_POS_DTC    (700)/**/
+#define TESS_DEMO_NEG_DTC    (300)
 
 void Tess_MotCtrl_StandbyMode();
 void Tess_MotCtrl_PwmMode();
@@ -23,6 +23,7 @@ void Tess_Act_StateMachineInit(void)
     MotCtrlStateMachine.CurrentMode   = StandBy;
     MotCtrlStateMachine.RequestedMode = StandBy;
     MotCtrlStateMachine.ControlWord = ControlWord_StandBy;
+    Tess_Input_RequestedSpeed = 0;
     Tess_Input_RequestedDTC = 500;
     Set_TessActMngRemoteEN(STD_OFF);  /*default debug mode*/
 }

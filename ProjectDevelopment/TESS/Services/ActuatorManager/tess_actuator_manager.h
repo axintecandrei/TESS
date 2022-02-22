@@ -43,9 +43,9 @@ typedef struct
 moc_statemachine_t 	MotCtrlStateMachine;
 
 ControlMode_t      	Tess_Input_RequestMode;
-uint16			   	Tess_Input_RequestedSpeed;
-uint16			   	Tess_Input_RequestedVoltage;
-uint16			   	Tess_Input_RequestedCurrent;
+int16			   	Tess_Input_RequestedSpeed;
+int16			   	Tess_Input_RequestedVoltage;
+int16			   	Tess_Input_RequestedCurrent;
 uint16			   	Tess_Input_RequestedDTC;
 
 
