@@ -6,7 +6,7 @@
  */
 #include "tess_encoder.h"
 
-void Tess_EcuGetEncoderFrequency(uint8 EncoderIdx, uint16 EncoderFrequency)
+void Tess_EcuGetEncoderFrequency(uint8 EncoderIdx, int16 EncoderFrequency)
 {
 	switch (EncoderIdx)
 	{

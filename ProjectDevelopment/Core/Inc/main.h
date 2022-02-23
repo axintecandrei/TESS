@@ -42,7 +42,7 @@ extern "C" {
 
 /* Exported constants --------------------------------------------------------*/
 /* USER CODE BEGIN EC */
-
+#define HAL_MCU_CLOCK_FREQUENCY   (170000000)
 /* USER CODE END EC */
 
 /* Exported macro ------------------------------------------------------------*/
@@ -92,6 +92,8 @@ void Error_Handler(void);
 #define PWMOutput1M4_Pin_GPIO_Port GPIOC
 #define PWMOutput2M4_Pin_Pin GPIO_PIN_9
 #define PWMOutput2M4_Pin_GPIO_Port GPIOC
+#define Debug_Pin GPIO_PIN_8
+#define Debug_GPIO_Port GPIOA
 #define USART3_TX_Pin GPIO_PIN_10
 #define USART3_TX_GPIO_Port GPIOC
 #define USART3_RX_Pin GPIO_PIN_11
