@@ -8,7 +8,7 @@
 #ifndef TESS_SYS_CONSTANTS_H_
 #define TESS_SYS_CONSTANTS_H_
 
-#define TESS_TS                      (0.0001F)
+#define TESS_TS                      (0.0002F)
 #define TESS_mV_V                    (0.001F)
 #define TESS_RAD_TO_RPM              (9.54929658F)
 

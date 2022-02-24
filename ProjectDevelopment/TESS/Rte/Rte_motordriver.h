@@ -10,8 +10,8 @@
 
 #include "StandardTypes.h"
 
-#define TESS_MAX_DTC     	(1000)
-#define TESS_MIN_DTC	 	(0)
+#define TESS_MAX_DTC     	(950)
+#define TESS_MIN_DTC	 	(50)
 #define TESS_STANDBY_DTC 	(500)
 
 typedef enum

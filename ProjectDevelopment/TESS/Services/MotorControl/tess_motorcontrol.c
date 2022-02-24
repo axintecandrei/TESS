@@ -18,8 +18,8 @@ void Tess_MotCtrl_Init(void)
 
     for (MotorIndex = 0; MotorIndex < TESS_MOTOR_NUMBERS; MotorIndex++)
     {
-        Motor[MotorIndex].SpeedCtrl.Pgain          = 0.00368;
-        Motor[MotorIndex].SpeedCtrl.Igain          = 0.0406;
+        Motor[MotorIndex].SpeedCtrl.Pgain          = 0.229;
+        Motor[MotorIndex].SpeedCtrl.Igain          = 2.68;
         Motor[MotorIndex].SpeedCtrl.IntegralPart   = 0;
 
         Motor[MotorIndex].CurrentCtrl.Pgain        = 0.0188;
