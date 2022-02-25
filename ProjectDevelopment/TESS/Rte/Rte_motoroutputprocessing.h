@@ -10,10 +10,7 @@
 
 #include "StandardTypes.h"
 
-uint16 PORT__TessMopRequestDtc[4];
 
-#define Set_TessMopRequestDtc(y,x)   (PORT__TessMopRequestDtc[y] = (x))
-#define Get_TessMopRequestDtc(y)    (*((const uint16 *) &PORT__TessMopRequestDtc[y]))
 
 extern void Tess_Mop_Main(void);
 

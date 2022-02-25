@@ -21,13 +21,13 @@ enum
     M4
 }Motors;
 
-/*Motor Parameters*/
+/*Requests*/
 typedef struct
 {
-    float R;
-    float L;
-    float Ke;
-}mip_mot_parameters_t;
+    float Speed;
+    float Current;
+    float Voltage;
+}moc_mot_requests_t;
 
 /*Motor inputs*/
 typedef struct
@@ -38,46 +38,25 @@ typedef struct
     float WheelSpeed;
 }mip_mot_inputs_t;
 
-/*Requests*/
 typedef struct
 {
-    float Speed;
-    float Current;
-    float Voltage;
-}moc_mot_requests_t;
-
-typedef struct
-{
-    float Error;
     float Pgain;
     float Igain;
     float IntegralPart;
-    float ProportionalPart;
     float Sat;
-}moc_mot_speed_ctrl_t;
+}moc_mot_controller_t;
 
-typedef struct
-{
-    float Error;
-    float Pgain;
-    float Igain;
-    float IntegralPart;
-    float ProportionalPart;
-    float Sat;
-}moc_mot_current_ctrl_t;
 
 typedef struct
 {
     /*feedback: volt, current, speed*/
     mip_mot_inputs_t       MotorInputs;
-    /*requests Speed, current, voltage*/
-    moc_mot_requests_t     Requests;
-    /*motor parameters*/
-    mip_mot_parameters_t   Param;
+
     /*speed controller */
-    moc_mot_speed_ctrl_t   SpeedCtrl;
+    moc_mot_controller_t   SpeedCtrl;
+
     /*current controller*/
-    moc_mot_current_ctrl_t CurrentCtrl;
+    moc_mot_controller_t   CurrentCtrl;
 
 }tess_act_motor_t;
 

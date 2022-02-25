@@ -14,6 +14,7 @@
 #include "tess_utilities.h"
 #include "tess_moc_types.h"
 
+#define TESS_MOC_MAX_SPEED     (7500)  /*mot rpm*/
 
 void Tess_MotCtrl_Init(void);
 void Tess_MotCtrl_Main(void);

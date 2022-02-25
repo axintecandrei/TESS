@@ -24,21 +24,6 @@ void Tess_Mip_Init(void)
 
     }
 
-    Motor[M1].Param.R             = TESS_M1_RESISTANCE;
-    Motor[M1].Param.L             = TESS_M1_INDUCTANCE;
-    Motor[M1].Param.Ke            = TESS_M1_KE;
-
-    Motor[M2].Param.R             = TESS_M2_RESISTANCE;
-    Motor[M2].Param.L             = TESS_M2_INDUCTANCE;
-    Motor[M2].Param.Ke            = TESS_M2_KE;
-
-    Motor[M3].Param.R             = TESS_M3_RESISTANCE;
-    Motor[M3].Param.L             = TESS_M3_INDUCTANCE;
-    Motor[M3].Param.Ke            = TESS_M3_KE;
-
-    Motor[M4].Param.R             = TESS_M4_RESISTANCE;
-    Motor[M4].Param.L             = TESS_M4_INDUCTANCE;
-    Motor[M4].Param.Ke            = TESS_M4_KE;
 }
 
 void Tess_Mip_Main(void)

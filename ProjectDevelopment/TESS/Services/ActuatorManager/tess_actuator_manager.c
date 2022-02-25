@@ -41,10 +41,10 @@ void Tess_ActMng_Inputs(void)
 
 		for(MotorIndex = 0; MotorIndex < TESS_MOTOR_NUMBERS; MotorIndex++)
 		{
-			Set_TessMocSpeedRequest(MotorIndex,Tess_Input_RequestedSpeed);
-			Set_TessMocVoltageRequest(MotorIndex,Tess_Input_RequestedVoltage);
-			Set_TessMocCurrentRequest(MotorIndex,Tess_Input_RequestedCurrent);
-			Set_TessMopRequestDtc(MotorIndex,Tess_Input_RequestedDTC);
+			Set_TessActMngSpeedRequest(MotorIndex,Tess_Input_RequestedSpeed);
+			Set_TessActMngVoltageRequest(MotorIndex,Tess_Input_RequestedVoltage);
+			Set_TessActMngCurrentRequest(MotorIndex,Tess_Input_RequestedCurrent);
+			Set_TessActMngRequestDtc(MotorIndex,Tess_Input_RequestedDTC);
 		}
 	}
 
@@ -267,10 +267,10 @@ static void Tess_ActMng_ResetInputs(void)
 
     for (MotorIndex = 0; MotorIndex < TESS_MOTOR_NUMBERS; MotorIndex++)
     {
-		Set_TessMocSpeedRequest(MotorIndex,0);
-		Set_TessMocVoltageRequest(MotorIndex,0);
-		Set_TessMocCurrentRequest(MotorIndex,0);
-		Set_TessMopRequestDtc(MotorIndex,500);
+		Set_TessActMngSpeedRequest(MotorIndex,0);
+		Set_TessActMngVoltageRequest(MotorIndex,0);
+		Set_TessActMngCurrentRequest(MotorIndex,0);
+		Set_TessActMngRequestDtc(MotorIndex,500);
     }
 }
 
@@ -283,34 +283,34 @@ static void Tess_ActMng_Demo(void)
 				{
 				case 'f':
 				{
-					Set_TessMopRequestDtc(0,TESS_DEMO_POS_DTC);
-					Set_TessMopRequestDtc(1,TESS_DEMO_POS_DTC);
-					Set_TessMopRequestDtc(2,TESS_DEMO_POS_DTC);
-					Set_TessMopRequestDtc(3,TESS_DEMO_POS_DTC);
+					Set_TessActMngRequestDtc(0,TESS_DEMO_POS_DTC);
+					Set_TessActMngRequestDtc(1,TESS_DEMO_POS_DTC);
+					Set_TessActMngRequestDtc(2,TESS_DEMO_POS_DTC);
+					Set_TessActMngRequestDtc(3,TESS_DEMO_POS_DTC);
 				}
 					break;
 				case 'b':
 				{
-					Set_TessMopRequestDtc(0,TESS_DEMO_NEG_DTC);
-					Set_TessMopRequestDtc(1,TESS_DEMO_NEG_DTC);
-					Set_TessMopRequestDtc(2,TESS_DEMO_NEG_DTC);
-					Set_TessMopRequestDtc(3,TESS_DEMO_NEG_DTC);
+					Set_TessActMngRequestDtc(0,TESS_DEMO_NEG_DTC);
+					Set_TessActMngRequestDtc(1,TESS_DEMO_NEG_DTC);
+					Set_TessActMngRequestDtc(2,TESS_DEMO_NEG_DTC);
+					Set_TessActMngRequestDtc(3,TESS_DEMO_NEG_DTC);
 				}
 					break;
 				case 'c':
 				{
-					Set_TessMopRequestDtc(0,TESS_DEMO_NEG_DTC);
-					Set_TessMopRequestDtc(1,TESS_DEMO_POS_DTC);
-					Set_TessMopRequestDtc(2,TESS_DEMO_POS_DTC);
-					Set_TessMopRequestDtc(3,TESS_DEMO_NEG_DTC);
+					Set_TessActMngRequestDtc(0,TESS_DEMO_NEG_DTC);
+					Set_TessActMngRequestDtc(1,TESS_DEMO_POS_DTC);
+					Set_TessActMngRequestDtc(2,TESS_DEMO_POS_DTC);
+					Set_TessActMngRequestDtc(3,TESS_DEMO_NEG_DTC);
 				}
 					break;
 				case 'd':
 				{
-					Set_TessMopRequestDtc(0,TESS_DEMO_POS_DTC);
-					Set_TessMopRequestDtc(1,TESS_DEMO_NEG_DTC);
-					Set_TessMopRequestDtc(2,TESS_DEMO_NEG_DTC);
-					Set_TessMopRequestDtc(3,TESS_DEMO_POS_DTC);
+					Set_TessActMngRequestDtc(0,TESS_DEMO_POS_DTC);
+					Set_TessActMngRequestDtc(1,TESS_DEMO_NEG_DTC);
+					Set_TessActMngRequestDtc(2,TESS_DEMO_NEG_DTC);
+					Set_TessActMngRequestDtc(3,TESS_DEMO_POS_DTC);
 				}
 					break;
 				}
@@ -318,9 +318,9 @@ static void Tess_ActMng_Demo(void)
 			else
 			{
 				MotCtrlStateMachine.ControlWord = ControlWord_StandBy;
-				Set_TessMopRequestDtc(0,500);
-				Set_TessMopRequestDtc(1,500);
-				Set_TessMopRequestDtc(2,500);
-				Set_TessMopRequestDtc(3,500);
+				Set_TessActMngRequestDtc(0,500);
+				Set_TessActMngRequestDtc(1,500);
+				Set_TessActMngRequestDtc(2,500);
+				Set_TessActMngRequestDtc(3,500);
 			}
 }
