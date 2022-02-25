@@ -6,23 +6,8 @@
  */
 #include "tess_encoder.h"
 
-void Tess_EcuGetEncoderFrequency(uint8 EncoderIdx, int16 EncoderFrequency)
+void Tess_EcuSetEncoderPeriod(uint8 EncoderIdx, int16 EncoderPeriod)
 {
-	switch (EncoderIdx)
-	{
-	case 0:
-		Set_TessEncoderFrequencyM1(EncoderFrequency);
-		break;
-	case 1:
-		Set_TessEncoderFrequencyM2(EncoderFrequency);
-		break;
-	case 2:
-		Set_TessEncoderFrequencyM3(EncoderFrequency);
-		break;
-	case 3:
-		Set_TessEncoderFrequencyM4(EncoderFrequency);
-		break;
-	default:
-		break;
-	}
+	Set_TessEncoderPeriod(EncoderIdx, EncoderPeriod);
+	Set_TessNewEncoderCapture(EncoderIdx,Get_TessNewEncoderCapture(EncoderIdx)^1);
 }

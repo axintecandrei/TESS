@@ -8,8 +8,8 @@
 #include "tess_motorcontrol.h"
 
 
-static void Tess_MotCtrl_SpeedControl(tess_act_motor_t* Motor);
-static void Tess_MotCtrl_CurrentControl(tess_act_motor_t* Motor);
+static void Tess_MotCtrl_SpeedControl(tess_act_motor_t* Motors);
+static void Tess_MotCtrl_CurrentControl(tess_act_motor_t* Motors);
 
 
 void Tess_MotCtrl_Init(void)
@@ -39,7 +39,7 @@ void Tess_MotCtrl_Main(void)
     Tess_MotCtrl_CurrentControl(Motor);
 }
 
-static void Tess_MotCtrl_SpeedControl(tess_act_motor_t* Motor)
+static void Tess_MotCtrl_SpeedControl(tess_act_motor_t* Motors)
 {
     float Error = 0;
     float ProportionalPart = 0;
@@ -54,29 +54,29 @@ static void Tess_MotCtrl_SpeedControl(tess_act_motor_t* Motor)
     {
         for (MotorIndex = 0; MotorIndex < TESS_MOTOR_NUMBERS; MotorIndex++)
         {
-            Error                = Motor[MotorIndex].Requests.Speed - Motor[MotorIndex].MotorInputs.MotorSpeed;
-            Motor[MotorIndex].SpeedCtrl.Error = Error;
-            ProportionalPart     = Motor[MotorIndex].SpeedCtrl.Pgain*Error;
-            Motor[MotorIndex].SpeedCtrl.ProportionalPart = ProportionalPart;
-            IntegralPart         = Motor[MotorIndex].SpeedCtrl.IntegralPart + DisableSat*Error*TESS_TS;
+            Error                = Motors[MotorIndex].Requests.Speed - Motors[MotorIndex].MotorInputs.MotorSpeed;
+            Motors[MotorIndex].SpeedCtrl.Error = Error;
+            ProportionalPart     = Motors[MotorIndex].SpeedCtrl.Pgain*Error;
+            Motors[MotorIndex].SpeedCtrl.ProportionalPart = ProportionalPart;
+            IntegralPart         = Motors[MotorIndex].SpeedCtrl.IntegralPart + DisableSat*Error*TESS_TS;
 
-            UnSatOutput = ProportionalPart + Motor[MotorIndex].SpeedCtrl.IntegralPart*Motor[MotorIndex].SpeedCtrl.Igain;
-            Motor[MotorIndex].Requests.Voltage = Saturate(UnSatOutput,-TESS_MAX_REQ_VOLT,TESS_MAX_REQ_VOLT);
-            Set_TessMocVoltageRequest(MotorIndex,Motor[MotorIndex].Requests.Voltage);
+            UnSatOutput = ProportionalPart + Motors[MotorIndex].SpeedCtrl.IntegralPart*Motors[MotorIndex].SpeedCtrl.Igain;
+            Motors[MotorIndex].Requests.Voltage = Saturate(UnSatOutput,-TESS_MAX_REQ_VOLT,TESS_MAX_REQ_VOLT);
+            Set_TessMocVoltageRequest(MotorIndex,Motors[MotorIndex].Requests.Voltage);
 
             if((Get_TessActMngControlWord() & Moc_Current)  > 0)
             {
-                UnSatOutput = ProportionalPart + IntegralPart*Motor[MotorIndex].SpeedCtrl.Igain;
-                Motor[MotorIndex].Requests.Current = Saturate(UnSatOutput,0,TESS_MAX_REQ_CURRENT);
+                UnSatOutput = ProportionalPart + IntegralPart*Motors[MotorIndex].SpeedCtrl.Igain;
+                Motors[MotorIndex].Requests.Current = Saturate(UnSatOutput,0,TESS_MAX_REQ_CURRENT);
 
                 /*Anti-WIndup*/
 
-                Motor[MotorIndex].SpeedCtrl.IntegralPart = IntegralPart;
+                Motors[MotorIndex].SpeedCtrl.IntegralPart = IntegralPart;
             }
             else
             {
 
-                if (Motor[MotorIndex].Requests.Voltage != UnSatOutput)
+                if (Motors[MotorIndex].Requests.Voltage != UnSatOutput)
                 {
                     OutputSaturate = 1;
                 }
@@ -104,8 +104,8 @@ static void Tess_MotCtrl_SpeedControl(tess_act_motor_t* Motor)
                     DisableSat = 1;
                 }
 
-                Motor[MotorIndex].SpeedCtrl.Sat = DisableSat;
-                Motor[MotorIndex].SpeedCtrl.IntegralPart = DisableSat*IntegralPart;
+                Motors[MotorIndex].SpeedCtrl.Sat = DisableSat;
+                Motors[MotorIndex].SpeedCtrl.IntegralPart = DisableSat*IntegralPart;
             }
          }
     }
@@ -113,13 +113,13 @@ static void Tess_MotCtrl_SpeedControl(tess_act_motor_t* Motor)
     {
         for (MotorIndex = 0; MotorIndex < TESS_MOTOR_NUMBERS; MotorIndex++)
         {
-            Motor[MotorIndex].SpeedCtrl.IntegralPart = 0;
+            Motors[MotorIndex].SpeedCtrl.IntegralPart = 0;
         }
     }
 
 }
 
-static void Tess_MotCtrl_CurrentControl(tess_act_motor_t* Motor)
+static void Tess_MotCtrl_CurrentControl(tess_act_motor_t* Motors)
 {
     float Error            = 0;
     float ProportionalPart = 0;
@@ -136,18 +136,18 @@ static void Tess_MotCtrl_CurrentControl(tess_act_motor_t* Motor)
     {
         for (MotorIndex = 0; MotorIndex < TESS_MOTOR_NUMBERS; MotorIndex++)
         {
-            Error             = Motor[MotorIndex].Requests.Current - Motor[MotorIndex].MotorInputs.Current;
-            Motor[MotorIndex].CurrentCtrl.Error = Error;
-            ProportionalPart  = Motor[MotorIndex].CurrentCtrl.Pgain*Error;
-            Motor[MotorIndex].CurrentCtrl.ProportionalPart = ProportionalPart;
-            IntegralPart      = Motor[MotorIndex].CurrentCtrl.IntegralPart + DisableSat*Error*TESS_TS;
+            Error             = Motors[MotorIndex].Requests.Current - Motors[MotorIndex].MotorInputs.Current;
+            Motors[MotorIndex].CurrentCtrl.Error = Error;
+            ProportionalPart  = Motors[MotorIndex].CurrentCtrl.Pgain*Error;
+            Motors[MotorIndex].CurrentCtrl.ProportionalPart = ProportionalPart;
+            IntegralPart      = Motors[MotorIndex].CurrentCtrl.IntegralPart + DisableSat*Error*TESS_TS;
 
-            UnSatOutput = ProportionalPart + IntegralPart*Motor[MotorIndex].CurrentCtrl.Igain;
-            Motor[MotorIndex].Requests.Voltage = Saturate(UnSatOutput,-TESS_MAX_REQ_VOLT,TESS_MAX_REQ_VOLT);
-            Set_TessMocVoltageRequest(MotorIndex,Motor[MotorIndex].Requests.Voltage);
+            UnSatOutput = ProportionalPart + IntegralPart*Motors[MotorIndex].CurrentCtrl.Igain;
+            Motors[MotorIndex].Requests.Voltage = Saturate(UnSatOutput,-TESS_MAX_REQ_VOLT,TESS_MAX_REQ_VOLT);
+            Set_TessMocVoltageRequest(MotorIndex,Motors[MotorIndex].Requests.Voltage);
             /*Anti-WIndup*/
 
-            if (Motor[MotorIndex].Requests.Voltage != UnSatOutput)
+            if (Motors[MotorIndex].Requests.Voltage != UnSatOutput)
             {
                 OutputSaturate = 1;
             }
@@ -175,15 +175,15 @@ static void Tess_MotCtrl_CurrentControl(tess_act_motor_t* Motor)
                 DisableSat = 1;
             }
 
-            Motor[MotorIndex].CurrentCtrl.Sat = DisableSat;
-            Motor[MotorIndex].CurrentCtrl.IntegralPart = DisableSat*IntegralPart;
+            Motors[MotorIndex].CurrentCtrl.Sat = DisableSat;
+            Motors[MotorIndex].CurrentCtrl.IntegralPart = DisableSat*IntegralPart;
 
         }
     }else
     {
         for (MotorIndex = 0; MotorIndex < TESS_MOTOR_NUMBERS; MotorIndex++)
         {
-            Motor[MotorIndex].CurrentCtrl.IntegralPart = 0;
+            Motors[MotorIndex].CurrentCtrl.IntegralPart = 0;
         }
     }
 }
