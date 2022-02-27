@@ -76,12 +76,18 @@ void Error_Handler(void);
 #define ADCM3Current_Pin_GPIO_Port GPIOA
 #define ADCDcLink_Pin_Pin GPIO_PIN_3
 #define ADCDcLink_Pin_GPIO_Port GPIOA
+#define EncoderM2_B_Pin GPIO_PIN_4
+#define EncoderM2_B_GPIO_Port GPIOA
 #define EncoderM1_A_Pin GPIO_PIN_5
 #define EncoderM1_A_GPIO_Port GPIOA
+#define EncoderM2_A_Pin GPIO_PIN_6
+#define EncoderM2_A_GPIO_Port GPIOA
 #define BT_TX_Pin GPIO_PIN_4
 #define BT_TX_GPIO_Port GPIOC
 #define BT_RX_Pin GPIO_PIN_5
 #define BT_RX_GPIO_Port GPIOC
+#define EncoderM4_A_Pin GPIO_PIN_2
+#define EncoderM4_A_GPIO_Port GPIOB
 #define ADCM4Current_Pin_Pin GPIO_PIN_14
 #define ADCM4Current_Pin_GPIO_Port GPIOB
 #define PWMOutput1M3_Pin_Pin GPIO_PIN_6
@@ -94,10 +100,16 @@ void Error_Handler(void);
 #define PWMOutput2M4_Pin_GPIO_Port GPIOC
 #define Debug_Pin GPIO_PIN_8
 #define Debug_GPIO_Port GPIOA
+#define EncoderM3_A_Pin GPIO_PIN_11
+#define EncoderM3_A_GPIO_Port GPIOA
+#define EncoderM3_B_Pin GPIO_PIN_12
+#define EncoderM3_B_GPIO_Port GPIOA
 #define USART3_TX_Pin GPIO_PIN_10
 #define USART3_TX_GPIO_Port GPIOC
 #define USART3_RX_Pin GPIO_PIN_11
 #define USART3_RX_GPIO_Port GPIOC
+#define EncoderM4_B_Pin GPIO_PIN_12
+#define EncoderM4_B_GPIO_Port GPIOC
 #define EncoderM1_B_Pin GPIO_PIN_3
 #define EncoderM1_B_GPIO_Port GPIOB
 /* USER CODE BEGIN Private defines */

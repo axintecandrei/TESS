@@ -45,13 +45,13 @@ static void Tess_Mip_GetMotorCurrents(tess_act_motor_t* Motors)
     Motors[M3].MotorInputs.Current = (Tess_Adc_GetValue(AdcChannelM3Cur)-TESS_CURRENT_SENSOR_OFFSET)/TESS_CURRENT_SENSOR_GAIN;
     Motors[M4].MotorInputs.Current = (Tess_Adc_GetValue(AdcChannelM4Cur)-TESS_CURRENT_SENSOR_OFFSET)/TESS_CURRENT_SENSOR_GAIN;
 }
- uint8 MotorSpeedStandstillCounter[TESS_MOTOR_NUMBERS] = {0,0,0,0};
- uint8 PrevEncoderFlag[TESS_MOTOR_NUMBERS] = {0,0,0,0};
+
 static void Tess_Mip_GetMotorSpeed(tess_act_motor_t* Motors)
 {
 	float Frequency;
 	uint8 MotorIndex = 0;
-
+	static uint8 MotorSpeedStandstillCounter[TESS_MOTOR_NUMBERS] = {0,0,0,0};
+	static uint8 PrevEncoderFlag[TESS_MOTOR_NUMBERS] = {0,0,0,0};
 
 	for (MotorIndex = 0; MotorIndex < TESS_MOTOR_NUMBERS; MotorIndex++)
 	{

@@ -9,6 +9,9 @@
 #define TESS_DEMO_POS_DTC    (700)/**/
 #define TESS_DEMO_NEG_DTC    (300)
 
+#define TESS_DEMO_POS_SPEED    (3500)/**/
+#define TESS_DEMO_NEG_SPEED    (-3500)
+
 void Tess_MotCtrl_StandbyMode();
 void Tess_MotCtrl_PwmMode();
 void Tess_MotCtrl_VoltageMode();
@@ -16,7 +19,8 @@ void Tess_MotCtrl_CurrentControlMode();
 void Tess_MotCtrl_SpeedVoltageMode();
 void Tess_MotCtrl_SpeedControlMode();
 static void Tess_ActMng_ResetInputs(void);
-static void Tess_ActMng_Demo(void);
+static void Tess_ActMng_Demo_DTC(void);
+static void Tess_ActMng_Demo_Speed(void);
 
 void Tess_Act_StateMachineInit(void)
 {
@@ -33,7 +37,7 @@ void Tess_ActMng_Inputs(void)
 	uint8 MotorIndex;
 	if(Get_TessActMngRemoteEN() == STD_ON)
 	{
-		Tess_ActMng_Demo();
+		Tess_ActMng_Demo_Speed();
 	}else
 	{
 		/*Debug Mode*/
@@ -274,7 +278,7 @@ static void Tess_ActMng_ResetInputs(void)
     }
 }
 
-static void Tess_ActMng_Demo(void)
+static void Tess_ActMng_Demo_DTC(void)
 {
 	if(TessBTFrame.Ignition == STD_ON)
 	{
@@ -322,5 +326,74 @@ static void Tess_ActMng_Demo(void)
 				Set_TessActMngRequestDtc(1,500);
 				Set_TessActMngRequestDtc(2,500);
 				Set_TessActMngRequestDtc(3,500);
+			}
+}
+
+static void Tess_ActMng_Demo_Speed(void)
+{
+	if(TessBTFrame.Ignition == STD_ON)
+	{
+				MotCtrlStateMachine.RequestedMode = SpeedVoltageControl;
+				switch(TessBTFrame.Command)
+				{
+				case 'f':
+				{
+					Set_TessActMngSpeedRequest(0,TESS_DEMO_POS_SPEED);
+					Set_TessActMngSpeedRequest(1,TESS_DEMO_POS_SPEED);
+					Set_TessActMngSpeedRequest(2,TESS_DEMO_POS_SPEED);
+					Set_TessActMngSpeedRequest(3,TESS_DEMO_POS_SPEED);
+				}
+					break;
+				case 'b':
+				{
+					Set_TessActMngSpeedRequest(0,TESS_DEMO_NEG_SPEED);
+					Set_TessActMngSpeedRequest(1,TESS_DEMO_NEG_SPEED);
+					Set_TessActMngSpeedRequest(2,TESS_DEMO_NEG_SPEED);
+					Set_TessActMngSpeedRequest(3,TESS_DEMO_NEG_SPEED);
+				}
+					break;
+				case 'c':
+				{
+					Set_TessActMngSpeedRequest(0,TESS_DEMO_NEG_SPEED);
+					Set_TessActMngSpeedRequest(1,TESS_DEMO_POS_SPEED);
+					Set_TessActMngSpeedRequest(2,TESS_DEMO_POS_SPEED);
+					Set_TessActMngSpeedRequest(3,TESS_DEMO_NEG_SPEED);
+				}
+					break;
+				case 'd':
+				{
+					Set_TessActMngSpeedRequest(0,TESS_DEMO_POS_SPEED);
+					Set_TessActMngSpeedRequest(1,TESS_DEMO_NEG_SPEED);
+					Set_TessActMngSpeedRequest(2,TESS_DEMO_NEG_SPEED);
+					Set_TessActMngSpeedRequest(3,TESS_DEMO_POS_SPEED);
+				}
+					break;
+
+				case '1':
+				{
+					Set_TessActMngSpeedRequest(0,TESS_DEMO_NEG_SPEED);
+					Set_TessActMngSpeedRequest(1,TESS_DEMO_POS_SPEED);
+					Set_TessActMngSpeedRequest(2,TESS_DEMO_NEG_SPEED);
+					Set_TessActMngSpeedRequest(3,TESS_DEMO_POS_SPEED);
+				}
+					break;
+
+				case '2':
+				{
+					Set_TessActMngSpeedRequest(0,TESS_DEMO_POS_SPEED);
+					Set_TessActMngSpeedRequest(1,TESS_DEMO_NEG_SPEED);
+					Set_TessActMngSpeedRequest(2,TESS_DEMO_POS_SPEED);
+					Set_TessActMngSpeedRequest(3,TESS_DEMO_NEG_SPEED);
+				}
+					break;
+				}
+			}
+			else
+			{
+				MotCtrlStateMachine.ControlWord = ControlWord_StandBy;
+				Set_TessActMngSpeedRequest(0,0);
+				Set_TessActMngSpeedRequest(1,0);
+				Set_TessActMngSpeedRequest(2,0);
+				Set_TessActMngSpeedRequest(3,0);
 			}
 }

@@ -57,7 +57,7 @@ static void Tess_MotCtrl_SpeedControl(tess_act_motor_t* Motors)
 
             UnSatOutput = ProportionalPart + Motors[MotorIndex].SpeedCtrl.IntegralPart*Motors[MotorIndex].SpeedCtrl.Igain;
 
-            Set_TessMocVoltageRequest(MotorIndex,Saturate(UnSatOutput,-TESS_MAX_REQ_VOLT,TESS_MAX_REQ_VOLT));
+            Set_TessMocVoltageRequest(MotorIndex,Saturate(UnSatOutput,-(Get_TessMipDcLinkVoltage()/2),(Get_TessMipDcLinkVoltage()/2)));
 
             if((Get_TessActMngControlWord() & Moc_Current)  > 0)
             {

@@ -9,6 +9,7 @@
 #define TESS_MOTORCONTROL_H_
 
 #include "Rte_motorcontrol.h"
+#include "Rte_motorinputprocessing.h"
 #include "Rte_actuatormanager.h"
 #include "tess_moc_param.h"
 #include "tess_utilities.h"
