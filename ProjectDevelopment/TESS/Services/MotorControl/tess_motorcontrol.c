@@ -39,7 +39,7 @@ static void Tess_MotCtrl_SpeedControl(tess_act_motor_t* Motors)
 {
     float Error 					= 0;
     float ProportionalPart 			= 0;
-    float UnSatOutput      			= 0;
+    int16 UnSatOutput      	    	= 0;
     uint8 MotorIndex     			= 0;
     uint8 OutputSaturate 			= 0;
     uint8 SameSign       			= 0;
@@ -66,9 +66,23 @@ static void Tess_MotCtrl_SpeedControl(tess_act_motor_t* Motors)
             }
             else
             {
-               if (Get_TessMocVoltageRequest(MotorIndex) != UnSatOutput)
+               if ((int16)Get_TessMocVoltageRequest(MotorIndex) != UnSatOutput)
                {
                   OutputSaturate = 1;
+               }
+               else
+               {
+                  OutputSaturate = 0;
+               }
+
+
+               if (Sign(UnSatOutput) == Sign(Error))
+               {
+                   SameSign = 1;
+               }
+               else
+               {
+                   SameSign = 0;
                }
 
                if (OutputSaturate && SameSign)

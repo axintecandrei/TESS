@@ -19,17 +19,17 @@
 #define Moc_Speed     (16)
 
 
-uint8 PORT__TessActMngControlWord;
+extern uint8 PORT__TessActMngControlWord;
 
 #define Set_TessActMngControlWord(x)   (PORT__TessActMngControlWord = (x))
 #define Get_TessActMngControlWord()    (*((const uint8 *) &PORT__TessActMngControlWord))
 
-uint8 PORT__TessActMngRemoteEN;
+extern uint8 PORT__TessActMngRemoteEN;
 
 #define Set_TessActMngRemoteEN(x)   (PORT__TessActMngRemoteEN = (x))
 #define Get_TessActMngRemoteEN()    (*((const uint8 *) &PORT__TessActMngRemoteEN))
 
-moc_mot_requests_t PORT__TessActMngRequests[4];
+extern moc_mot_requests_t PORT__TessActMngRequests[4];
 
 #define Set_TessActMngSpeedRequest(y,x)    (PORT__TessActMngRequests[y].Speed = (x))
 #define Get_TessActMngSpeedRequest(y)      (PORT__TessActMngRequests[y].Speed)
@@ -40,7 +40,7 @@ moc_mot_requests_t PORT__TessActMngRequests[4];
 #define Set_TessActMngCurrentRequest(y,x)  (PORT__TessActMngRequests[y].Current = (x))
 #define Get_TessActMngCurrentRequest(y)    (PORT__TessActMngRequests[y].Current)
 
-uint16 PORT__TessActMngRequestDtc[4];
+extern uint16 PORT__TessActMngRequestDtc[4];
 
 #define Set_TessActMngRequestDtc(y,x)   (PORT__TessActMngRequestDtc[y] = (x))
 #define Get_TessActMngRequestDtc(y)    (*((const uint16 *) &PORT__TessActMngRequestDtc[y]))

@@ -7,7 +7,7 @@
 
 #include "tess_motoroutputprocessing.h"
 
-static void Tess_Mop_SetDutyCycle(uint8 Motor, uint16 MotorVoltage);
+static void Tess_Mop_SetDutyCycle(uint8 MotorId, uint16 MotorVoltage);
 static uint16 Tess_Mop_Voltage2DutyCycle(int16 Voltage);
 
 void Tess_Mop_Main(void)
@@ -56,7 +56,7 @@ static uint16 Tess_Mop_Voltage2DutyCycle(int16 MotorVoltage)
 	return LocDtc;
 }
 
-static void Tess_Mop_SetDutyCycle(uint8 Motor, uint16 ReqDutyCycle)
+static void Tess_Mop_SetDutyCycle(uint8 MotorId, uint16 ReqDutyCycle)
 {
-	Tess_MotorDrv_SetMotorPwm(Motor,ReqDutyCycle);
+	Tess_MotorDrv_SetMotorPwm(MotorId,ReqDutyCycle);
 }

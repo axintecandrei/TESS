@@ -10,7 +10,7 @@
 
 #include "StandardTypes.h"
 
-uint16 PORT__TessMipDcLinkVoltage;
+extern uint16 PORT__TessMipDcLinkVoltage;
 
 #define Set_TessMipDcLinkVoltage(x)   (PORT__TessMipDcLinkVoltage = (x))
 #define Get_TessMipDcLinkVoltage()    (*((const uint16 *) &PORT__TessMipDcLinkVoltage))

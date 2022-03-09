@@ -13,13 +13,13 @@
 
 
 /*Motors ID*/
-enum
+typedef enum
 {
     M1 = 0,
     M2,
     M3,
     M4
-}Motors;
+}MotorsID;
 
 /*Requests*/
 typedef struct
@@ -60,6 +60,6 @@ typedef struct
 
 }tess_act_motor_t;
 
-tess_act_motor_t Motor[TESS_MOTOR_NUMBERS];
+
 
 #endif /* TESS_ACT_TYPES_H_ */

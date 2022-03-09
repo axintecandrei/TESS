@@ -10,9 +10,9 @@
 
 #include "StandardTypes.h"
 
-int16 PORT__TessEncoderPeriod[4];
+extern int16 PORT__TessEncoderPeriod[4];
 
-uint8 PORT__TessNewEncoderCapture[4];
+extern uint8 PORT__TessNewEncoderCapture[4];
 
 #define Set_TessEncoderPeriod(y,x)   (PORT__TessEncoderPeriod[y] = (x))
 #define Get_TessEncoderPeriod(y)     (PORT__TessEncoderPeriod[y])

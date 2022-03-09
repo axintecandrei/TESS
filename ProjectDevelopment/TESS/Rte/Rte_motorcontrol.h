@@ -10,7 +10,7 @@
 
 #include "tess_moc_types.h"
 
-moc_mot_requests_t PORT__TessMocRequests[4];
+extern moc_mot_requests_t PORT__TessMocRequests[4];
 
 #define Set_TessMocSpeedRequest(y,x)    (PORT__TessMocRequests[y].Speed = (x))
 #define Get_TessMocSpeedRequest(y)      (PORT__TessMocRequests[y].Speed)
@@ -20,6 +20,8 @@ moc_mot_requests_t PORT__TessMocRequests[4];
 
 #define Set_TessMocCurrentRequest(y,x)  (PORT__TessMocRequests[y].Current = (x))
 #define Get_TessMocCurrentRequest(y)    (PORT__TessMocRequests[y].Current)
+
+extern tess_act_motor_t Motor[TESS_MOTOR_NUMBERS];
 
 extern void Tess_MotCtrl_Init(void);
 extern void Tess_MotCtrl_Main(void);
