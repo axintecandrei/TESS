@@ -39,6 +39,7 @@ static void Tess_MotCtrl_SpeedControl(tess_act_motor_t* Motors)
 {
     float Error 					= 0;
     float ProportionalPart 			= 0;
+    float IntegralPart				= 0;
     int16 UnSatOutput      	    	= 0;
     uint8 MotorIndex     			= 0;
     uint8 OutputSaturate 			= 0;
@@ -52,10 +53,11 @@ static void Tess_MotCtrl_SpeedControl(tess_act_motor_t* Motors)
         	Set_TessMocSpeedRequest(MotorIndex, Saturate(Get_TessActMngSpeedRequest(MotorIndex),-TESS_MOC_MAX_SPEED,TESS_MOC_MAX_SPEED));
 
         	Error                						= Get_TessMocSpeedRequest(MotorIndex) - Motors[MotorIndex].MotorInputs.MotorSpeed;
-            ProportionalPart     					  	= Motors[MotorIndex].SpeedCtrl.Pgain*Error;
-            Motors[MotorIndex].SpeedCtrl.IntegralPart   = Motors[MotorIndex].SpeedCtrl.IntegralPart + Motors[MotorIndex].SpeedCtrl.Sat*Error*TESS_TS;
+            ProportionalPart							= Motors[MotorIndex].SpeedCtrl.Pgain*Error;
+            IntegralPart								= Motors[MotorIndex].SpeedCtrl.IntegralPart + Motors[MotorIndex].SpeedCtrl.Sat*Error*TESS_TS;
+            Motors[MotorIndex].SpeedCtrl.IntegralPart	= IntegralPart;
 
-            UnSatOutput = ProportionalPart + Motors[MotorIndex].SpeedCtrl.IntegralPart*Motors[MotorIndex].SpeedCtrl.Igain;
+            UnSatOutput = ProportionalPart + IntegralPart*Motors[MotorIndex].SpeedCtrl.Igain;
 
             Set_TessMocVoltageRequest(MotorIndex,Saturate(UnSatOutput,-(Get_TessMipDcLinkVoltage()/2),(Get_TessMipDcLinkVoltage()/2)));
 
@@ -85,16 +87,16 @@ static void Tess_MotCtrl_SpeedControl(tess_act_motor_t* Motors)
                    SameSign = 0;
                }
 
-               if (OutputSaturate && SameSign)
+               if (!(OutputSaturate && SameSign))
                {
-            	   Motors[MotorIndex].SpeedCtrl.Sat = 0;
+            	   /*No saturation*/
+            	   Motors[MotorIndex].SpeedCtrl.Sat= 1;
                }
                else
                {
-            	   Motors[MotorIndex].SpeedCtrl.Sat = 1;
+            	   /*Saturate*/
+            	   Motors[MotorIndex].SpeedCtrl.Sat= 0;
                }
-
-               Motors[MotorIndex].SpeedCtrl.IntegralPart *= Motors[MotorIndex].SpeedCtrl.Sat;
 
             }
             }
